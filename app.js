@@ -1,6 +1,7 @@
 const SUPA_URL = 'https://tlbeilrkfhjevnlvfnxa.supabase.co';
 const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsYmVpbHJrZmhqZXZubHZmbnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NTEyMjcsImV4cCI6MjA5MjAyNzIyN30.pD8fkK2Ju31VzA032_M8NZk5ASp4Z-tCdowgohW5-JE';
-const supabase = window.supabase.createClient(SUPA_URL, SUPA_KEY);
+const { createClient } = window.supabase;
+const supabase = createClient(SUPA_URL, SUPA_KEY);
 
 const fmt = n => '$' + Number(n || 0).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 let sChart = null, pChart = null;
