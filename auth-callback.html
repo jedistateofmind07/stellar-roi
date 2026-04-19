@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Signing in... — Stellar Analytics ROI</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0a0a0a;color:#fff;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.logo{width:48px;height:48px;background:#00c805;border-radius:50%;margin-bottom:8px}
+.spinner{width:32px;height:32px;border:2px solid #2a2a2a;border-top-color:#00c805;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.msg{font-size:15px;color:#aaa}
+.err{font-size:14px;color:#ff5000;max-width:360px;text-align:center;padding:16px;background:rgba(255,80,0,.1);border:1px solid rgba(255,80,0,.3);border-radius:10px;line-height:1.5}
+.back{margin-top:12px;color:#a78bfa;font-size:13px;cursor:pointer;text-decoration:underline}
+</style>
+</head>
+<body>
+<div class="logo"></div>
+<div class="spinner" id="spinner"></div>
+<div class="msg" id="msg">Verifying your account...</div>
+<div class="err" id="err" style="display:none"></div>
+<div class="back" id="back" style="display:none" onclick="window.location.href='/'">← Back to home</div>
+
+<script>
+const SUPA_URL='https://tlbeilrkfhjevnlvfnxa.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsYmVpbHJrZmhqZXZubHZmbnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NTEyMjcsImV4cCI6MjA5MjAyNzIyN30.pD8fkK2Ju31VzA032_M8NZk5ASp4Z-tCdowgohW5-JE';
+const {createClient:_sc}=window.supabase;
+const db=_sc(SUPA_URL,SUPA_KEY);
+
+async function handleCallback(){
+  // Exchange the OAuth code for a session
+  const{data:{session},error}=await db.auth.getSession();
+
+  if(error||!session){
+    // Try to get session from URL hash
+    const{data,error:e2}=await db.auth.exchangeCodeForSession(window.location.href);
+    if(e2||!data.session){
+      showError('Authentication failed. Please try again.');
+      return;
+    }
+  }
+
+  const email=session?.user?.email||(await db.auth.getSession()).data.session?.user?.email;
+  if(!email){showError('Could not retrieve email. Please try again.');return;}
+
+  // Check whitelist
+  const{data:allowed,error:wErr}=await db.from('allowed_users').select('*').eq('email',email).single();
+
+  if(wErr||!allowed){
+    await db.auth.signOut();
+    showError(`⛔ "${email}" is not authorized to access this platform.\n\nContact Robbie to request access.`);
+    return;
+  }
+
+  // Store user info in session storage for the app
+  sessionStorage.setItem('stellar_user', JSON.stringify({
+    email: allowed.email,
+    name: allowed.name,
+    role: allowed.role
+  }));
+
+  document.getElementById('msg').textContent='Welcome back, '+allowed.name+'! Redirecting...';
+  setTimeout(()=>window.location.href='/index.html', 800);
+}
+
+function showError(msg){
+  document.getElementById('spinner').style.display='none';
+  document.getElementById('msg').style.display='none';
+  const err=document.getElementById('err');
+  err.textContent=msg;
+  err.style.display='block';
+  document.getElementById('back').style.display='block';
+}
+
+handleCallback();
+</script>
+</body>
+</html>
