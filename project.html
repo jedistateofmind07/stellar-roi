@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project — Stellar Cost/ROI Calculator</title>
+<link rel="icon" type="image/png" href="/icon.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--surface:#141414;--surface2:#1c1c1c;--border:#2a2a2a;--border2:#333;--text:#fff;--muted:#a78bfa;--green:#00c805;--gdim:#00c80522;--gbg:#00c80514;--red:#ff5000;--rdim:#ff500022;--amber:#f5a623;--adim:#f5a62322;--abg:#f5a62314;--blue:#4a9eff;--bdim:#4a9eff22}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.back-btn{background:none;border:1px solid var(--border2);border-radius:8px;color:var(--muted);padding:6px 12px;font-size:12px;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:5px}
+.back-btn:hover{border-color:var(--green);color:var(--green)}
+.proj-name{font-size:16px;font-weight:600;flex:1}
+.proj-addr{font-size:11px;color:var(--muted)}
+.tabs{display:flex;background:var(--surface);border-bottom:1px solid var(--border);overflow-x:auto;position:sticky;top:53px;z-index:99}
+.tab{padding:11px 18px;font-size:12px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
+.tab:hover{color:var(--text)}.tab.active{color:var(--green);border-bottom-color:var(--green)}
+.body{padding:18px;max-width:1000px;margin:0 auto}
+.panel{display:none}.panel.active{display:block}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:15px 18px;margin-bottom:14px}
+.stitle{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:16px}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 14px}
+.mlabel{font-size:10px;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.05em}
+.mval{font-size:20px;font-weight:600}
+.mval.g{color:var(--green)}.mval.r{color:var(--red)}.mval.a{color:var(--amber)}
+.pl-table{width:100%;border-collapse:collapse;font-size:13px}
+.pl-table th{text-align:left;padding:8px 10px;color:var(--muted);font-size:10px;text-transform:uppercase;border-bottom:1px solid var(--border);font-weight:500}
+.pl-table td{padding:8px 10px;border-bottom:1px solid var(--border)}
+.pl-table td.num{text-align:right;font-variant-numeric:tabular-nums}
+.pl-table td.pos{color:var(--green);text-align:right;font-weight:500}
+.pl-table td.neg{color:var(--red);text-align:right;font-weight:500}
+.pl-table td.zero{color:var(--muted);text-align:right}
+.pl-table tr.section-header td{background:var(--surface2);color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;padding:6px 10px}
+.pl-table tr.income-header td{background:var(--gbg);color:var(--green);font-size:10px;text-transform:uppercase;letter-spacing:.06em;font-weight:600;padding:6px 10px}
+.pl-table tr.total-row td{font-weight:600;border-top:2px solid var(--border2);background:var(--gbg)}
+.pl-table tr.profit-row td{font-weight:600;font-size:14px;background:var(--gbg);color:var(--green)}
+.pl-table tr.loss-row td{font-weight:600;font-size:14px;background:var(--rdim);color:var(--red)}
+.pl-input{width:90px;text-align:right;padding:4px 8px;font-size:12px;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:inherit;outline:none}
+.pl-input:focus{border-color:var(--green)}
+.date-filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.filter-btn{padding:5px 14px;border:1px solid var(--border2);border-radius:16px;background:transparent;cursor:pointer;font-size:12px;color:var(--muted);font-family:inherit}
+.filter-btn:hover{border-color:var(--green);color:var(--green)}
+.filter-btn.active{background:var(--green);color:#000;border-color:var(--green);font-weight:600}
+.date-range{display:flex;gap:6px;align-items:center}
+.date-range input{padding:5px 10px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:12px;font-family:inherit;outline:none;width:130px}
+.date-range input:focus{border-color:var(--green)}
+.bid-row{padding:12px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.bstatus{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:600}
+.sp{background:var(--adim);color:var(--amber)}.sa{background:var(--gdim);color:var(--green)}.sr{background:var(--rdim);color:var(--red)}.sv{background:var(--bdim);color:var(--blue)}
+.exp-row{padding:10px 0;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:13px}
+.person-section{margin-bottom:16px}
+.person-hdr{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border2);margin-bottom:8px}
+.avatar{width:32px;height:32px;border-radius:50%;background:var(--gdim);color:var(--green);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.charts-grid{grid-template-columns:1fr}}
+.btn{padding:7px 16px;border:1px solid var(--border2);border-radius:18px;background:transparent;cursor:pointer;font-size:12px;color:var(--text);font-family:inherit}
+.btn:hover{border-color:var(--green);color:var(--green)}
+.btn.primary{background:var(--green);color:#000;border-color:var(--green);font-weight:600}
+.btn.primary:hover{opacity:.85;color:#000}
+.btn.sm{padding:4px 10px;font-size:11px;border-radius:12px}
+.exp-table{width:100%;border-collapse:collapse}
+.exp-table th{text-align:left;padding:8px 8px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:600;border-bottom:1px solid var(--border2);background:var(--surface2)}
+.exp-table th.r{text-align:right}
+.exp-table td{padding:8px 8px;border-bottom:1px solid var(--border);vertical-align:middle;font-size:13px}
+.exp-table tr:hover td{background:var(--surface2)}
+.exp-table tr.editing td{background:#1a2a1a}
+.exp-table tr.new-row td{background:#1a1a2a}
+.etd-input{width:100%;padding:5px 8px;background:var(--surface);border:1px solid var(--green);border-radius:6px;color:var(--text);font-size:12px;font-family:inherit;outline:none}
+.etd-select{width:100%;padding:5px 8px;background:var(--surface);border:1px solid var(--green);border-radius:6px;color:var(--text);font-size:12px;font-family:inherit;outline:none}
+.icon-btn{background:none;border:none;cursor:pointer;padding:3px 5px;border-radius:5px;font-size:14px;line-height:1;opacity:.7}
+.icon-btn:hover{opacity:1;background:var(--surface2)}
+.thumb{width:36px;height:36px;object-fit:cover;border-radius:5px;cursor:zoom-in;border:1px solid var(--border)}
+.thumb-pdf{width:36px;height:36px;background:var(--surface2);border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--muted);cursor:pointer;border:1px solid var(--border)}
+.add-exp-row-btn{display:flex;align-items:center;gap:6px;background:none;border:1px dashed var(--green);border-radius:8px;color:var(--green);font-size:13px;padding:8px 16px;cursor:pointer;font-family:inherit;margin-top:10px;width:100%;justify-content:center}
+.add-exp-row-btn:hover{background:var(--gbg)}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px;flex-shrink:0}
+.toggle-approve{display:flex;align-items:center;gap:5px;font-size:11px;cursor:pointer;color:var(--muted)}
+.toggle-approve input{cursor:pointer;width:14px;height:14px}
+.save-notice{font-size:12px;color:var(--green);background:var(--gbg);border:1px solid var(--gdim);border-radius:8px;padding:8px 12px;margin-bottom:12px}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <button class="back-btn" onclick="window.location.href='/dashboard'">← Dashboard</button>
+  <img src="/icon.png" alt="Stellar" style="height:30px;width:30px;object-fit:contain;border-radius:6px">
+  <div>
+    <div class="proj-name" id="proj-name">Loading...</div>
+    <div class="proj-addr" id="proj-addr"></div>
+  </div>
+  <button class="btn primary" onclick="savePL()" id="save-btn" style="font-size:12px;padding:6px 14px;display:none">Save P&L</button>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('pl')">P&L</button>
+  <button class="tab" onclick="showTab('bids')">Bids</button>
+  <button class="tab" onclick="showTab('expenses')">Expenses</button>
+  <button class="tab" onclick="showTab('charts')">Charts</button>
+</div>
+
+<div class="body">
+
+<!-- P&L TAB -->
+<div class="panel active" id="tab-pl">
+  <div id="pl-save-notice" class="save-notice" style="display:none">✓ P&L saved</div>
+  <div class="date-filters" id="pl-filters"></div>
+  <div class="mgrid" id="pl-metrics"></div>
+  <div class="card">
+    <div class="stitle">Profit & loss — flip breakdown</div>
+    <table class="pl-table" id="pl-table">
+      <tr><th style="width:40%">Item</th><th class="num">Estimated ($)</th><th class="num">Actual ($)</th><th class="num">Difference</th></tr>
+      <tr class="section-header"><td colspan="4">📦 Purchase (costs)</td></tr>
+      <tr><td>Purchase price</td><td class="num"><input class="pl-input" id="pl-purchase-price-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-purchase-price-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-purchase-price-diff">—</td></tr>
+      <tr><td>Closing / acquisition costs</td><td class="num"><input class="pl-input" id="pl-closing-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-closing-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-closing-diff">—</td></tr>
+      <tr class="section-header"><td colspan="4">🏗️ Rehab (costs)</td></tr>
+      <tr><td>Labor <span style="font-size:10px;color:var(--green)" id="labor-auto-note"></span></td><td class="num"><input class="pl-input" id="pl-rehab-labor-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-rehab-labor-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-rehab-labor-diff">—</td></tr>
+      <tr><td>Materials <span style="font-size:10px;color:var(--green)" id="mat-auto-note"></span></td><td class="num"><input class="pl-input" id="pl-rehab-mat-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-rehab-mat-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-rehab-mat-diff">—</td></tr>
+      <tr class="section-header"><td colspan="4">🏦 Holding (costs)</td></tr>
+      <tr><td>Mortgage payments</td><td class="num"><input class="pl-input" id="pl-mortgage-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-mortgage-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-mortgage-diff">—</td></tr>
+      <tr><td>Taxes, insurance, utilities</td><td class="num"><input class="pl-input" id="pl-holding-other-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-holding-other-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-holding-other-diff">—</td></tr>
+      <tr style="background:var(--gbg)"><td style="color:var(--green)">💵 Loan disbursement <span style="font-size:10px">(income — reduces net cost)</span></td><td class="num"><input class="pl-input" id="pl-loan-est" type="number" placeholder="0" oninput="recalcPL()" style="border-color:var(--green)"></td><td class="num"><input class="pl-input" id="pl-loan-act" type="number" placeholder="0" oninput="recalcPL()" style="border-color:var(--green)"></td><td class="num" id="pl-loan-diff">—</td></tr>
+      <tr class="section-header"><td colspan="4">🏷️ Selling (costs)</td></tr>
+      <tr><td>Agent commission</td><td class="num"><input class="pl-input" id="pl-commission-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-commission-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-commission-diff">—</td></tr>
+      <tr><td>Closing / selling costs</td><td class="num"><input class="pl-input" id="pl-sell-closing-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-sell-closing-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-sell-closing-diff">—</td></tr>
+      <tr><td>Staging & marketing</td><td class="num"><input class="pl-input" id="pl-staging-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-staging-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-staging-diff">—</td></tr>
+      <tr><td style="font-size:11px;color:var(--muted);padding:4px 10px;font-style:italic" colspan="4">↑ Loan disbursement reduces net out-of-pocket below</td></tr>
+      <tr class="total-row"><td>Net out-of-pocket costs</td><td class="num" id="pl-total-est-cost">$0</td><td class="num" id="pl-total-act-cost">$0</td><td class="num" id="pl-total-cost-diff">—</td></tr>
+      <tr class="section-header"><td colspan="4">Revenue</td></tr>
+      <tr><td>Selling price (ARV)</td><td class="num"><input class="pl-input" id="pl-arv-est" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num"><input class="pl-input" id="pl-arv-act" type="number" placeholder="0" oninput="recalcPL()"></td><td class="num" id="pl-arv-diff">—</td></tr>
+      <tr id="pl-profit-row"><td>Net profit / loss</td><td class="num" id="pl-profit-est">$0</td><td class="num" id="pl-profit-act">$0</td><td class="num" id="pl-profit-diff">—</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- BIDS TAB -->
+<div class="panel" id="tab-bids">
+  <div class="date-filters" id="bids-filters"></div>
+  <div id="bids-content"><div style="color:var(--muted);font-size:13px">Loading...</div></div>
+</div>
+
+<!-- EXPENSES TAB -->
+<div class="panel" id="tab-expenses">
+  <div class="date-filters" id="exp-filters"></div>
+  <div id="expenses-content"><div style="color:var(--muted);font-size:13px">Loading...</div></div>
+</div>
+
+<!-- CHARTS TAB -->
+<div class="panel" id="tab-charts">
+  <div class="date-filters" id="chart-filters"></div>
+  <div class="charts-grid">
+    <div class="card"><div class="stitle">Cost breakdown</div><div style="position:relative;height:220px"><canvas id="costBreakChart" role="img" aria-label="Cost breakdown bar chart"></canvas></div></div>
+    <div class="card"><div class="stitle">ROI overview</div><div style="position:relative;height:220px"><canvas id="roiChart" role="img" aria-label="ROI donut chart"></canvas></div></div>
+    <div class="card"><div class="stitle">Paid vs outstanding by person</div><div style="position:relative;height:220px"><canvas id="personChart" role="img" aria-label="Paid vs outstanding per person"></canvas></div></div>
+    <div class="card"><div class="stitle">Bids by status</div><div style="position:relative;height:220px"><canvas id="bidStatusChart" role="img" aria-label="Bids by status donut chart"></canvas></div></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const SUPA_URL='https://tlbeilrkfhjevnlvfnxa.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsYmVpbHJrZmhqZXZubHZmbnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NTEyMjcsImV4cCI6MjA5MjAyNzIyN30.pD8fkK2Ju31VzA032_M8NZk5ASp4Z-tCdowgohW5-JE';
+const {createClient:_sc}=window.supabase;
+const db=_sc(SUPA_URL,SUPA_KEY);
+
+const fmt=n=>'$'+Number(n||0).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+const fmtDiff=d=>{if(!d||d===0)return{t:'—',c:'zero'};return d>0?{t:'+'+fmt(d),c:'pos'}:{t:fmt(d),c:'neg'}};
+const params=new URLSearchParams(window.location.search);
+const PROJECT_ID=params.get('id');
+
+let project=null,bids=[],lineItems=[],payments=[],expenses=[],plData={};
+let activeFilter='all',customFrom='',customTo='';
+let costChart=null,roiChart=null,personChart=null,bidChart=null;
+
+const PL_FIELDS=['purchase-price','closing','loan','rehab-labor','rehab-mat','mortgage','holding-other','commission','sell-closing','staging','arv'];
+
+async function init(){
+  if(!PROJECT_ID){document.getElementById('proj-name').textContent='No project selected';return;}
+  const[p,b,li,pay,exp,pl]=await Promise.all([
+    db.from('projects').select('*').eq('id',PROJECT_ID).single(),
+    db.from('bids').select('*').eq('project_id',PROJECT_ID).order('submitted_at',{ascending:false}),
+    db.from('bid_line_items').select('*'),
+    db.from('payments').select('*'),
+    db.from('reimbursement_expenses').select('*').eq('project_id',PROJECT_ID).order('submitted_at',{ascending:false}),
+    db.from('project_pl').select('*').eq('project_id',PROJECT_ID).single()
+  ]);
+  project=p.data;
+  bids=b.data||[];
+  lineItems=li.data||[];
+  payments=pay.data||[];
+  expenses=exp.data||[];
+  if(pl.data) plData=pl.data;
+
+  if(project){
+    document.getElementById('proj-name').textContent=project.name;
+    document.getElementById('proj-addr').textContent=[project.address,project.city].filter(Boolean).join(', ');
+    document.title=project.name+' — Stellar Cost/ROI Calculator';
+  }
+
+  // Show save btn on initial load (pl tab default)
+  const saveBtn = document.getElementById('save-btn');
+  if(saveBtn) saveBtn.style.display = 'inline-block';
+  loadPLValues();
+  // Auto-fill actuals from approved bids + expenses
+  autoFillActuals();
+  recalcPL();
+  renderDateFilters('pl-filters','recalcPL');
+}
+
+function autoFillActuals(){
+  // Labor from approved bids
+  const laborFromBids=bids.filter(b=>b.status==='approved').reduce((s,b)=>s+(b.labor_total||0),0);
+  const matFromBids=bids.filter(b=>b.status==='approved').reduce((s,b)=>s+(b.material_total||0),0);
+  // Expenses from approved reimbursements
+  const expTotal=expenses.filter(e=>e.status==='approved').reduce((s,e)=>s+(e.total_amount||0),0);
+
+  const laborEl=document.getElementById('pl-rehab-labor-act');
+  const matEl=document.getElementById('pl-rehab-mat-act');
+  const approvedBidCount=bids.filter(b=>b.status==='approved').length;
+  if(laborEl&&laborFromBids>0){laborEl.value=laborFromBids;laborEl.style.borderColor='var(--green)';}
+  const laborNote=document.getElementById('labor-auto-note');
+  if(laborNote&&approvedBidCount>0)laborNote.textContent='(auto: '+approvedBidCount+' bids)';
+  if(matEl&&(matFromBids>0||expTotal>0)){matEl.value=matFromBids+expTotal;matEl.style.borderColor='var(--green)';}
+  const matNote=document.getElementById('mat-auto-note');
+  if(matNote&&(matFromBids>0||expTotal>0))matNote.textContent='(auto: bids+expenses)';
+}
+
+function loadPLValues(){
+  PL_FIELDS.forEach(f=>{
+    const estEl=document.getElementById('pl-'+f+'-est');
+    const actEl=document.getElementById('pl-'+f+'-act');
+    if(estEl&&plData['est_'+f.replace(/-/g,'_')])estEl.value=plData['est_'+f.replace(/-/g,'_')]||'';
+    if(actEl&&plData['act_'+f.replace(/-/g,'_')])actEl.value=plData['act_'+f.replace(/-/g,'_')]||'';
+  });
+}
+
+function getVal(id){return parseFloat(document.getElementById(id)?.value)||0;}
+
+function recalcPL(){
+  const costs=['purchase-price','closing','rehab-labor','rehab-mat','mortgage','holding-other','commission','sell-closing','staging'];
+  const incomeItems=['loan']; // loan disbursements reduce net cost
+  let estCost=0,actCost=0;
+  costs.forEach(f=>{
+    const e=getVal('pl-'+f+'-est'),a=getVal('pl-'+f+'-act');
+    estCost+=e;actCost+=a;
+    // Cost: over budget (a>e) = red, under budget (a<e) = green
+    const delta=a-e;
+    const d={t:delta===0?'—':(delta>0?'+':'')+fmt(delta),c:delta===0?'zero':delta>0?'neg':'pos'};
+    const el=document.getElementById('pl-'+f+'-diff');
+    if(el){el.textContent=d.t;el.className='num '+d.c;}
+    // Color the actual value cell red (it's a cost)
+    const actEl=document.getElementById('pl-'+f+'-act');
+    if(actEl&&a>0)actEl.style.color='var(--red)';
+    else if(actEl)actEl.style.color='';
+    // Color est cell red too (it's a cost)
+    const estEl2=document.getElementById('pl-'+f+'-est');
+    if(estEl2&&e>0)estEl2.style.color='var(--red)';
+    else if(estEl2)estEl2.style.color='';
+  });
+
+  // Loan disbursements = income, subtract from costs
+  const loanEst=getVal('pl-loan-est'), loanAct=getVal('pl-loan-act');
+  estCost-=loanEst; actCost-=loanAct;
+  const loanDelta=loanAct-loanEst;
+  const loanDiffEl=document.getElementById('pl-loan-diff');
+  if(loanDiffEl){
+    loanDiffEl.textContent=loanDelta===0?'—':(loanDelta>0?'+':'')+fmt(loanDelta);
+    loanDiffEl.className='num '+(loanDelta===0?'zero':loanDelta>0?'pos':'neg');
+  }
+  // Color loan inputs green (income)
+  const loanEstEl=document.getElementById('pl-loan-est');
+  const loanActEl=document.getElementById('pl-loan-act');
+  if(loanEstEl)loanEstEl.style.color=loanEst>0?'var(--green)':'';
+  if(loanActEl)loanActEl.style.color=loanAct>0?'var(--green)':'';
+
+  const arvEst=getVal('pl-arv-est'),arvAct=getVal('pl-arv-act');
+  const arvDiff=fmtDiff(arvAct-arvEst);
+  const arvDiffEl=document.getElementById('pl-arv-diff');
+  if(arvDiffEl){arvDiffEl.textContent=arvDiff.t;arvDiffEl.className='num '+arvDiff.c;}
+  // ARV inputs = green (revenue)
+  const arvEstEl=document.getElementById('pl-arv-est');
+  const arvActEl=document.getElementById('pl-arv-act');
+  if(arvEstEl)arvEstEl.style.color=arvEst>0?'var(--green)':'';
+  if(arvActEl)arvActEl.style.color=arvAct>0?'var(--green)':'';
+
+  const totalEstEl=document.getElementById('pl-total-est-cost');
+  const totalActEl=document.getElementById('pl-total-act-cost');
+  if(totalEstEl){totalEstEl.textContent=fmt(estCost);totalEstEl.style.color='var(--red)';}
+  if(totalActEl){totalActEl.textContent=fmt(actCost);totalActEl.style.color='var(--red)';}
+  const costDelta=actCost-estCost;
+  const costDiff={t:costDelta===0?'—':(costDelta>0?'+':'')+fmt(costDelta),c:costDelta===0?'zero':costDelta>0?'neg':'pos'};
+  const costDiffEl=document.getElementById('pl-total-cost-diff');
+  if(costDiffEl){costDiffEl.textContent=costDiff.t;costDiffEl.className='num '+costDiff.c;}
+
+  const profitEst=arvEst-estCost,profitAct=arvAct-actCost;
+  const profEstEl=document.getElementById('pl-profit-est'); profEstEl.textContent=fmt(profitEst); profEstEl.style.color=profitEst>=0?'var(--green)':'var(--red)'; profEstEl.style.fontWeight='600';
+  const profActEl=document.getElementById('pl-profit-act'); profActEl.textContent=fmt(profitAct); profActEl.style.color=profitAct>=0?'var(--green)':'var(--red)'; profActEl.style.fontWeight='600';
+  const profDiff=fmtDiff(profitAct-profitEst);
+  const profDiffEl=document.getElementById('pl-profit-diff');
+  if(profDiffEl){profDiffEl.textContent=profDiff.t;profDiffEl.className='num '+profDiff.c;}
+
+  const profRow=document.getElementById('pl-profit-row');
+  if(profRow)profRow.className=profitAct>=0?'profit-row':'loss-row';
+
+  const roi=arvEst>0?((profitEst/arvEst)*100).toFixed(1):0;
+  const margin=estCost>0?((profitEst/estCost)*100).toFixed(1):0;
+  document.getElementById('pl-metrics').innerHTML=[
+    {l:'Est. profit',v:fmt(profitEst),c:profitEst>=0?'g':'r'},
+    {l:'Act. profit',v:fmt(profitAct),c:profitAct>=0?'g':'r'},
+    {l:'Total est. costs',v:fmt(estCost),c:''},
+    {l:'Total act. costs',v:fmt(actCost),c:''},
+    {l:'ARV (est.)',v:fmt(arvEst),c:''},
+    {l:'ROI',v:roi+'%',c:roi>=0?'g':'r'},
+    {l:'Margin',v:margin+'%',c:margin>=0?'g':'r'}
+  ].map(m=>`<div class="metric"><div class="mlabel">${m.l}</div><div class="mval ${m.c}">${m.v}</div></div>`).join('');
+}
+
+async function savePL(){
+  const btn=document.getElementById('save-btn');
+  btn.disabled=true;btn.textContent='Saving...';
+  const record={project_id:PROJECT_ID};
+  PL_FIELDS.forEach(f=>{
+    const key=f.replace(/-/g,'_');
+    record['est_'+key]=getVal('pl-'+f+'-est');
+    record['act_'+key]=getVal('pl-'+f+'-act');
+  });
+
+  // Try insert first, then upsert
+  const{error}=await db.from('project_pl').upsert(record,{onConflict:'project_id'});
+  if(error){
+    // Table may not exist yet — create it
+    await db.rpc('exec_sql',{sql:`create table if not exists project_pl (id uuid primary key default gen_random_uuid(), project_id uuid references projects(id) unique, ${PL_FIELDS.map(f=>`est_${f.replace(/-/g,'_')} numeric default 0, act_${f.replace(/-/g,'_')} numeric default 0`).join(', ')}); alter table project_pl enable row level security; create policy if not exists "public_all" on project_pl for all using (true) with check (true);`}).catch(()=>{});
+    await db.from('project_pl').upsert(record,{onConflict:'project_id'});
+  }
+
+  const notice=document.getElementById('pl-save-notice');
+  notice.style.display='block';setTimeout(()=>notice.style.display='none',3000);
+  btn.disabled=false;btn.textContent='Save P&L';
+}
+
+function filterByDate(items,dateField){
+  if(activeFilter==='all'&&!customFrom&&!customTo)return items;
+  const now=new Date();
+  return items.filter(item=>{
+    const d=new Date(item[dateField]);
+    if(customFrom&&customTo){return d>=new Date(customFrom)&&d<=new Date(customTo+'T23:59:59');}
+    if(activeFilter==='month'){return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();}
+    if(activeFilter==='quarter'){const q=Math.floor(now.getMonth()/3);const dq=Math.floor(d.getMonth()/3);return dq===q&&d.getFullYear()===now.getFullYear();}
+    if(activeFilter==='year'){return d.getFullYear()===now.getFullYear();}
+    return true;
+  });
+}
+
+function renderDateFilters(containerId,onchange){
+  const filters=[{k:'all',l:'All time'},{k:'month',l:'This month'},{k:'quarter',l:'This quarter'},{k:'year',l:'This year'}];
+  document.getElementById(containerId).innerHTML=`
+    <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+      ${filters.map(f=>`<button class="filter-btn ${activeFilter===f.k&&!customFrom?'active':''}" onclick="setFilter('${f.k}','${containerId}','${onchange}')">${f.l}</button>`).join('')}
+      <div class="date-range">
+        <input type="date" id="df-from-${containerId}" value="${customFrom}" onchange="setCustomRange('${containerId}','${onchange}')">
+        <span style="color:var(--muted);font-size:12px">to</span>
+        <input type="date" id="df-to-${containerId}" value="${customTo}" onchange="setCustomRange('${containerId}','${onchange}')">
+      </div>
+    </div>`;
+}
+
+function setFilter(k,cid,fn){
+  activeFilter=k;customFrom='';customTo='';
+  renderDateFilters(cid,fn);
+  window[fn]();
+}
+
+function setCustomRange(cid,fn){
+  customFrom=document.getElementById('df-from-'+cid)?.value||'';
+  customTo=document.getElementById('df-to-'+cid)?.value||'';
+  if(customFrom||customTo){activeFilter='';}
+  renderDateFilters(cid,fn);
+  window[fn]();
+}
+
+function showTab(t){
+  // Show Save P&L button only on P&L tab
+  const saveBtn = document.getElementById('save-btn');
+  if(saveBtn) saveBtn.style.display = t==='pl' ? 'inline-block' : 'none';
+  document.querySelectorAll('.tab').forEach((el,i)=>{
+    ['pl','bids','expenses','charts'].forEach((tab,j)=>{if(j===i)el.classList.toggle('active',tab===t)});
+  });
+  document.querySelectorAll('.panel').forEach(el=>el.classList.remove('active'));
+  document.getElementById('tab-'+t).classList.add('active');
+  if(t==='bids')renderBids();
+  if(t==='expenses')renderExpenses();
+  if(t==='charts')renderCharts();
+}
+
+function renderBids(){
+  renderDateFilters('bids-filters','renderBids');
+  const filtered=filterByDate(bids,'submitted_at');
+  const el=document.getElementById('bids-content');
+  if(!filtered.length){el.innerHTML=`<div style="font-size:13px;color:var(--muted)">No bids for this period.</div>`;return;}
+
+  // Group by person
+  const byPerson={};
+  filtered.forEach(b=>{
+    const key=b.company||'Unknown';
+    if(!byPerson[key])byPerson[key]=[];
+    byPerson[key].push(b);
+  });
+
+  el.innerHTML=Object.entries(byPerson).map(([person,pBids])=>{
+    const totalVal=pBids.reduce((s,b)=>s+(b.grand_total||0),0);
+    const paidVal=pBids.reduce((s,b)=>{
+      const pays=payments.filter(p=>p.bid_id===b.id);
+      return s+pays.reduce((ps,p)=>ps+(p.amount||0),0);
+    },0);
+    const initials=person.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);
+    return`<div class="person-section">
+      <div class="person-hdr">
+        <div class="avatar">${initials}</div>
+        <div style="flex:1"><div style="font-size:14px;font-weight:600">${person}</div><div style="font-size:11px;color:var(--muted)">${pBids.length} bid${pBids.length>1?'s':''} — ${fmt(totalVal)} total</div></div>
+        <div style="text-align:right"><div style="font-size:11px;color:var(--muted)">Paid out</div><div style="font-size:14px;font-weight:600;color:var(--green)">${fmt(paidVal)}</div></div>
+      </div>
+      ${pBids.map(b=>{
+        const pays=payments.filter(p=>p.bid_id===b.id);
+        const paid=pays.reduce((s,p)=>s+(p.amount||0),0);
+        const sc={pending:'sp',approved:'sa',rejected:'sr',revision:'sv'}[b.status]||'sp';
+        const lines=lineItems.filter(l=>l.bid_id===b.id);
+        const laborLines=lines.filter(l=>l.type==='labor');
+        const matLines=lines.filter(l=>l.type==='material');
+        return`<div class="bid-row">
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:600">${b.job_title}</div>
+            <div style="font-size:11px;color:var(--muted)">${b.submitted_at?b.submitted_at.slice(0,10):'—'}</div>
+            ${laborLines.length?`<div style="font-size:11px;color:var(--muted)">Labor: ${laborLines.map(l=>l.description).join(', ')}</div>`:''}
+            ${matLines.length?`<div style="font-size:11px;color:var(--muted)">Materials: ${matLines.map(l=>l.description).join(', ')}</div>`:''}
+          </div>
+          <div style="text-align:right">
+            <div style="font-size:14px;font-weight:600;color:${b.status==='approved'?'var(--green)':'var(--amber)'}">${fmt(b.grand_total)}</div>
+            ${b.status==='approved'?`<div style="font-size:11px;color:var(--muted)">${fmt(paid)} paid</div>`:''}
+          </div>
+          <span class="bstatus ${sc}">${b.status}</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+  }).join('');
+}
+
+function renderExpenses(){
+  renderDateFilters('exp-filters','renderExpenses');
+  const filtered = filterByDate(expenses, 'submitted_at');
+  const el = document.getElementById('expenses-content');
+
+  const hdr = `<div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;overflow:hidden">
+    <table class="exp-table">
+      <thead><tr>
+        <th style="width:180px">Item</th>
+        <th style="width:52px">Photo</th>
+        <th style="width:100px">Date</th>
+        <th>Description / notes</th>
+        <th style="width:100px">Who paid</th>
+        <th class="r" style="width:90px">Reimbursed</th>
+        <th class="r" style="width:80px">Cost</th>
+        <th style="width:90px">Status</th>
+        <th style="width:70px">Actions</th>
+      </tr></thead>
+      <tbody id="exp-tbody"></tbody>
+    </table>
+    <button class="add-exp-row-btn" onclick="addExpenseRow()">+ Add expense line</button>
+  </div>`;
+
+  el.innerHTML = hdr;
+  const tbody = document.getElementById('exp-tbody');
+  filtered.forEach(e => tbody.appendChild(makeExpRow(e)));
+
+  // Totals row
+  const approved = filtered.filter(e => e.status === 'approved');
+  const totalCost = approved.reduce((s,e) => s+(e.total_amount||0), 0);
+  const totalReimb = approved.filter(e => e.reimbursed).reduce((s,e) => s+(e.total_amount||0), 0);
+  const tr = document.createElement('tr');
+  tr.style.background = 'var(--gbg)';
+  tr.innerHTML = `<td colspan="5" style="font-size:12px;font-weight:600;color:var(--green)">Approved total</td>
+    <td style="text-align:right;font-size:12px;font-weight:600;color:var(--green)">${fmt(totalReimb)}</td>
+    <td style="text-align:right;font-size:12px;font-weight:600;color:var(--green)">${fmt(totalCost)}</td>
+    <td colspan="2"></td>`;
+  tbody.appendChild(tr);
+}
+
+function makeExpRow(e, isNew=false){
+  const items = Array.isArray(e.line_items) ? e.line_items : [];
+  const itemName = items.map(l=>l.desc).filter(Boolean).join(', ') || e.notes || 'Expense';
+  const files = e.files && e.files.length ? e.files : [];
+  const fileThumb = files.length ? (() => {
+    const url = files[0];
+    const isImg = url && /\.(jpg|jpeg|png|heic)/i.test(url);
+    const isUrl = url && url.startsWith('http');
+    if(isImg && isUrl) return `<img class="thumb" src="${url}" onclick="viewFile('${url}','${url.split('/').pop()}')" alt="receipt">`;
+    if(url) return `<div class="thumb-pdf" onclick="viewFile('${url}','receipt')" title="${url.split('/').pop()}">PDF</div>`;
+    return `<div class="thumb-pdf" title="${url}">📎</div>`;
+  })() : '<span style="color:var(--border2);font-size:11px">—</span>';
+
+  const statusDotColor = e.status==='approved'?'#00c805':e.status==='rejected'?'#ff5000':'#f5a623';
+  const statusLabel = e.status==='approved'?'Approved':e.status==='rejected'?'Rejected':'Pending';
+  const reimbAmt = e.reimbursed && e.status==='approved'
+    ? fmt(e.reimbursement_amount && e.reimbursement_amount < e.total_amount ? e.reimbursement_amount : e.total_amount)
+    : '$0';
+  const isPartial = e.reimbursed && e.reimbursement_amount && e.reimbursement_amount < e.total_amount;
+  const reimbColor = e.reimbursed ? (isPartial ? 'var(--amber)' : 'var(--green)') : 'var(--amber)';
+
+  const tr = document.createElement('tr');
+  tr.dataset.id = e.id;
+  tr.innerHTML = `
+    <td><span style="display:inline-flex;align-items:center;gap:5px"><span class="status-dot" style="background:${statusDotColor}"></span><span style="font-weight:500">${itemName}</span></span></td>
+    <td>${fileThumb}</td>
+    <td style="color:var(--muted);font-size:12px">${e.submitted_at?e.submitted_at.slice(0,10):'—'}</td>
+    <td style="color:var(--muted);font-size:12px">${e.notes||itemName||'—'}</td>
+    <td style="font-size:12px">${e.paid_by||'—'}</td>
+    <td style="text-align:right;font-weight:500"><span style="color:${reimbColor}">${reimbAmt}</span>${isPartial?`<div style="font-size:9px;color:var(--amber)">partial</div>`:''}</td>
+    <td style="text-align:right;font-weight:600;color:var(--green)">${fmt(e.total_amount)}</td>
+    <td>${e.status==='pending'?`<button onclick="quickApproveExp('${e.id}')" style="font-size:10px;padding:3px 10px;background:var(--green);color:#000;border:none;border-radius:10px;cursor:pointer;font-weight:600;font-family:inherit">Approve</button>`:e.status==='approved'?`<button onclick="toggleReimbExp('${e.id}',${!e.reimbursed})" style="font-size:10px;padding:3px 9px;background:${e.reimbursed?'var(--gdim)':'transparent'};color:${e.reimbursed?'var(--green)':'var(--amber)'};border:1px solid ${e.reimbursed?'var(--green)':'var(--amber)'};border-radius:10px;cursor:pointer;font-family:inherit">${e.reimbursed?'✓ Paid':'Mark paid'}</button>`:`<span style="font-size:10px;color:var(--red)">Rejected</span>`}</td>
+    <td style="white-space:nowrap">
+      <button class="icon-btn" title="Edit" onclick="editExpRow('${e.id}')">✏️</button>
+      <button class="icon-btn" title="Delete" onclick="deleteExpRow('${e.id}')" style="color:var(--red)">🗑️</button>
+    </td>`;
+  return tr;
+}
+
+function addExpenseRow(){
+  const tbody = document.getElementById('exp-tbody');
+  if(!tbody) return;
+  const today = new Date().toISOString().slice(0,10);
+  const tr = document.createElement('tr');
+  tr.className = 'new-row';
+  tr.id = 'new-exp-row';
+  tr.innerHTML = `
+    <td><input class="etd-input" id="nr-desc" placeholder="Item name" style="width:150px"></td>
+    <td><input type="file" id="nr-file" accept="image/jpeg,image/png,image/heic,application/pdf" style="width:52px;font-size:9px;opacity:.7"></td>
+    <td><input class="etd-input" id="nr-date" type="date" value="${today}" style="width:110px"></td>
+    <td><input class="etd-input" id="nr-notes" placeholder="Notes / description"></td>
+    <td><select class="etd-select" id="nr-paidby" style="width:90px">
+      <option value="">—</option>
+      <option>Robbie</option><option>Aasif</option><option>Douglas</option><option value="Other">Other</option>
+    </select></td>
+    <td style="text-align:right"><span style="color:var(--muted);font-size:11px">—</span></td>
+    <td style="text-align:right"><div style="position:relative;display:inline-block"><span style="position:absolute;left:6px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px">$</span><input class="etd-input" id="nr-amount" type="number" step="0.01" placeholder="0.00" style="width:70px;padding-left:18px;text-align:right"></div></td>
+    <td><label class="toggle-approve"><input type="checkbox" id="nr-approve" checked> Auto-approve</label></td>
+    <td style="white-space:nowrap">
+      <button class="icon-btn" title="Save" onclick="saveNewExpRow()" style="color:var(--green);font-size:16px">💾</button>
+      <button class="icon-btn" title="Cancel" onclick="document.getElementById('new-exp-row').remove()" style="color:var(--red)">✕</button>
+    </td>`;
+  // Insert before totals row (last row)
+  const rows = tbody.querySelectorAll('tr');
+  tbody.insertBefore(tr, rows[rows.length-1]);
+  document.getElementById('nr-desc').focus();
+}
+
+async function saveNewExpRow(){
+  const desc = document.getElementById('nr-desc')?.value.trim();
+  const paidby = document.getElementById('nr-paidby')?.value;
+  const amount = parseFloat(document.getElementById('nr-amount')?.value)||0;
+  const date = document.getElementById('nr-date')?.value || new Date().toISOString().slice(0,10);
+  const notes = document.getElementById('nr-notes')?.value || '';
+  const autoApprove = document.getElementById('nr-approve')?.checked;
+  if(!desc||!amount){alert('Item name and amount are required.');return;}
+
+  const saveBtn = document.querySelector('#new-exp-row .icon-btn');
+  if(saveBtn){saveBtn.textContent='⏳';saveBtn.disabled=true;}
+
+  // Upload file
+  let fileUrls = [];
+  const fi = document.getElementById('nr-file');
+  if(fi && fi.files.length){
+    const f = fi.files[0];
+    const path = PROJECT_ID+'/'+Date.now()+'-'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    const{data:ud,error:ue}=await db.storage.from('receipts').upload(path,f,{upsert:true});
+    if(!ue){const{data:urlD}=db.storage.from('receipts').getPublicUrl(path);fileUrls.push(urlD.publicUrl);}
+    else fileUrls.push(f.name);
+  }
+
+  const{data,error}=await db.from('reimbursement_expenses').insert({
+    project_id:PROJECT_ID, paid_by:paidby||'Unknown',
+    line_items:[{desc,amt:amount}], total_amount:amount,
+    files:fileUrls, notes, status:autoApprove?'approved':'pending',
+    reimbursed:false, submitted_at:new Date(date+'T12:00:00').toISOString()
+  }).select();
+
+  if(error){alert('Error: '+error.message);if(saveBtn){saveBtn.textContent='💾';saveBtn.disabled=false;}return;}
+  expenses.unshift(data[0]);
+  if(autoApprove){autoFillActuals();recalcPL();}
+  renderExpenses();
+}
+
+function editExpRow(id){
+  const e = expenses.find(x=>x.id===id);
+  if(!e)return;
+  const tr = document.querySelector(`tr[data-id="${id}"]`);
+  if(!tr)return;
+  const items = Array.isArray(e.line_items)?e.line_items:[];
+  const itemName = items.map(l=>l.desc).filter(Boolean).join(', ')||e.notes||'';
+  const date = e.submitted_at?e.submitted_at.slice(0,10):'';
+  tr.className = 'editing';
+  tr.innerHTML = `
+    <td><input class="etd-input" id="ed-desc-${id}" value="${itemName}" style="width:150px"></td>
+    <td><input type="file" id="ed-file-${id}" accept="image/jpeg,image/png,image/heic,application/pdf" style="width:52px;font-size:9px;opacity:.7"></td>
+    <td><input class="etd-input" id="ed-date-${id}" type="date" value="${date}" style="width:110px"></td>
+    <td><input class="etd-input" id="ed-notes-${id}" value="${e.notes||''}" placeholder="Notes"></td>
+    <td><select class="etd-select" id="ed-paidby-${id}" style="width:90px">
+      <option value="">—</option>
+      ${['Robbie','Aasif','Douglas'].map(n=>`<option${e.paid_by===n?' selected':''}>${n}</option>`).join('')}
+      <option value="Other"${!['Robbie','Aasif','Douglas'].includes(e.paid_by)?' selected':''}>Other</option>
+    </select></td>
+    <td><div style="position:relative;display:inline-block">
+      <span style="position:absolute;left:6px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px">$</span>
+      <input class="etd-input" id="ed-reimb-amt-${id}" type="number" step="0.01" 
+        value="${e.reimbursement_amount||0}" placeholder="0.00" 
+        style="width:90px;padding-left:18px;text-align:right"
+        title="Enter amount reimbursed so far (0 = not reimbursed)">
+    </div><div style="font-size:9px;color:var(--muted);text-align:right;margin-top:2px">of ${fmt(e.total_amount)}</div></td>
+    <td><div style="position:relative;display:inline-block"><span style="position:absolute;left:6px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:12px">$</span><input class="etd-input" id="ed-amt-${id}" type="number" step="0.01" value="${e.total_amount||0}" style="width:70px;padding-left:18px;text-align:right"></div></td>
+    <td><span style="font-size:11px;color:var(--muted)">${e.status}</span></td>
+    <td style="white-space:nowrap">
+      <button class="icon-btn" title="Save" onclick="saveEditRow('${id}')" style="color:var(--green);font-size:16px">💾</button>
+      <button class="icon-btn" title="Cancel" onclick="renderExpenses()" style="color:var(--red)">✕</button>
+    </td>`;
+}
+
+async function saveEditRow(id){
+  const desc = document.getElementById('ed-desc-'+id)?.value.trim()||'';
+  const notes = document.getElementById('ed-notes-'+id)?.value||'';
+  const paidby = document.getElementById('ed-paidby-'+id)?.value||'';
+  const amount = parseFloat(document.getElementById('ed-amt-'+id)?.value)||0;
+  const date = document.getElementById('ed-date-'+id)?.value||'';
+  const saveBtn = document.querySelector(`tr.editing .icon-btn`);
+  if(saveBtn){saveBtn.textContent='⏳';saveBtn.disabled=true;}
+
+  // Upload new file if chosen
+  let fileUrls = expenses.find(x=>x.id===id)?.files||[];
+  const fi = document.getElementById('ed-file-'+id);
+  if(fi && fi.files.length){
+    const f=fi.files[0];
+    const path=PROJECT_ID+'/'+Date.now()+'-'+f.name.replace(/[^a-zA-Z0-9._-]/g,'_');
+    const{data:ud,error:ue}=await db.storage.from('receipts').upload(path,f,{upsert:true});
+    if(!ue){const{data:urlD}=db.storage.from('receipts').getPublicUrl(path);fileUrls=[urlD.publicUrl,...fileUrls];}
+  }
+
+  const{error}=await db.from('reimbursement_expenses').update({
+    paid_by:paidby, line_items:[{desc,amt:amount}],
+    total_amount:amount, notes, files:fileUrls,
+    submitted_at:date?new Date(date+'T12:00:00').toISOString():undefined
+  }).eq('id',id);
+
+  if(error){alert('Error: '+error.message);if(saveBtn){saveBtn.textContent='💾';saveBtn.disabled=false;}return;}
+  const e=expenses.find(x=>x.id===id);
+  if(e){e.paid_by=paidby;e.line_items=[{desc,amt:amount}];e.total_amount=amount;e.notes=notes;if(date)e.submitted_at=new Date(date+'T12:00:00').toISOString();}
+  autoFillActuals();recalcPL();renderExpenses();
+}
+
+async function deleteExpRow(id){
+  if(!confirm('Delete this expense? This cannot be undone.'))return;
+  const{error}=await db.from('reimbursement_expenses').delete().eq('id',id);
+  if(!error){expenses=expenses.filter(x=>x.id!==id);autoFillActuals();recalcPL();renderExpenses();}
+  else alert('Error: '+error.message);
+}
+
+
+async function quickApproveExp(id){
+  const{error}=await db.from('reimbursement_expenses').update({status:'approved'}).eq('id',id);
+  if(!error){
+    const e=expenses.find(x=>x.id===id);
+    if(e)e.status='approved';
+    renderExpenses();
+    autoFillActuals();
+    recalcPL();
+  }
+}
+
+async function toggleReimbExp(id,val){
+  const{error}=await db.from('reimbursement_expenses').update({reimbursed:val,reimbursed_at:val?new Date().toISOString():null}).eq('id',id);
+  if(!error){
+    const e=expenses.find(x=>x.id===id);
+    if(e){e.reimbursed=val;e.reimbursed_at=val?new Date().toISOString():null;}
+    renderExpenses();
+  }
+}
+
+function viewFile(url, name){
+  if(!url||url===name){
+    alert('File "'+name+'" was submitted before file storage was enabled. Ask the submitter to re-upload.');
+    return;
+  }
+  // Check if it's an image or PDF
+  const isImg=/\.(jpg|jpeg|png|heic|gif|webp)/i.test(url);
+  const isPdf=/\.pdf/i.test(url);
+  if(isImg){
+    // Open image in a lightbox overlay
+    const overlay=document.createElement('div');
+    overlay.style.cssText='position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.92);z-index:9999;display:flex;align-items:center;justify-content:center;cursor:zoom-out';
+    overlay.onclick=()=>document.body.removeChild(overlay);
+    const img=document.createElement('img');
+    img.src=url;
+    img.style.cssText='max-width:92vw;max-height:90vh;border-radius:10px;object-fit:contain';
+    img.alt=name;
+    const close=document.createElement('div');
+    close.innerHTML='&times;';
+    close.style.cssText='position:absolute;top:16px;right:24px;color:#fff;font-size:32px;cursor:pointer;font-weight:300;line-height:1';
+    close.onclick=()=>document.body.removeChild(overlay);
+    overlay.appendChild(img);
+    overlay.appendChild(close);
+    document.body.appendChild(overlay);
+  } else {
+    window.open(url,'_blank');
+  }
+}
+
+function renderCharts(){
+  renderDateFilters('chart-filters','renderCharts');
+  const fBids=filterByDate(bids,'submitted_at');
+  const fExps=filterByDate(expenses,'submitted_at');
+  const approvedBids=fBids.filter(b=>b.status==='approved');
+
+  // Cost breakdown
+  const laborCost=approvedBids.reduce((s,b)=>s+(b.labor_total||0),0);
+  const matCost=approvedBids.reduce((s,b)=>s+(b.material_total||0),0);
+  const expCost=fExps.filter(e=>e.status==='approved').reduce((s,e)=>s+(e.total_amount||0),0);
+  const purchEst=getVal('pl-purchase-price-est')||0;
+  const holdEst=(getVal('pl-mortgage-est')||0)+(getVal('pl-holding-other-est')||0);
+  const sellEst=(getVal('pl-commission-est')||0)+(getVal('pl-sell-closing-est')||0)+(getVal('pl-staging-est')||0);
+
+  if(costChart)costChart.destroy();
+  const costEl=document.getElementById('costBreakChart');
+  costChart=new Chart(costEl,{type:'bar',data:{labels:['Purchase','Rehab Labor','Rehab Materials','Expenses','Holding','Selling'],datasets:[{data:[purchEst,laborCost,matCost,expCost,holdEst,sellEst],backgroundColor:['#00c80533','#a78bfa33','#4a9eff33','#f5a62333','#ff500033','#00c80522'],borderColor:['#00c805','#a78bfa','#4a9eff','#f5a623','#ff5000','#00c805'],borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#a78bfa',font:{size:10}},grid:{color:'#1e1e1e'}},y:{ticks:{color:'#a78bfa',font:{size:10},callback:v=>'$'+v.toLocaleString()},grid:{color:'#1e1e1e'}}}}});
+
+  // ROI donut
+  const arvEst=getVal('pl-arv-est')||0;
+  const totalCost=purchEst+laborCost+matCost+expCost+holdEst+sellEst;
+  const profit=arvEst-totalCost;
+  if(roiChart)roiChart.destroy();
+  const roiEl=document.getElementById('roiChart');
+  if(arvEst>0){roiChart=new Chart(roiEl,{type:'doughnut',data:{labels:['Total cost','Profit'],datasets:[{data:[totalCost,Math.max(0,profit)],backgroundColor:['#ff500044','#00c80544'],borderColor:['#ff5000','#00c805'],borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#a78bfa',font:{size:10},boxWidth:9}}}}});}
+  else roiEl.parentElement.innerHTML='<div style="font-size:12px;color:var(--muted);padding:30px;text-align:center">Enter ARV to see ROI</div>';
+
+  // Person chart
+  const allPeople={};
+  approvedBids.forEach(b=>{
+    const pays=payments.filter(p=>p.bid_id===b.id);
+    const paid=pays.reduce((s,p)=>s+(p.amount||0),0);
+    const owed=(b.grand_total||0)-paid;
+    if(!allPeople[b.company])allPeople[b.company]={paid:0,owed:0};
+    allPeople[b.company].paid+=paid;
+    allPeople[b.company].owed+=owed;
+  });
+  fExps.filter(e=>e.status==='approved').forEach(e=>{
+    if(!allPeople[e.paid_by])allPeople[e.paid_by]={paid:0,owed:0};
+    if(e.reimbursed)allPeople[e.paid_by].paid+=(e.total_amount||0);
+    else allPeople[e.paid_by].owed+=(e.total_amount||0);
+  });
+  if(personChart)personChart.destroy();
+  const pNames=Object.keys(allPeople);
+  if(pNames.length){personChart=new Chart(document.getElementById('personChart'),{type:'bar',data:{labels:pNames,datasets:[{label:'Paid',data:pNames.map(p=>allPeople[p].paid),backgroundColor:'#00c80544',borderColor:'#00c805',borderWidth:1},{label:'Outstanding',data:pNames.map(p=>allPeople[p].owed),backgroundColor:'#ff500044',borderColor:'#ff5000',borderWidth:1}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#a78bfa',font:{size:10},boxWidth:9}}},scales:{x:{ticks:{color:'#a78bfa',font:{size:10}},grid:{color:'#1e1e1e'}},y:{ticks:{color:'#a78bfa',font:{size:10},callback:v=>'$'+v.toLocaleString()},grid:{color:'#1e1e1e'}}}}});}
+
+  // Bid status donut
+  const statC={pending:0,approved:0,rejected:0,revision:0};
+  fBids.forEach(b=>statC[b.status]=(statC[b.status]||0)+1);
+  const nonz=Object.entries(statC).filter(([,v])=>v>0);
+  if(bidChart)bidChart.destroy();
+  const cols={pending:'#f5a623',approved:'#00c805',rejected:'#ff5000',revision:'#4a9eff'};
+  if(nonz.length){bidChart=new Chart(document.getElementById('bidStatusChart'),{type:'doughnut',data:{labels:nonz.map(([k])=>k),datasets:[{data:nonz.map(([,v])=>v),backgroundColor:nonz.map(([k])=>cols[k]+'88'),borderColor:nonz.map(([k])=>cols[k]),borderWidth:2}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{color:'#a78bfa',font:{size:10},boxWidth:9}}}}});}
+  else document.getElementById('bidStatusChart').parentElement.innerHTML='<div style="font-size:12px;color:var(--muted);padding:30px;text-align:center">No bids yet</div>';
+}
+
+init();
+</script>
+</body>
+</html>
