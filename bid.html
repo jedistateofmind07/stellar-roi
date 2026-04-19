@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-t="bid.title">Submit a Bid — Stellar Cost/ROI Calculator</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--surface:#141414;--surface2:#1c1c1c;--border:#2a2a2a;--border2:#333;--text:#fff;--muted:#a78bfa;--green:#00c805;--gdim:#00c80522;--gbg:#00c80514;--red:#ff5000;--rdim:#ff500022;--amber:#f5a623;--adim:#f5a62322}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:0 0 40px}
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:10px;margin-bottom:24px}
+.logo-dot{width:24px;height:24px;background:var(--green);border-radius:50%}
+.page-title{font-size:15px;font-weight:600}
+.page-sub{font-size:11px;color:var(--muted)}
+.container{max-width:640px;margin:0 auto;padding:0 16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.stitle{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:12px}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.flabel{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+input,select,textarea{width:100%;padding:10px 12px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:14px;font-family:inherit;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--green)}
+select option{background:var(--surface2)}
+.fgrid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:480px){.fgrid2{grid-template-columns:1fr}}
+.amt-wrap{position:relative}
+.amt-wrap .sym{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none}
+.amt-wrap input{padding-left:24px}
+.lirow{display:grid;grid-template-columns:1fr 130px 32px;gap:8px;align-items:center;margin-bottom:8px}
+.rm-btn{width:32px;height:32px;border-radius:50%;background:var(--rdim);border:none;cursor:pointer;color:var(--red);font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.add-li{font-size:12px;color:var(--green);background:none;border:1px dashed var(--green);border-radius:14px;padding:5px 14px;cursor:pointer;font-family:inherit;margin-bottom:4px}
+.add-li:hover{background:var(--gdim)}
+.tot-box{background:var(--surface2);border-radius:8px;padding:12px 16px;margin:12px 0}
+.tot-row{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;border-bottom:1px solid var(--border)}
+.tot-row:last-child{border:none;font-size:15px;font-weight:600;color:var(--green);padding-top:10px}
+.sdiv{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin:16px 0 10px;display:flex;align-items:center;gap:7px}
+.sdiv::after{content:'';flex:1;height:1px;background:var(--border)}
+.uz{border:2px dashed var(--border2);border-radius:10px;padding:20px;text-align:center;cursor:pointer;margin-bottom:10px;transition:border-color .2s}
+.uz:hover,.uz.over{border-color:var(--green)}
+.uz-icon{width:40px;height:40px;margin:0 auto 8px;border-radius:50%;background:var(--gdim);display:flex;align-items:center;justify-content:center}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+.chip{background:var(--surface2);border:1px solid var(--border);border-radius:7px;padding:4px 10px;font-size:12px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.chip-x{background:none;border:none;cursor:pointer;color:var(--red);font-size:14px;padding:0;line-height:1}
+.btn-submit{width:100%;padding:14px;background:var(--green);color:#000;border:none;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;margin-top:8px;transition:opacity .15s}
+.btn-submit:hover{opacity:.85}
+.btn-submit:disabled{opacity:.5;cursor:not-allowed}
+.err{font-size:13px;color:var(--red);padding:10px 14px;background:var(--rdim);border-radius:8px;margin-bottom:12px}
+.success-screen{text-align:center;padding:40px 20px;display:none}
+.success-icon{width:64px;height:64px;background:var(--gbg);border:2px solid var(--green);border-radius:50%;margin:0 auto 16px;display:flex;align-items:center;justify-content:center}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo-dot"></div>
+  <div>
+    <div class="page-title">Submit a Bid or Quote</div>
+    <div class="page-sub">Stellar Cost/ROI Calculator — your bid will be reviewed before any work is authorized</div>
+    <button onclick="toggleLang()" style="background:none;border:1px solid var(--border2);border-radius:16px;color:var(--muted);font-size:12px;padding:5px 14px;cursor:pointer;font-family:inherit" data-t="lang.toggle">Español</button>
+</div>
+</div>
+
+<div class="container">
+
+<div id="form-area">
+  <div class="card">
+    <div class="stitle" data-t="bid.your_info">Your information</div>
+    <div class="fgrid2">
+      <div class="fg"><label class="flabel" data-t="bid.company">Company / your name *</label><input type="text" id="b-company" placeholder="e.g. Jose's Plumbing LLC"></div>
+      <div class="fg"><label class="flabel" data-t="bid.contact">Contact name</label><input type="text" id="b-contact" placeholder="e.g. Jose Martinez"></div>
+    </div>
+    <div class="fgrid2">
+      <div class="fg"><label class="flabel" data-t="bid.phone">Phone number</label><input type="tel" id="b-phone" placeholder="e.g. (214) 555-0123"></div>
+      <div class="fg"><label class="flabel" data-t="bid.email">Email</label><input type="email" id="b-email" placeholder="e.g. jose@plumbing.com"></div>
+    </div>
+    <div class="stitle" style="margin-top:16px" data-t="bid.address">Business address</div>
+    <div class="fg" style="margin-bottom:10px"><label class="flabel" data-t="bid.street">Street address</label><input type="text" id="b-street" placeholder="e.g. 123 Main St"></div>
+    <div class="fgrid2">
+      <div class="fg"><label class="flabel" data-t="bid.unit">Unit / Suite / Apt</label><input type="text" id="b-unit" placeholder="e.g. Suite 200 (optional)"></div>
+      <div class="fg"><label class="flabel" data-t="bid.city">City</label><input type="text" id="b-city" placeholder="e.g. Frisco"></div>
+    </div>
+    <div class="fgrid2">
+      <div class="fg"><label class="flabel" data-t="bid.state">State</label><input type="text" id="b-state" placeholder="e.g. TX"></div>
+      <div class="fg"><label class="flabel" data-t="bid.zip">ZIP code</label><input type="text" id="b-zip" placeholder="e.g. 75033"></div>
+    </div>
+    <div class="stitle" style="margin-top:16px" data-t="bid.job_details">Job details</div>
+    <div class="fgrid2">
+      <div class="fg"><label class="flabel" data-t="bid.property">Property *</label>
+        <div id="b-proj-locked" style="display:none;padding:10px 12px;background:var(--gbg);border:1px solid var(--green);border-radius:8px;font-size:14px;font-weight:600;color:var(--green)"></div>
+        <select id="b-proj" style="display:block"><option value="">— loading properties... —</option></select>
+        <div id="no-proj-hint" style="font-size:11px;color:var(--muted);margin-top:3px;display:none">No properties available yet.</div>
+      </div>
+      <div class="fg"><label class="flabel" data-t="bid.job_title">Job title *</label><input type="text" id="b-title" placeholder="e.g. Full bathroom remodel"></div>
+    </div>
+    <div class="fg"><label class="flabel" data-t="bid.scope">Scope of work</label><textarea id="b-scope" rows="3" style="resize:vertical" placeholder="Describe the work to be done, timeline, any special conditions..."></textarea></div>
+  </div>
+
+  <div class="card">
+    <div class="sdiv" style="margin-top:0" data-t="bid.labor">Labor items</div>
+    <div id="labor-lines"></div>
+    <button class="add-li" onclick="addLaborLine()" data-t="bid.add_labor">+ Add labor line</button>
+
+    <div class="sdiv" data-t="bid.materials">Materials items</div>
+    <div id="mat-lines"></div>
+    <button class="add-li" onclick="addMatLine()" data-t="bid.add_materials">+ Add materials line</button>
+
+    <div class="tot-box">
+      <div class="tot-row"><span style="color:var(--muted)" data-t="bid.labor_sub">Labor subtotal</span><span id="l-sub">$0</span></div>
+      <div class="tot-row"><span style="color:var(--muted)" data-t="bid.mat_sub">Materials subtotal</span><span id="m-sub">$0</span></div>
+      <div class="tot-row"><span data-t="bid.grand_total">Grand total</span><span id="g-tot">$0</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="stitle">Photos & documents <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--muted)">(optional)</span></div>
+    <div id="upload-err" class="err" style="display:none"></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:8px">Up to 4 files &nbsp;·&nbsp; JPG, PNG or PDF &nbsp;·&nbsp; Max 100 MB each &nbsp;·&nbsp; <span id="fcount" style="color:var(--green)">0</span> attached</div>
+    <div class="uz" id="uz" onclick="document.getElementById('finput').click()" ondragover="dOver(event)" ondragleave="dLeave()" ondrop="dDrop(event)">
+      <div class="uz-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#00c805"><path d="M9 16h6v-6h4l-7-7-7 7h4v6zm-4 2h14v2H5v-2z"/></svg>
+      </div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:3px">Tap to upload or drag & drop</div>
+      <div style="font-size:11px;color:var(--border2)">Quote sheets, photos, specs — JPG, PNG or PDF</div>
+    </div>
+    <input type="file" id="finput" accept="image/jpeg,image/png,application/pdf" multiple style="display:none" onchange="fileSelect(event)">
+    <div class="chips" id="chips"></div>
+    <div class="fg" style="margin-bottom:0"><label class="flabel">Additional notes (optional)</label><textarea id="b-notes" rows="2" style="resize:vertical" placeholder="Warranty, timeline, anything else you'd like us to know..."></textarea></div>
+  </div>
+
+  <div id="submit-err" class="err" style="display:none"></div>
+  <button class="btn-submit" id="submit-btn" onclick="submitBid()">Submit Bid</button>
+</div>
+
+<div class="success-screen" id="success-screen">
+  <div class="success-icon">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="#00c805"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+  </div>
+  <div style="font-size:20px;font-weight:600;color:var(--green);margin-bottom:8px" data-t="bid.success">Bid submitted!</div>
+  <div style="font-size:14px;color:var(--muted);max-width:320px;margin:0 auto">Your bid has been received and is in the review queue. You'll be contacted once it's been reviewed.</div>
+  <div style="margin-top:24px;font-size:13px;color:var(--muted)">You can close this page.</div>
+</div>
+
+</div>
+
+<script>
+const SUPA_URL='https://tlbeilrkfhjevnlvfnxa.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsYmVpbHJrZmhqZXZubHZmbnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NTEyMjcsImV4cCI6MjA5MjAyNzIyN30.pD8fkK2Ju31VzA032_M8NZk5ASp4Z-tCdowgohW5-JE';
+const { createClient: _createClient } = window.supabase;
+const db = _createClient(SUPA_URL, SUPA_KEY);
+
+const fmt=n=>'$'+Number(n||0).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+let lLines=[{desc:'',amt:0}],mLines=[{desc:'',amt:0}],files=[];
+const MAX_F=4,MAX_S=100*1024*1024,ALLOW=['image/jpeg','image/png','application/pdf'];
+
+async function loadProjects(){
+  const{data,error}=await db.from('projects').select('*').order('created_at',{ascending:false});
+  const sel=document.getElementById('b-proj');
+  if(error||!data?.length){sel.innerHTML='<option value="">— no properties available —</option>';document.getElementById('no-proj-hint').style.display='block';return;}
+  sel.innerHTML='<option value="">— select property —</option>'+data.map(p=>`<option value="${p.id}">${p.name} — ${[p.address,p.city].filter(Boolean).join(', ')}</option>`).join('');
+}
+
+function renderLaborLines(){
+  document.getElementById('labor-lines').innerHTML=lLines.map((l,i)=>`<div class="lirow">
+    <input type="text" value="${l.desc}" placeholder="e.g. Demo & haul away" oninput="lLines[${i}].desc=this.value">
+    <div class="amt-wrap"><span class="sym">$</span><input type="number" value="${l.amt||''}" placeholder="0" style="padding-left:24px" oninput="lLines[${i}].amt=parseFloat(this.value)||0;calcTots()"></div>
+    <button class="rm-btn" onclick="lLines.splice(${i},1);renderLaborLines()">&times;</button>
+  </div>`).join('');calcTots();
+}
+function renderMatLines(){
+  document.getElementById('mat-lines').innerHTML=mLines.map((m,i)=>`<div class="lirow">
+    <input type="text" value="${m.desc}" placeholder="e.g. Tile & grout" oninput="mLines[${i}].desc=this.value">
+    <div class="amt-wrap"><span class="sym">$</span><input type="number" value="${m.amt||''}" placeholder="0" style="padding-left:24px" oninput="mLines[${i}].amt=parseFloat(this.value)||0;calcTots()"></div>
+    <button class="rm-btn" onclick="mLines.splice(${i},1);renderMatLines()">&times;</button>
+  </div>`).join('');calcTots();
+}
+function addLaborLine(){lLines.push({desc:'',amt:0});renderLaborLines();}
+function addMatLine(){mLines.push({desc:'',amt:0});renderMatLines();}
+function calcTots(){
+  const lt=lLines.reduce((s,l)=>s+l.amt,0),mt=mLines.reduce((s,m)=>s+m.amt,0);
+  document.getElementById('l-sub').textContent=fmt(lt);
+  document.getElementById('m-sub').textContent=fmt(mt);
+  document.getElementById('g-tot').textContent=fmt(lt+mt);
+}
+
+function dOver(e){e.preventDefault();document.getElementById('uz').classList.add('over');}
+function dLeave(){document.getElementById('uz').classList.remove('over');}
+function dDrop(e){e.preventDefault();dLeave();processFiles(Array.from(e.dataTransfer.files));}
+function fileSelect(e){processFiles(Array.from(e.target.files));e.target.value='';}
+function processFiles(newFiles){
+  const err=document.getElementById('upload-err');
+  for(const f of newFiles){
+    if(files.length>=MAX_F){err.textContent='Max 4 files allowed.';err.style.display='block';setTimeout(()=>err.style.display='none',3000);break;}
+    if(!ALLOW.includes(f.type)){err.textContent=`"${f.name}" must be JPG, PNG or PDF.`;err.style.display='block';setTimeout(()=>err.style.display='none',3000);continue;}
+    if(f.size>MAX_S){err.textContent=`"${f.name}" exceeds 100 MB.`;err.style.display='block';setTimeout(()=>err.style.display='none',3000);continue;}
+    if(files.find(x=>x.name===f.name&&x.size===f.size))continue;
+    files.push(f);
+  }
+  document.getElementById('chips').innerHTML=files.map((f,i)=>`<div class="chip">${f.name} <span style="color:var(--border2)">(${(f.size/1024/1024).toFixed(1)}MB)</span><button class="chip-x" onclick="files.splice(${i},1);document.getElementById('chips').innerHTML='';processFiles([]);">&times;</button></div>`).join('');
+  document.getElementById('fcount').textContent=files.length;
+}
+
+async function submitBid(){
+  const btn=document.getElementById('submit-btn');
+  const company=document.getElementById('b-company').value.trim();
+  const projId=document.getElementById('b-proj').value;
+  const title=document.getElementById('b-title').value.trim();
+  const err=document.getElementById('submit-err');
+  if(!company||!projId||!title){err.textContent='Company name, property, and job title are required.';err.style.display='block';window.scrollTo(0,0);return;}
+  err.style.display='none';
+  btn.disabled=true;btn.textContent='Submitting...';
+  const lt=lLines.reduce((s,l)=>s+l.amt,0),mt=mLines.reduce((s,m)=>s+m.amt,0);
+  const phone=document.getElementById('b-phone').value;
+  const email=document.getElementById('b-email').value;
+  const street=document.getElementById('b-street').value;
+  const unit=document.getElementById('b-unit').value;
+  const city=document.getElementById('b-city').value;
+  const state=document.getElementById('b-state').value;
+  const zip=document.getElementById('b-zip').value;
+  const addrParts=[street,unit,city,state,zip].filter(Boolean);
+  const fullAddr=addrParts.join(', ');
+  const contactInfo=[document.getElementById('b-contact').value,phone,email,fullAddr].filter(Boolean).join(' | ');
+  const extraNotes=document.getElementById('b-notes').value;
+  const combinedNotes=[extraNotes,fullAddr?'Address: '+fullAddr:''].filter(Boolean).join('\n');
+  const{data:bidData,error:bidErr}=await db.from('bids').insert({project_id:projId,company,contact_name:contactInfo,job_title:title,scope:document.getElementById('b-scope').value,labor_total:lt,material_total:mt,grand_total:lt+mt,notes:combinedNotes,files:files.map(f=>f.name),status:'pending'}).select();
+  if(bidErr){err.textContent='Error: '+bidErr.message;err.style.display='block';btn.disabled=false;btn.textContent='Submit Bid';return;}
+  const bid=bidData[0];
+  const inserts=[...lLines.filter(l=>l.desc||l.amt).map(l=>({bid_id:bid.id,type:'labor',description:l.desc,amount:l.amt})),...mLines.filter(m=>m.desc||m.amt).map(m=>({bid_id:bid.id,type:'material',description:m.desc,amount:m.amt}))];
+  if(inserts.length)await db.from('bid_line_items').insert(inserts);
+  document.getElementById('form-area').style.display='none';
+  document.getElementById('success-screen').style.display='block';
+  window.scrollTo(0,0);
+}
+
+loadProjects();
+renderLaborLines();
+renderMatLines();
+</script>
+</body>
+</html>
