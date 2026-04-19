@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stellar Analytics ROI — Real Estate Flip Tracker</title>
+<link rel="icon" type="image/png" href="/icon.png">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0a0a0a;--surface:#141414;--surface2:#1c1c1c;--border:#2a2a2a;--text:#fff;--muted:#a78bfa;--green:#00c805;--gdim:#00c80522;--gbg:#00c80514;--red:#ff5000;--amber:#f5a623}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:center;gap:10px}
+.logo-dot{width:28px;height:28px;background:var(--green);border-radius:50%}
+.logo-text{font-size:16px;font-weight:700;letter-spacing:-.3px}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase}
+.nav-cta{background:var(--green);color:#000;border:none;padding:9px 22px;border-radius:20px;font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;transition:opacity .2s}
+.nav-cta:hover{opacity:.85}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.hero-glow{position:absolute;top:20%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(0,200,5,.08) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:var(--gdim);border:1px solid var(--green);border-radius:20px;padding:5px 14px;font-size:12px;color:var(--green);font-weight:600;margin-bottom:24px;letter-spacing:.04em}
+.hero h1{font-size:clamp(36px,6vw,72px);font-weight:800;line-height:1.08;letter-spacing:-2px;max-width:800px;margin-bottom:20px}
+.hero h1 span{color:var(--green)}
+.hero p{font-size:clamp(15px,2vw,20px);color:#aaa;max-width:560px;line-height:1.6;margin-bottom:40px}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-google{display:flex;align-items:center;gap:10px;background:#fff;color:#1a1a1a;border:none;padding:13px 24px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.3)}
+.btn-google:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,0,0,.4)}
+.btn-google svg{flex-shrink:0}
+.btn-ghost{background:transparent;border:1px solid var(--border);color:#aaa;padding:13px 24px;border-radius:10px;font-size:15px;cursor:pointer;font-family:inherit}
+.btn-ghost:hover{border-color:var(--green);color:var(--green)}
+.hero-note{font-size:12px;color:#555;margin-top:16px}
+
+/* STATS */
+.stats{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;padding:40px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--surface)}
+.stat{text-align:center}
+.stat-val{font-size:32px;font-weight:700;color:var(--green)}
+.stat-lbl{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-top:4px}
+
+/* FEATURES */
+.section{padding:80px 24px;max-width:1100px;margin:0 auto}
+.section-badge{display:inline-block;background:var(--gdim);border:1px solid var(--green);border-radius:12px;padding:4px 14px;font-size:11px;color:var(--green);font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-bottom:16px}
+.section h2{font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-1px;margin-bottom:12px}
+.section h2 span{color:var(--green)}
+.section-sub{font-size:16px;color:#888;max-width:560px;line-height:1.6;margin-bottom:48px}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px;transition:border-color .2s}
+.feat-card:hover{border-color:var(--green)}
+.feat-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+.feat-icon.g{background:var(--gdim)}
+.feat-icon.p{background:#a78bfa22}
+.feat-icon.a{background:#f5a62322}
+.feat-title{font-size:17px;font-weight:600;margin-bottom:8px}
+.feat-desc{font-size:14px;color:#888;line-height:1.6}
+
+/* HOW IT WORKS */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:48px}
+.how-step{position:relative;padding:28px;background:var(--surface);border:1px solid var(--border);border-radius:14px}
+.step-num{width:36px;height:36px;border-radius:50%;background:var(--green);color:#000;font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.step-title{font-size:16px;font-weight:600;margin-bottom:8px}
+.step-desc{font-size:13px;color:#888;line-height:1.6}
+
+/* TESTIMONIAL / CALLOUT */
+.callout{background:linear-gradient(135deg,var(--gdim) 0%,transparent 60%);border:1px solid rgba(0,200,5,.2);border-radius:20px;padding:48px;text-align:center;margin:0 24px 80px}
+.callout h2{font-size:clamp(24px,4vw,42px);font-weight:700;letter-spacing:-1px;margin-bottom:16px}
+.callout p{font-size:16px;color:#aaa;max-width:500px;margin:0 auto 32px;line-height:1.6}
+
+/* LOGIN MODAL */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.show{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:40px;width:100%;max-width:420px;text-align:center;position:relative}
+.modal-close{position:absolute;top:14px;right:18px;background:none;border:none;color:#666;font-size:22px;cursor:pointer;line-height:1}
+.modal-close:hover{color:#fff}
+.modal-logo{width:48px;height:48px;background:var(--green);border-radius:50%;margin:0 auto 20px}
+.modal h3{font-size:22px;font-weight:700;margin-bottom:8px}
+.modal p{font-size:14px;color:#888;margin-bottom:28px;line-height:1.6}
+.modal-divider{display:flex;align-items:center;gap:12px;margin:20px 0;color:#555;font-size:12px}
+.modal-divider::before,.modal-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.access-denied{background:rgba(255,80,0,.1);border:1px solid rgba(255,80,0,.3);border-radius:10px;padding:14px;margin-top:16px;font-size:13px;color:var(--red);display:none}
+.loading-spinner{display:none;margin:16px auto;width:28px;height:28px;border:2px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:32px 24px;text-align:center;color:#555;font-size:13px}
+footer span{color:var(--green)}
+
+@media(max-width:600px){
+  nav{padding:12px 16px}
+  .stats{gap:24px}
+  .callout{padding:32px 20px;margin:0 12px 60px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">
+    <img src="/logo.png" alt="Stellar Analytics ROI" style="height:38px;width:auto">
+  </div>
+  <button class="nav-cta" onclick="showLogin()">Sign In</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <img src="/logo.png" alt="Stellar Analytics ROI" style="height:90px;width:auto;margin-bottom:24px;filter:drop-shadow(0 0 24px rgba(0,200,5,.3))">
+  <h1>Track every flip.<br><span>Maximize every dollar.</span></h1>
+  <p>Stellar Analytics ROI gives your team a single platform to manage bids, track expenses, and see real-time profit on every project.</p>
+  <div class="hero-cta">
+    <button class="btn-google" onclick="showLogin()">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+      Continue with Google
+    </button>
+  </div>
+  <p class="hero-note">Access is by invitation only — partners only</p>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="stat-val">3</div><div class="stat-lbl">Active functions</div></div>
+  <div class="stat"><div class="stat-val">100%</div><div class="stat-lbl">Real-time data</div></div>
+  <div class="stat"><div class="stat-val">∞</div><div class="stat-lbl">Projects tracked</div></div>
+  <div class="stat"><div class="stat-val">$0</div><div class="stat-lbl">Surprise costs</div></div>
+</div>
+
+<!-- FEATURES -->
+<div class="section">
+  <div class="section-badge">Features</div>
+  <h2>Everything you need to<br><span>run a profitable flip</span></h2>
+  <p class="section-sub">Three powerful tools, one platform. From the moment you submit a bid to the day you close the sale.</p>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon g">📋</div>
+      <div class="feat-title">Bid & Contractor Portal</div>
+      <div class="feat-desc">Send contractors a simple link to submit bids with full labor and materials breakdowns. Review, approve, reject, or request revisions — all in one queue. Nothing hits your actuals until you approve it.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon a">💵</div>
+      <div class="feat-title">Expense Reimbursement</div>
+      <div class="feat-desc">Partners at a hardware store can snap a photo of their receipt and submit it in 30 seconds. Track who paid, who's been reimbursed, and what's still outstanding — per person and per project.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon p">📊</div>
+      <div class="feat-title">Project P&L Dashboard</div>
+      <div class="feat-desc">Flip-specific profit and loss with estimated vs actual for every cost category. Labor and materials auto-populate from approved bids. See your ROI, margin, and net profit in real time.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon g">🏗️</div>
+      <div class="feat-title">Per-Project Dashboards</div>
+      <div class="feat-desc">Every project gets its own dashboard with 4 tabs: P&L, Bids, Expenses, and Charts. Filter by date range, view cost breakdowns, and track every dollar from purchase to sale.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon p">👥</div>
+      <div class="feat-title">People & Subcontractors</div>
+      <div class="feat-desc">See every contractor and partner in one place. Total bids, total expenses, what's been paid, what's outstanding — all in one expandable view across every project.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon a">📈</div>
+      <div class="feat-title">Charts & Reporting</div>
+      <div class="feat-desc">Visual cost breakdowns, ROI donuts, paid vs outstanding per person, and bid status charts. Filter everything by month, quarter, year, or custom date range. Export to Excel any time.</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:80px 24px">
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="section-badge">How it works</div>
+    <h2 style="font-size:clamp(28px,4vw,48px);font-weight:700;letter-spacing:-1px;margin-bottom:12px">From bid to <span style="color:var(--green)">profit</span> in three steps</h2>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="step-num">1</div>
+        <div class="step-title">Add your project</div>
+        <div class="step-desc">Create a project with the address and partners. This becomes the hub for all bids, expenses, and financial tracking for that flip.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">2</div>
+        <div class="step-title">Send the links</div>
+        <div class="step-desc">Give contractors the /bid link and partners the /expense link. They submit everything — you review and approve from the dashboard.</div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">3</div>
+        <div class="step-title">Watch the numbers</div>
+        <div class="step-desc">Approved bids and expenses automatically populate your P&L actuals. See your real-time profit, ROI, and outstanding reimbursements at a glance.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div style="max-width:1100px;margin:80px auto 0">
+  <div class="callout">
+    <h2>Ready to track your next flip?</h2>
+    <p>Sign in with your Google account to access the dashboard. Invitation only — contact Robbie to get access.</p>
+    <button class="btn-google" onclick="showLogin()" style="margin:0 auto">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+      Sign in with Google
+    </button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 <span>Stellar Analytics ROI</span> · Built for ARR Property Ventures · Powered by Supabase + Vercel</p>
+</footer>
+
+<!-- LOGIN MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="hideLogin(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('modal-overlay').classList.remove('show')">×</button>
+    <div class="modal-logo"></div>
+    <h3>Welcome back</h3>
+    <p>Sign in with your Google account to access the Stellar Analytics ROI dashboard.</p>
+    <button class="btn-google" id="google-btn" onclick="signInWithGoogle()" style="width:100%;justify-content:center">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+      Continue with Google
+    </button>
+    <div class="loading-spinner" id="spinner"></div>
+    <div class="access-denied" id="access-denied">
+      ⛔ Your Google account is not authorized to access this platform. Contact Robbie to request access.
+    </div>
+    <p style="font-size:11px;color:#555;margin-top:20px">Access is invitation-only. Only approved team members can sign in.</p>
+  </div>
+</div>
+
+<script>
+const SUPA_URL='https://tlbeilrkfhjevnlvfnxa.supabase.co';
+const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRsYmVpbHJrZmhqZXZubHZmbnhhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY0NTEyMjcsImV4cCI6MjA5MjAyNzIyN30.pD8fkK2Ju31VzA032_M8NZk5ASp4Z-tCdowgohW5-JE';
+const {createClient:_sc}=window.supabase;
+const db=_sc(SUPA_URL,SUPA_KEY);
+
+function showLogin(){document.getElementById('modal-overlay').classList.add('show');}
+function hideLogin(e){if(e.target===document.getElementById('modal-overlay'))document.getElementById('modal-overlay').classList.remove('show');}
+
+async function signInWithGoogle(){
+  const btn=document.getElementById('google-btn');
+  const spinner=document.getElementById('spinner');
+  btn.style.display='none';
+  spinner.style.display='block';
+  document.getElementById('access-denied').style.display='none';
+
+  const{data,error}=await db.auth.signInWithOAuth({
+    provider:'google',
+    options:{redirectTo:window.location.origin+'/auth-callback.html'}
+  });
+
+  if(error){
+    btn.style.display='flex';
+    spinner.style.display='none';
+    document.getElementById('access-denied').style.display='block';
+    document.getElementById('access-denied').textContent='Error: '+error.message;
+  }
+}
+
+// Check if already logged in
+async function checkSession(){
+  const{data:{session}}=await db.auth.getSession();
+  if(session){
+    const email=session.user.email;
+    const{data}=await db.from('allowed_users').select('*').eq('email',email).single();
+    if(data) window.location.href='/index.html';
+  }
+}
+checkSession();
+</script>
+</body>
+</html>
