@@ -9,6 +9,13 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  .rtabs{display:flex;background:var(--surface2);border-bottom:1px solid var(--bdim);overflow-x:auto;margin:0 -18px 18px;padding:0;scrollbar-width:none}
+.rtabs::-webkit-scrollbar{display:none}
+.rtab{padding:10px 16px;font-size:12px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit;transition:color .15s}
+.rtab:hover{color:var(--text)}
+.rtab.active{color:var(--blue);border-bottom-color:var(--blue);font-weight:500}
+.rpanel{display:none}
+.rpanel.active{display:block}
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{--bg:#0a0a0a;--surface:#141414;--surface2:#1c1c1c;--border:#2a2a2a;--border2:#333;--text:#fff;--muted:#a78bfa;--green:#00c805;--gdim:#00c80522;--gbg:#00c80514;--red:#ff5000;--rdim:#ff500022;--amber:#f5a623;--adim:#f5a62322;--abg:#f5a62314;--blue:#4a9eff;--bdim:#4a9eff22;--bbg:#4a9eff14}
