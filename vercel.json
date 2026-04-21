@@ -1,0 +1,16 @@
+{
+  "cleanUrls": false,
+  "routes": [
+    { "src": "^/$",              "dest": "/landing.html"       },
+    { "src": "^/auth-callback$", "dest": "/auth-callback.html" },
+    { "src": "^/auth-callback.html$", "dest": "/auth-callback.html" },
+    { "src": "^/dashboard$",     "dest": "/index.html"         },
+    { "src": "^/tenant$",        "dest": "/tenant.html"        },
+    { "src": "^/bid$",           "dest": "/bid.html"           },
+    { "src": "^/expense$",       "dest": "/expense.html"       },
+    { "src": "^/project$",       "dest": "/project.html"       },
+    { "src": "^/project/(.*)$",  "dest": "/project.html"       },
+    { "src": "^/(.+\\.html)$",   "dest": "/$1"                 },
+    { "src": "^/(.+\\.js)$",     "dest": "/$1"                 }
+  ]
+}

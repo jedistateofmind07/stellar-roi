@@ -1,0 +1,201 @@
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     PASTE THIS ENTIRE BLOCK at the bottom of index.html, just before </body>
+     ═══════════════════════════════════════════════════════════════════════════ -->
+
+<!-- ── RENTAL SECTION PANEL ── -->
+<div class="panel" id="tab-rentals">
+
+  <!-- Section header -->
+  <div style="background:linear-gradient(135deg,#4a9eff14,#4a9eff08);border:1px solid #4a9eff22;
+    border-radius:10px;padding:14px 18px;margin-bottom:0;display:flex;align-items:center;gap:12px">
+    <div style="width:40px;height:40px;border-radius:10px;background:#4a9eff22;display:flex;
+      align-items:center;justify-content:center;font-size:20px;flex-shrink:0">🏠</div>
+    <div>
+      <div style="font-size:15px;font-weight:600;color:var(--blue)">Property Management</div>
+      <div style="font-size:11px;color:var(--muted)">Tenants · Rent · Maintenance · Announcements</div>
+    </div>
+  </div>
+
+  <!-- Sub-navigation tabs -->
+  <div class="rtabs">
+    <button class="rtab active" data-tab="tenants"       onclick="showRentalTab('tenants')">Tenants</button>
+    <button class="rtab"        data-tab="rent"          onclick="showRentalTab('rent')">Rent</button>
+    <button class="rtab"        data-tab="maintenance"   onclick="showRentalTab('maintenance')">Maintenance</button>
+    <button class="rtab"        data-tab="announcements" onclick="showRentalTab('announcements')">Announcements</button>
+  </div>
+
+  <!-- ── TENANTS PANEL ── -->
+  <div class="rpanel active" id="rtab-tenants">
+    <div class="card">
+      <div class="stitle">Add tenant</div>
+      <div class="fgrid">
+        <div class="fg">
+          <label class="flabel">Property *</label>
+          <select id="rt-proj"><option value="">— select —</option></select>
+        </div>
+        <div class="fg">
+          <label class="flabel">Unit</label>
+          <input type="text" id="rt-unit" placeholder="e.g. 2B">
+        </div>
+        <div class="fg">
+          <label class="flabel">Full name *</label>
+          <input type="text" id="rt-name" placeholder="e.g. Maria Santos">
+        </div>
+        <div class="fg">
+          <label class="flabel">Email *</label>
+          <input type="email" id="rt-email" placeholder="tenant@email.com">
+        </div>
+        <div class="fg">
+          <label class="flabel">Phone</label>
+          <input type="tel" id="rt-phone" placeholder="(555) 000-0000">
+        </div>
+        <div class="fg">
+          <label class="flabel">Monthly rent ($) *</label>
+          <input type="number" id="rt-rent" placeholder="0">
+        </div>
+        <div class="fg">
+          <label class="flabel">Rent due — day of month</label>
+          <input type="number" id="rt-due" value="1" min="1" max="28" placeholder="1">
+        </div>
+      </div>
+      <div class="fgrid">
+        <div class="fg">
+          <label class="flabel">Lease start</label>
+          <input type="date" id="rt-ls">
+        </div>
+        <div class="fg">
+          <label class="flabel">Lease end</label>
+          <input type="date" id="rt-le">
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="btn primary" id="rt-btn" onclick="addTenant()">Add tenant</button>
+        <span id="rt-fb" style="display:none" class="fb"></span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="stitle">All tenants</div>
+      <div id="rt-list"><div style="font-size:13px;color:var(--muted)">Loading...</div></div>
+    </div>
+  </div>
+
+  <!-- ── RENT PANEL ── -->
+  <div class="rpanel" id="rtab-rent">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+        <div class="stitle" style="margin-bottom:0;margin-right:4px">Rent —</div>
+        <select id="rr-month" onchange="renderRent()" style="width:130px;padding:6px 10px;
+          background:var(--surface2);border:1px solid var(--border2);border-radius:8px;
+          color:var(--text);font-size:12px;font-family:inherit;outline:none">
+          <option value="1">January</option><option value="2">February</option>
+          <option value="3">March</option><option value="4">April</option>
+          <option value="5">May</option><option value="6">June</option>
+          <option value="7">July</option><option value="8">August</option>
+          <option value="9">September</option><option value="10">October</option>
+          <option value="11">November</option><option value="12">December</option>
+        </select>
+        <input type="number" id="rr-year" onchange="renderRent()" placeholder="2025"
+          style="width:82px;padding:6px 10px;background:var(--surface2);border:1px solid var(--border2);
+          border-radius:8px;color:var(--text);font-size:12px;font-family:inherit;outline:none">
+      </div>
+      <div class="mgrid" id="rr-summary"></div>
+      <div id="rr-list"><div style="font-size:13px;color:var(--muted)">Loading...</div></div>
+    </div>
+  </div>
+
+  <!-- ── MAINTENANCE PANEL ── -->
+  <div class="rpanel" id="rtab-maintenance">
+    <div class="card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
+        <div class="stitle" style="margin-bottom:0">Maintenance requests</div>
+        <select id="rm-filter" onchange="renderMaintenance()" style="width:155px;padding:6px 10px;
+          background:var(--surface2);border:1px solid var(--border2);border-radius:8px;
+          color:var(--text);font-size:12px;font-family:inherit;outline:none">
+          <option value="all">All statuses</option>
+          <option value="open">Open</option>
+          <option value="in_progress">In progress</option>
+          <option value="resolved">Resolved</option>
+        </select>
+      </div>
+      <div id="rm-list"><div style="font-size:13px;color:var(--muted)">Loading...</div></div>
+    </div>
+  </div>
+
+  <!-- ── ANNOUNCEMENTS PANEL ── -->
+  <div class="rpanel" id="rtab-announcements">
+    <div class="card">
+      <div class="stitle">Post announcement</div>
+      <div class="fgrid">
+        <div class="fg">
+          <label class="flabel">Property (leave blank for all tenants)</label>
+          <select id="ra-proj"><option value="">— all properties —</option></select>
+        </div>
+        <div class="fg">
+          <label class="flabel">Title *</label>
+          <input type="text" id="ra-title" placeholder="e.g. Water shutoff notice — Friday 9am">
+        </div>
+      </div>
+      <div class="fg" style="margin-bottom:12px">
+        <label class="flabel">Message *</label>
+        <textarea id="ra-body" rows="3" style="resize:vertical"
+          placeholder="Enter your message to tenants..."></textarea>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <button class="btn primary" id="ra-btn" onclick="addAnnouncement()">Post announcement</button>
+        <span id="ra-fb" style="display:none" class="fb"></span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="stitle">Recent announcements</div>
+      <div id="ra-list"><div style="font-size:13px;color:var(--muted)">Loading...</div></div>
+    </div>
+  </div>
+
+</div>
+<!-- ── END RENTAL SECTION ── -->
+
+
+<!-- ── LOG PAYMENT MODAL ── -->
+<div id="lp-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);
+  align-items:center;justify-content:center;z-index:1000;padding:16px">
+  <div style="background:var(--surface);border:1px solid var(--border2);border-radius:14px;
+    padding:22px;width:100%;max-width:400px">
+    <div style="font-size:15px;font-weight:600;margin-bottom:16px;color:var(--blue)"
+      id="lp-title">Log payment</div>
+    <input type="hidden" id="lp-tid">
+    <input type="hidden" id="lp-month">
+    <input type="hidden" id="lp-year">
+    <div class="fgrid">
+      <div class="fg">
+        <label class="flabel">Amount ($)</label>
+        <input type="number" id="lp-amt" placeholder="0">
+      </div>
+      <div class="fg">
+        <label class="flabel">Date paid</label>
+        <input type="date" id="lp-date">
+      </div>
+    </div>
+    <div class="fg" style="margin-bottom:10px">
+      <label class="flabel">Payment method</label>
+      <select id="lp-method" style="padding:8px 11px;background:var(--surface2);
+        border:1px solid var(--border2);border-radius:8px;color:var(--text);
+        font-size:13px;font-family:inherit;outline:none;width:100%">
+        <option value="zelle">Zelle</option>
+        <option value="check">Check</option>
+        <option value="cash">Cash</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="fg" style="margin-bottom:18px">
+      <label class="flabel">Notes (optional)</label>
+      <input type="text" id="lp-notes" placeholder="e.g. Check #1042">
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="btn primary" id="lp-btn" onclick="submitLogPayment()" style="flex:1">Log payment</button>
+      <button class="btn" onclick="closeLogPayment()" style="flex:1">Cancel</button>
+    </div>
+  </div>
+</div>
+<!-- ── END MODALS ── -->
+
+<script src="/rental.js"></script>
