@@ -10,7 +10,7 @@
       ? `<p class="routine-card-sa">${Yoga.escapeHtml(r.sanskrit_name)}</p>`
       : '';
     return `
-      <a href="/routine?id=${encodeURIComponent(r.id)}" class="routine-card" role="listitem">
+      <a href="routine.html?id=${encodeURIComponent(r.id)}" class="routine-card" role="listitem">
         <h3 class="routine-card-name">${Yoga.escapeHtml(r.name)}</h3>
         ${sanskrit}
         <div class="routine-card-meta">

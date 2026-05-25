@@ -3,7 +3,7 @@
     "id": "mountain",
     "english_name": "Mountain Pose",
     "sanskrit_name": "Tadasana",
-    "image": "/public/poses/categories/standing.svg",
+    "image": "public/poses/categories/standing.svg",
     "difficulty": "Beginner",
     "categories": ["Standing"],
     "instructions": [
@@ -27,7 +27,7 @@
     "id": "upward-salute",
     "english_name": "Upward Salute",
     "sanskrit_name": "Urdhva Hastasana",
-    "image": "/public/poses/categories/standing.svg",
+    "image": "public/poses/categories/standing.svg",
     "difficulty": "Beginner",
     "categories": ["Standing"],
     "instructions": [
@@ -50,7 +50,7 @@
     "id": "chair",
     "english_name": "Chair Pose",
     "sanskrit_name": "Utkatasana",
-    "image": "/public/poses/categories/standing.svg",
+    "image": "public/poses/categories/standing.svg",
     "difficulty": "Beginner",
     "categories": ["Standing"],
     "instructions": [
@@ -75,7 +75,7 @@
     "id": "warrior-1",
     "english_name": "Warrior I",
     "sanskrit_name": "Virabhadrasana I",
-    "image": "/public/poses/categories/standing.svg",
+    "image": "public/poses/categories/standing.svg",
     "difficulty": "Beginner",
     "categories": ["Standing"],
     "instructions": [
@@ -100,7 +100,7 @@
     "id": "warrior-2",
     "english_name": "Warrior II",
     "sanskrit_name": "Virabhadrasana II",
-    "image": "/public/poses/categories/standing.svg",
+    "image": "public/poses/categories/standing.svg",
     "difficulty": "Beginner",
     "categories": ["Standing"],
     "instructions": [
@@ -125,7 +125,7 @@
     "id": "warrior-3",
     "english_name": "Warrior III",
     "sanskrit_name": "Virabhadrasana III",
-    "image": "/public/poses/categories/balance.svg",
+    "image": "public/poses/categories/balance.svg",
     "difficulty": "Intermediate",
     "categories": ["Standing", "Balance"],
     "instructions": [
@@ -149,7 +149,7 @@
     "id": "triangle",
     "english_name": "Triangle Pose",
     "sanskrit_name": "Trikonasana",
-    "image": "/public/poses/categories/standing.svg",
+    "image": "public/poses/categories/standing.svg",
     "difficulty": "Beginner",
     "categories": ["Standing"],
     "instructions": [
@@ -174,7 +174,7 @@
     "id": "extended-side-angle",
     "english_name": "Extended Side Angle",
     "sanskrit_name": "Utthita Parsvakonasana",
-    "image": "/public/poses/categories/standing.svg",
+    "image": "public/poses/categories/standing.svg",
     "difficulty": "Beginner",
     "categories": ["Standing"],
     "instructions": [
@@ -198,7 +198,7 @@
     "id": "high-lunge",
     "english_name": "High Lunge",
     "sanskrit_name": "Utthita Ashwa Sanchalanasana",
-    "image": "/public/poses/categories/standing.svg",
+    "image": "public/poses/categories/standing.svg",
     "difficulty": "Beginner",
     "categories": ["Standing"],
     "instructions": [
@@ -222,7 +222,7 @@
     "id": "low-lunge",
     "english_name": "Low Lunge",
     "sanskrit_name": "Anjaneyasana",
-    "image": "/public/poses/categories/hip-opener.svg",
+    "image": "public/poses/categories/hip-opener.svg",
     "difficulty": "Beginner",
     "categories": ["Standing", "Hip Opener"],
     "instructions": [
@@ -246,7 +246,7 @@
     "id": "revolved-side-angle",
     "english_name": "Revolved Side Angle",
     "sanskrit_name": "Parivrtta Parsvakonasana",
-    "image": "/public/poses/categories/twist.svg",
+    "image": "public/poses/categories/twist.svg",
     "difficulty": "Advanced",
     "categories": ["Standing", "Twist"],
     "instructions": [
@@ -271,7 +271,7 @@
     "id": "standing-forward-fold",
     "english_name": "Standing Forward Fold",
     "sanskrit_name": "Uttanasana",
-    "image": "/public/poses/categories/forward-bend.svg",
+    "image": "public/poses/categories/forward-bend.svg",
     "difficulty": "Beginner",
     "categories": ["Standing", "Forward Bend"],
     "instructions": [
@@ -295,7 +295,7 @@
     "id": "half-standing-forward-fold",
     "english_name": "Halfway Lift",
     "sanskrit_name": "Ardha Uttanasana",
-    "image": "/public/poses/categories/forward-bend.svg",
+    "image": "public/poses/categories/forward-bend.svg",
     "difficulty": "Beginner",
     "categories": ["Standing", "Forward Bend"],
     "instructions": [
@@ -318,7 +318,7 @@
     "id": "wide-legged-forward-fold",
     "english_name": "Wide-Legged Forward Fold",
     "sanskrit_name": "Prasarita Padottanasana",
-    "image": "/public/poses/categories/forward-bend.svg",
+    "image": "public/poses/categories/forward-bend.svg",
     "difficulty": "Beginner",
     "categories": ["Standing", "Forward Bend"],
     "instructions": [
@@ -342,7 +342,7 @@
     "id": "pyramid",
     "english_name": "Pyramid Pose",
     "sanskrit_name": "Parsvottanasana",
-    "image": "/public/poses/categories/forward-bend.svg",
+    "image": "public/poses/categories/forward-bend.svg",
     "difficulty": "Intermediate",
     "categories": ["Standing", "Forward Bend"],
     "instructions": [
@@ -366,7 +366,7 @@
     "id": "cobra",
     "english_name": "Cobra Pose",
     "sanskrit_name": "Bhujangasana",
-    "image": "/public/poses/categories/backbend.svg",
+    "image": "public/poses/categories/backbend.svg",
     "difficulty": "Beginner",
     "categories": ["Backbend"],
     "instructions": [
@@ -391,7 +391,7 @@
     "id": "upward-dog",
     "english_name": "Upward Facing Dog",
     "sanskrit_name": "Urdhva Mukha Svanasana",
-    "image": "/public/poses/categories/backbend.svg",
+    "image": "public/poses/categories/backbend.svg",
     "difficulty": "Beginner",
     "categories": ["Backbend"],
     "instructions": [
@@ -416,7 +416,7 @@
     "id": "bridge",
     "english_name": "Bridge Pose",
     "sanskrit_name": "Setu Bandha Sarvangasana",
-    "image": "/public/poses/categories/backbend.svg",
+    "image": "public/poses/categories/backbend.svg",
     "difficulty": "Beginner",
     "categories": ["Backbend"],
     "instructions": [
@@ -440,7 +440,7 @@
     "id": "wheel",
     "english_name": "Wheel Pose",
     "sanskrit_name": "Urdhva Dhanurasana",
-    "image": "/public/poses/categories/backbend.svg",
+    "image": "public/poses/categories/backbend.svg",
     "difficulty": "Advanced",
     "categories": ["Backbend"],
     "instructions": [
@@ -465,7 +465,7 @@
     "id": "camel",
     "english_name": "Camel Pose",
     "sanskrit_name": "Ustrasana",
-    "image": "/public/poses/categories/backbend.svg",
+    "image": "public/poses/categories/backbend.svg",
     "difficulty": "Intermediate",
     "categories": ["Backbend"],
     "instructions": [
@@ -490,7 +490,7 @@
     "id": "bow",
     "english_name": "Bow Pose",
     "sanskrit_name": "Dhanurasana",
-    "image": "/public/poses/categories/backbend.svg",
+    "image": "public/poses/categories/backbend.svg",
     "difficulty": "Intermediate",
     "categories": ["Backbend"],
     "instructions": [
@@ -515,7 +515,7 @@
     "id": "locust",
     "english_name": "Locust Pose",
     "sanskrit_name": "Salabhasana",
-    "image": "/public/poses/categories/backbend.svg",
+    "image": "public/poses/categories/backbend.svg",
     "difficulty": "Beginner",
     "categories": ["Backbend"],
     "instructions": [
@@ -540,7 +540,7 @@
     "id": "downward-dog",
     "english_name": "Downward Facing Dog",
     "sanskrit_name": "Adho Mukha Svanasana",
-    "image": "/public/poses/categories/inversion.svg",
+    "image": "public/poses/categories/inversion.svg",
     "difficulty": "Beginner",
     "categories": ["Standing", "Forward Bend", "Inversion"],
     "instructions": [
@@ -565,7 +565,7 @@
     "id": "dolphin",
     "english_name": "Dolphin Pose",
     "sanskrit_name": "Ardha Pincha Mayurasana",
-    "image": "/public/poses/categories/inversion.svg",
+    "image": "public/poses/categories/inversion.svg",
     "difficulty": "Intermediate",
     "categories": ["Inversion"],
     "instructions": [
@@ -590,7 +590,7 @@
     "id": "headstand",
     "english_name": "Headstand",
     "sanskrit_name": "Sirsasana",
-    "image": "/public/poses/categories/inversion.svg",
+    "image": "public/poses/categories/inversion.svg",
     "difficulty": "Advanced",
     "categories": ["Inversion"],
     "instructions": [
@@ -615,7 +615,7 @@
     "id": "shoulder-stand",
     "english_name": "Shoulder Stand",
     "sanskrit_name": "Sarvangasana",
-    "image": "/public/poses/categories/inversion.svg",
+    "image": "public/poses/categories/inversion.svg",
     "difficulty": "Intermediate",
     "categories": ["Inversion"],
     "instructions": [
@@ -640,7 +640,7 @@
     "id": "legs-up-the-wall",
     "english_name": "Legs Up the Wall",
     "sanskrit_name": "Viparita Karani",
-    "image": "/public/poses/categories/restorative.svg",
+    "image": "public/poses/categories/restorative.svg",
     "difficulty": "Beginner",
     "categories": ["Inversion", "Restorative"],
     "instructions": [
@@ -665,7 +665,7 @@
     "id": "tree",
     "english_name": "Tree Pose",
     "sanskrit_name": "Vrksasana",
-    "image": "/public/poses/categories/balance.svg",
+    "image": "public/poses/categories/balance.svg",
     "difficulty": "Beginner",
     "categories": ["Standing", "Balance"],
     "instructions": [
@@ -690,7 +690,7 @@
     "id": "half-moon",
     "english_name": "Half Moon Pose",
     "sanskrit_name": "Ardha Chandrasana",
-    "image": "/public/poses/categories/balance.svg",
+    "image": "public/poses/categories/balance.svg",
     "difficulty": "Intermediate",
     "categories": ["Standing", "Balance"],
     "instructions": [
@@ -715,7 +715,7 @@
     "id": "eagle",
     "english_name": "Eagle Pose",
     "sanskrit_name": "Garudasana",
-    "image": "/public/poses/categories/balance.svg",
+    "image": "public/poses/categories/balance.svg",
     "difficulty": "Intermediate",
     "categories": ["Standing", "Balance"],
     "instructions": [
@@ -740,7 +740,7 @@
     "id": "dancer",
     "english_name": "Dancer Pose",
     "sanskrit_name": "Natarajasana",
-    "image": "/public/poses/categories/balance.svg",
+    "image": "public/poses/categories/balance.svg",
     "difficulty": "Intermediate",
     "categories": ["Standing", "Balance", "Backbend"],
     "instructions": [
@@ -764,7 +764,7 @@
     "id": "crow",
     "english_name": "Crow Pose",
     "sanskrit_name": "Bakasana",
-    "image": "/public/poses/categories/balance.svg",
+    "image": "public/poses/categories/balance.svg",
     "difficulty": "Intermediate",
     "categories": ["Balance", "Core"],
     "instructions": [
@@ -788,7 +788,7 @@
     "id": "side-plank",
     "english_name": "Side Plank",
     "sanskrit_name": "Vasisthasana",
-    "image": "/public/poses/categories/balance.svg",
+    "image": "public/poses/categories/balance.svg",
     "difficulty": "Intermediate",
     "categories": ["Balance", "Core"],
     "instructions": [
@@ -811,7 +811,7 @@
     "id": "hand-to-big-toe",
     "english_name": "Extended Hand-to-Big-Toe",
     "sanskrit_name": "Utthita Hasta Padangusthasana",
-    "image": "/public/poses/categories/balance.svg",
+    "image": "public/poses/categories/balance.svg",
     "difficulty": "Advanced",
     "categories": ["Standing", "Balance"],
     "instructions": [
@@ -835,7 +835,7 @@
     "id": "easy-pose",
     "english_name": "Easy Pose",
     "sanskrit_name": "Sukhasana",
-    "image": "/public/poses/categories/seated.svg",
+    "image": "public/poses/categories/seated.svg",
     "difficulty": "Beginner",
     "categories": ["Seated"],
     "instructions": [
@@ -858,7 +858,7 @@
     "id": "staff",
     "english_name": "Staff Pose",
     "sanskrit_name": "Dandasana",
-    "image": "/public/poses/categories/seated.svg",
+    "image": "public/poses/categories/seated.svg",
     "difficulty": "Beginner",
     "categories": ["Seated"],
     "instructions": [
@@ -882,7 +882,7 @@
     "id": "hero",
     "english_name": "Hero Pose",
     "sanskrit_name": "Virasana",
-    "image": "/public/poses/categories/seated.svg",
+    "image": "public/poses/categories/seated.svg",
     "difficulty": "Beginner",
     "categories": ["Seated"],
     "instructions": [
@@ -906,7 +906,7 @@
     "id": "bound-angle",
     "english_name": "Bound Angle / Butterfly",
     "sanskrit_name": "Baddha Konasana",
-    "image": "/public/poses/categories/hip-opener.svg",
+    "image": "public/poses/categories/hip-opener.svg",
     "difficulty": "Beginner",
     "categories": ["Seated", "Hip Opener"],
     "instructions": [
@@ -929,7 +929,7 @@
     "id": "seated-forward-fold",
     "english_name": "Seated Forward Fold",
     "sanskrit_name": "Paschimottanasana",
-    "image": "/public/poses/categories/forward-bend.svg",
+    "image": "public/poses/categories/forward-bend.svg",
     "difficulty": "Beginner",
     "categories": ["Seated", "Forward Bend"],
     "instructions": [
@@ -953,7 +953,7 @@
     "id": "half-lord-of-the-fishes",
     "english_name": "Half Lord of the Fishes",
     "sanskrit_name": "Ardha Matsyendrasana",
-    "image": "/public/poses/categories/twist.svg",
+    "image": "public/poses/categories/twist.svg",
     "difficulty": "Intermediate",
     "categories": ["Seated", "Twist"],
     "instructions": [
@@ -977,7 +977,7 @@
     "id": "revolved-triangle",
     "english_name": "Revolved Triangle",
     "sanskrit_name": "Parivrtta Trikonasana",
-    "image": "/public/poses/categories/twist.svg",
+    "image": "public/poses/categories/twist.svg",
     "difficulty": "Advanced",
     "categories": ["Standing", "Twist"],
     "instructions": [
@@ -1002,7 +1002,7 @@
     "id": "seated-twist",
     "english_name": "Seated Twist",
     "sanskrit_name": "Marichyasana C",
-    "image": "/public/poses/categories/twist.svg",
+    "image": "public/poses/categories/twist.svg",
     "difficulty": "Intermediate",
     "categories": ["Seated", "Twist"],
     "instructions": [
@@ -1026,7 +1026,7 @@
     "id": "supine-twist",
     "english_name": "Supine Spinal Twist",
     "sanskrit_name": "Supta Matsyendrasana",
-    "image": "/public/poses/categories/twist.svg",
+    "image": "public/poses/categories/twist.svg",
     "difficulty": "Beginner",
     "categories": ["Twist", "Restorative"],
     "instructions": [
@@ -1050,7 +1050,7 @@
     "id": "revolved-chair",
     "english_name": "Revolved Chair",
     "sanskrit_name": "Parivrtta Utkatasana",
-    "image": "/public/poses/categories/twist.svg",
+    "image": "public/poses/categories/twist.svg",
     "difficulty": "Intermediate",
     "categories": ["Standing", "Twist"],
     "instructions": [
@@ -1075,7 +1075,7 @@
     "id": "pigeon",
     "english_name": "Pigeon Pose",
     "sanskrit_name": "Eka Pada Rajakapotasana",
-    "image": "/public/poses/categories/hip-opener.svg",
+    "image": "public/poses/categories/hip-opener.svg",
     "difficulty": "Intermediate",
     "categories": ["Hip Opener"],
     "instructions": [
@@ -1099,7 +1099,7 @@
     "id": "lizard",
     "english_name": "Lizard Pose",
     "sanskrit_name": "Utthan Pristhasana",
-    "image": "/public/poses/categories/hip-opener.svg",
+    "image": "public/poses/categories/hip-opener.svg",
     "difficulty": "Intermediate",
     "categories": ["Hip Opener"],
     "instructions": [
@@ -1123,7 +1123,7 @@
     "id": "cow-face",
     "english_name": "Cow Face Pose",
     "sanskrit_name": "Gomukhasana",
-    "image": "/public/poses/categories/hip-opener.svg",
+    "image": "public/poses/categories/hip-opener.svg",
     "difficulty": "Intermediate",
     "categories": ["Seated", "Hip Opener"],
     "instructions": [
@@ -1147,7 +1147,7 @@
     "id": "happy-baby",
     "english_name": "Happy Baby",
     "sanskrit_name": "Ananda Balasana",
-    "image": "/public/poses/categories/hip-opener.svg",
+    "image": "public/poses/categories/hip-opener.svg",
     "difficulty": "Beginner",
     "categories": ["Hip Opener", "Restorative"],
     "instructions": [
@@ -1171,7 +1171,7 @@
     "id": "garland",
     "english_name": "Garland Pose / Yogi Squat",
     "sanskrit_name": "Malasana",
-    "image": "/public/poses/categories/hip-opener.svg",
+    "image": "public/poses/categories/hip-opener.svg",
     "difficulty": "Beginner",
     "categories": ["Hip Opener"],
     "instructions": [
@@ -1194,7 +1194,7 @@
     "id": "plank",
     "english_name": "Plank Pose",
     "sanskrit_name": "Phalakasana",
-    "image": "/public/poses/categories/core.svg",
+    "image": "public/poses/categories/core.svg",
     "difficulty": "Beginner",
     "categories": ["Core"],
     "instructions": [
@@ -1218,7 +1218,7 @@
     "id": "chaturanga",
     "english_name": "Four-Limbed Staff",
     "sanskrit_name": "Chaturanga Dandasana",
-    "image": "/public/poses/categories/core.svg",
+    "image": "public/poses/categories/core.svg",
     "difficulty": "Intermediate",
     "categories": ["Core"],
     "instructions": [
@@ -1243,7 +1243,7 @@
     "id": "boat",
     "english_name": "Boat Pose",
     "sanskrit_name": "Navasana",
-    "image": "/public/poses/categories/core.svg",
+    "image": "public/poses/categories/core.svg",
     "difficulty": "Intermediate",
     "categories": ["Core"],
     "instructions": [
@@ -1268,7 +1268,7 @@
     "id": "childs-pose",
     "english_name": "Child's Pose",
     "sanskrit_name": "Balasana",
-    "image": "/public/poses/categories/restorative.svg",
+    "image": "public/poses/categories/restorative.svg",
     "difficulty": "Beginner",
     "categories": ["Restorative", "Forward Bend"],
     "instructions": [
@@ -1292,7 +1292,7 @@
     "id": "corpse",
     "english_name": "Corpse Pose",
     "sanskrit_name": "Savasana",
-    "image": "/public/poses/categories/restorative.svg",
+    "image": "public/poses/categories/restorative.svg",
     "difficulty": "Beginner",
     "categories": ["Restorative"],
     "instructions": [
@@ -1316,7 +1316,7 @@
     "id": "reclined-bound-angle",
     "english_name": "Reclined Bound Angle",
     "sanskrit_name": "Supta Baddha Konasana",
-    "image": "/public/poses/categories/restorative.svg",
+    "image": "public/poses/categories/restorative.svg",
     "difficulty": "Beginner",
     "categories": ["Restorative", "Hip Opener"],
     "instructions": [
@@ -1340,7 +1340,7 @@
     "id": "cat",
     "english_name": "Cat Pose",
     "sanskrit_name": "Marjaryasana",
-    "image": "/public/poses/categories/restorative.svg",
+    "image": "public/poses/categories/restorative.svg",
     "difficulty": "Beginner",
     "categories": ["Restorative"],
     "instructions": [
@@ -1364,7 +1364,7 @@
     "id": "cow",
     "english_name": "Cow Pose",
     "sanskrit_name": "Bitilasana",
-    "image": "/public/poses/categories/backbend.svg",
+    "image": "public/poses/categories/backbend.svg",
     "difficulty": "Beginner",
     "categories": ["Backbend"],
     "instructions": [
@@ -1388,7 +1388,7 @@
     "id": "thunderbolt",
     "english_name": "Thunderbolt Pose",
     "sanskrit_name": "Vajrasana",
-    "image": "/public/poses/categories/seated.svg",
+    "image": "public/poses/categories/seated.svg",
     "difficulty": "Beginner",
     "categories": ["Seated", "Restorative"],
     "instructions": [
@@ -1412,7 +1412,7 @@
     "id": "revolved-half-moon",
     "english_name": "Revolved Half Moon",
     "sanskrit_name": "Parivrtta Ardha Chandrasana",
-    "image": "/public/poses/categories/twist.svg",
+    "image": "public/poses/categories/twist.svg",
     "difficulty": "Advanced",
     "categories": ["Balance", "Twist"],
     "instructions": [
@@ -1437,7 +1437,7 @@
     "id": "tortoise",
     "english_name": "Tortoise Pose",
     "sanskrit_name": "Kurmasana",
-    "image": "/public/poses/categories/forward-bend.svg",
+    "image": "public/poses/categories/forward-bend.svg",
     "difficulty": "Advanced",
     "categories": ["Seated", "Forward Bend", "Hip Opener"],
     "instructions": [
@@ -1461,7 +1461,7 @@
     "id": "firefly",
     "english_name": "Firefly Pose",
     "sanskrit_name": "Tittibhasana",
-    "image": "/public/poses/categories/balance.svg",
+    "image": "public/poses/categories/balance.svg",
     "difficulty": "Advanced",
     "categories": ["Balance", "Core"],
     "instructions": [

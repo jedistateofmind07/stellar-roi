@@ -46,7 +46,7 @@
     const img = pose ? pose.image : '';
     const hold = Yoga.formatDuration(step.hold_seconds);
     const note = step.note ? `<p class="flow-note">${Yoga.escapeHtml(step.note)}</p>` : '';
-    const href = pose ? `/pose?id=${encodeURIComponent(pose.id)}` : '#';
+    const href = pose ? `pose.html?id=${encodeURIComponent(pose.id)}` : '#';
     return `
       <li>
         <a href="${href}" class="flow-row">

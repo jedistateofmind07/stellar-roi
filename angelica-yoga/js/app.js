@@ -3,7 +3,7 @@
 const Yoga = {
   async loadPoses() {
     if (this._poses) return this._poses;
-    const res = await fetch('/data/poses.json');
+    const res = await fetch('data/poses.json');
     this._poses = await res.json();
     this._poseById = new Map(this._poses.map(p => [p.id, p]));
     return this._poses;
@@ -11,7 +11,7 @@ const Yoga = {
 
   async loadRoutines() {
     if (this._routines) return this._routines;
-    const res = await fetch('/data/routines.json');
+    const res = await fetch('data/routines.json');
     this._routines = await res.json();
     return this._routines;
   },

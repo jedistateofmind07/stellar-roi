@@ -57,7 +57,7 @@
     empty.hidden = true;
 
     grid.innerHTML = filtered.map(p => `
-      <a href="/pose?id=${encodeURIComponent(p.id)}" class="pose-card" role="listitem">
+      <a href="pose.html?id=${encodeURIComponent(p.id)}" class="pose-card" role="listitem">
         <img class="pose-card-img" src="${Yoga.escapeHtml(p.image)}" alt="${Yoga.escapeHtml(p.english_name)}" loading="lazy">
         <div class="pose-card-body">
           <p class="pose-card-en">${Yoga.escapeHtml(p.english_name)}</p>
