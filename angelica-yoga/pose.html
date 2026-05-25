@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f4f1ea">
+<title>Pose — Angelica's Yoga</title>
+<link rel="icon" type="image/svg+xml" href="/public/favicon.svg">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page-pose">
+<header class="topbar">
+  <a href="/" class="brand">
+    <img src="/public/logo.svg" alt="" class="brand-mark">
+    <span class="brand-text">Angelica's Yoga</span>
+  </a>
+  <nav class="topnav">
+    <a href="/poses">Poses</a>
+    <a href="/routines">Routines</a>
+  </nav>
+</header>
+
+<main class="container container-narrow" id="pose-main">
+  <a href="/poses" class="back-link">← All poses</a>
+
+  <div id="pose-loading" class="loading">Loading…</div>
+  <article id="pose-article" hidden>
+    <div class="pose-hero">
+      <img id="pose-image" alt="">
+    </div>
+
+    <header class="pose-header">
+      <h1 id="pose-english"></h1>
+      <p id="pose-sanskrit" class="pose-sanskrit"></p>
+      <div class="pose-tags" id="pose-tags"></div>
+    </header>
+
+    <section class="pose-section">
+      <h2>How to</h2>
+      <ol id="pose-instructions" class="numbered-list"></ol>
+    </section>
+
+    <section class="pose-section">
+      <h2>Benefits</h2>
+      <ul id="pose-benefits" class="check-list"></ul>
+    </section>
+
+    <section class="pose-section">
+      <h2>Avoid if</h2>
+      <ul id="pose-contra" class="warn-list"></ul>
+    </section>
+  </article>
+
+  <div id="pose-error" class="empty-state" hidden>
+    <p>That pose wasn't found.</p>
+    <a href="/poses" class="btn-ghost">Back to all poses</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>Made with care for Angelica</p>
+</footer>
+
+<script src="/js/app.js"></script>
+<script src="/js/pose.js"></script>
+</body>
+</html>

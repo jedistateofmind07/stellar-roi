@@ -1,0 +1,1484 @@
+[
+  {
+    "id": "mountain",
+    "english_name": "Mountain Pose",
+    "sanskrit_name": "Tadasana",
+    "image": "/public/poses/categories/standing.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing"],
+    "instructions": [
+      "Stand with feet hip-width apart, big toes touching if comfortable.",
+      "Distribute weight evenly across all four corners of each foot.",
+      "Engage thighs, lift kneecaps, and lengthen the tailbone toward the floor.",
+      "Roll shoulders back and down; let arms hang naturally beside the body, palms facing forward.",
+      "Lengthen the crown of the head toward the ceiling. Breathe steadily."
+    ],
+    "benefits": [
+      "Improves posture and body awareness",
+      "Strengthens thighs, knees, and ankles",
+      "Establishes a grounded foundation for all standing poses"
+    ],
+    "contraindications": [
+      "Low blood pressure (avoid standing still for long periods)",
+      "Insomnia (some practitioners find it stimulating before sleep)"
+    ]
+  },
+  {
+    "id": "upward-salute",
+    "english_name": "Upward Salute",
+    "sanskrit_name": "Urdhva Hastasana",
+    "image": "/public/poses/categories/standing.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing"],
+    "instructions": [
+      "Begin in Mountain Pose.",
+      "On an inhale, sweep both arms out and overhead.",
+      "Bring palms to touch or keep them shoulder-width apart, biceps by the ears.",
+      "Lift through the side waist and gaze gently up between the thumbs."
+    ],
+    "benefits": [
+      "Stretches the entire side body, shoulders, and armpits",
+      "Improves digestion",
+      "Relieves mild anxiety and fatigue"
+    ],
+    "contraindications": [
+      "Shoulder injury (keep arms shoulder-width)",
+      "Neck pain (keep gaze forward instead of up)"
+    ]
+  },
+  {
+    "id": "chair",
+    "english_name": "Chair Pose",
+    "sanskrit_name": "Utkatasana",
+    "image": "/public/poses/categories/standing.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing"],
+    "instructions": [
+      "Stand with feet together or hip-width apart.",
+      "Inhale and raise arms overhead, palms facing each other.",
+      "Exhale and bend the knees, sinking the hips back as if sitting in a chair.",
+      "Keep weight in the heels; lengthen the tailbone down to protect the lower back.",
+      "Hold steady and breathe."
+    ],
+    "benefits": [
+      "Strengthens thighs, ankles, calves, and spine",
+      "Stretches shoulders and chest",
+      "Stimulates abdominal organs and the heart"
+    ],
+    "contraindications": [
+      "Knee or ankle injury",
+      "Low blood pressure",
+      "Headache or insomnia"
+    ]
+  },
+  {
+    "id": "warrior-1",
+    "english_name": "Warrior I",
+    "sanskrit_name": "Virabhadrasana I",
+    "image": "/public/poses/categories/standing.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing"],
+    "instructions": [
+      "From Mountain, step the left foot back about 4 feet, angling the back foot 45 degrees.",
+      "Square the hips toward the front of the mat.",
+      "Bend the front knee to 90 degrees, tracking over the ankle.",
+      "Sweep the arms overhead, palms facing each other, gaze forward or up.",
+      "Repeat on the other side."
+    ],
+    "benefits": [
+      "Strengthens shoulders, arms, legs, ankles, and back",
+      "Opens hips, chest, and lungs",
+      "Develops focus, stability, and stamina"
+    ],
+    "contraindications": [
+      "High blood pressure",
+      "Heart problems",
+      "Shoulder issues (keep arms parallel or hands on hips)"
+    ]
+  },
+  {
+    "id": "warrior-2",
+    "english_name": "Warrior II",
+    "sanskrit_name": "Virabhadrasana II",
+    "image": "/public/poses/categories/standing.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing"],
+    "instructions": [
+      "Stand with feet 4 to 4.5 feet apart, arms extended at shoulder height.",
+      "Turn the right foot out 90 degrees and the left foot in slightly.",
+      "Bend the right knee directly over the ankle until the thigh is parallel to the floor.",
+      "Reach actively through both fingertips; gaze over the front hand.",
+      "Hold, then repeat on the second side."
+    ],
+    "benefits": [
+      "Strengthens and stretches legs and ankles",
+      "Opens hips, chest, and shoulders",
+      "Builds endurance and concentration"
+    ],
+    "contraindications": [
+      "Diarrhea",
+      "High blood pressure",
+      "Neck issues (look forward instead of over the hand)"
+    ]
+  },
+  {
+    "id": "warrior-3",
+    "english_name": "Warrior III",
+    "sanskrit_name": "Virabhadrasana III",
+    "image": "/public/poses/categories/balance.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Standing", "Balance"],
+    "instructions": [
+      "From Warrior I or High Lunge, shift weight into the front foot.",
+      "Lift the back leg parallel to the floor as you hinge the torso forward.",
+      "Form a long line from fingertips to back heel; flex the lifted foot.",
+      "Engage the core and standing leg; gaze a few inches in front of you.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Strengthens ankles, legs, shoulders, and back muscles",
+      "Improves balance and posture",
+      "Tones the abdomen"
+    ],
+    "contraindications": [
+      "High blood pressure",
+      "Recent ankle or back injury"
+    ]
+  },
+  {
+    "id": "triangle",
+    "english_name": "Triangle Pose",
+    "sanskrit_name": "Trikonasana",
+    "image": "/public/poses/categories/standing.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing"],
+    "instructions": [
+      "Stand with feet 3.5 to 4 feet apart. Turn the right foot out 90 degrees, left foot in slightly.",
+      "Extend arms parallel to the floor at shoulder height.",
+      "Hinge from the front hip and reach the right hand forward, then down to the shin, ankle, or block.",
+      "Stack the top shoulder over the bottom and reach the left hand to the ceiling.",
+      "Gaze up at the top hand. Repeat on the second side."
+    ],
+    "benefits": [
+      "Stretches hips, hamstrings, calves, and spine",
+      "Opens chest and shoulders",
+      "Relieves backache and stress"
+    ],
+    "contraindications": [
+      "Low blood pressure",
+      "Headache or diarrhea",
+      "Neck injury (look forward instead of up)"
+    ]
+  },
+  {
+    "id": "extended-side-angle",
+    "english_name": "Extended Side Angle",
+    "sanskrit_name": "Utthita Parsvakonasana",
+    "image": "/public/poses/categories/standing.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing"],
+    "instructions": [
+      "From Warrior II on the right side, bring the right forearm to the right thigh, or fingertips to the floor outside the right foot.",
+      "Extend the left arm overhead, alongside the ear, creating a long diagonal line from heel to fingertips.",
+      "Open the chest toward the ceiling and gaze under the top arm.",
+      "Hold and breathe; repeat on the second side."
+    ],
+    "benefits": [
+      "Strengthens and stretches the legs, knees, and ankles",
+      "Opens the side body, chest, lungs, and shoulders",
+      "Stimulates abdominal organs"
+    ],
+    "contraindications": [
+      "Headache",
+      "High or low blood pressure",
+      "Insomnia"
+    ]
+  },
+  {
+    "id": "high-lunge",
+    "english_name": "High Lunge",
+    "sanskrit_name": "Utthita Ashwa Sanchalanasana",
+    "image": "/public/poses/categories/standing.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing"],
+    "instructions": [
+      "From a forward fold, step the left foot back into a long lunge with the back leg straight and heel lifted.",
+      "Bend the front knee to 90 degrees, stacked over the ankle.",
+      "Sweep the arms overhead, palms facing each other.",
+      "Lengthen the tailbone toward the back heel; lift the chest.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Strengthens legs, glutes, and core",
+      "Opens hip flexors and chest",
+      "Builds heat and stamina"
+    ],
+    "contraindications": [
+      "Knee injury (lower the back knee for Low Lunge)",
+      "Recent hip surgery"
+    ]
+  },
+  {
+    "id": "low-lunge",
+    "english_name": "Low Lunge",
+    "sanskrit_name": "Anjaneyasana",
+    "image": "/public/poses/categories/hip-opener.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing", "Hip Opener"],
+    "instructions": [
+      "From Downward Dog, step the right foot between the hands and lower the left knee to the floor.",
+      "Untuck the back toes; sink the hips forward and down.",
+      "Inhale and lift the torso, sweeping the arms overhead.",
+      "Soften the front of the back hip toward the mat; lift through the heart.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Stretches hip flexors and quadriceps",
+      "Strengthens the front leg",
+      "Opens the chest, shoulders, and groin"
+    ],
+    "contraindications": [
+      "Knee injury (pad under the back knee)",
+      "Heart conditions (keep hands at heart center)"
+    ]
+  },
+  {
+    "id": "revolved-side-angle",
+    "english_name": "Revolved Side Angle",
+    "sanskrit_name": "Parivrtta Parsvakonasana",
+    "image": "/public/poses/categories/twist.svg",
+    "difficulty": "Advanced",
+    "categories": ["Standing", "Twist"],
+    "instructions": [
+      "From High Lunge with the right leg forward, lower the back knee briefly to set up if needed.",
+      "Bring the hands to the heart and twist to the right, hooking the left elbow outside the right thigh.",
+      "Press palms together firmly; press the back leg straight, lifting through the back heel.",
+      "Open the chest toward the right; gaze up past the right shoulder.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Strengthens and stretches the legs, ankles, and groin",
+      "Improves digestion and detoxifies the abdomen",
+      "Builds stamina and balance"
+    ],
+    "contraindications": [
+      "Low blood pressure",
+      "Headache, insomnia, or migraine",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "standing-forward-fold",
+    "english_name": "Standing Forward Fold",
+    "sanskrit_name": "Uttanasana",
+    "image": "/public/poses/categories/forward-bend.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing", "Forward Bend"],
+    "instructions": [
+      "Stand in Mountain Pose with feet hip-width apart.",
+      "Exhale and hinge forward from the hips, lengthening the spine as you fold.",
+      "Bend the knees as much as needed to release the lower back.",
+      "Let the head and neck hang heavy; bring fingertips to the floor, shins, or grip opposite elbows.",
+      "Stay for several breaths."
+    ],
+    "benefits": [
+      "Stretches hamstrings, calves, and hips",
+      "Calms the nervous system and relieves stress",
+      "Improves digestion"
+    ],
+    "contraindications": [
+      "Lower back injury (keep knees bent or fold halfway)",
+      "Sciatica (proceed gently)"
+    ]
+  },
+  {
+    "id": "half-standing-forward-fold",
+    "english_name": "Halfway Lift",
+    "sanskrit_name": "Ardha Uttanasana",
+    "image": "/public/poses/categories/forward-bend.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing", "Forward Bend"],
+    "instructions": [
+      "From Standing Forward Fold, press fingertips into the floor or shins.",
+      "Inhale and lengthen the spine forward, parallel to the floor.",
+      "Draw the shoulders down the back; lift the chest forward.",
+      "Gaze a few inches in front of the mat."
+    ],
+    "benefits": [
+      "Lengthens the spine",
+      "Strengthens the back muscles",
+      "Prepares the body for deeper folds and Chaturanga"
+    ],
+    "contraindications": [
+      "Back injury (keep knees bent)",
+      "Vertigo"
+    ]
+  },
+  {
+    "id": "wide-legged-forward-fold",
+    "english_name": "Wide-Legged Forward Fold",
+    "sanskrit_name": "Prasarita Padottanasana",
+    "image": "/public/poses/categories/forward-bend.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing", "Forward Bend"],
+    "instructions": [
+      "Step the feet 3.5 to 4 feet apart, toes turned slightly in.",
+      "Place hands on the hips and lift the chest.",
+      "Exhale and hinge forward from the hips, bringing hands to the floor under the shoulders.",
+      "Bend the elbows back and let the crown of the head reach toward the floor.",
+      "Press the outer edges of the feet down."
+    ],
+    "benefits": [
+      "Stretches the inner thighs, hamstrings, and spine",
+      "Tones abdominal organs",
+      "Calms the brain"
+    ],
+    "contraindications": [
+      "Lower back issues (fold halfway only)",
+      "Migraine"
+    ]
+  },
+  {
+    "id": "pyramid",
+    "english_name": "Pyramid Pose",
+    "sanskrit_name": "Parsvottanasana",
+    "image": "/public/poses/categories/forward-bend.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Standing", "Forward Bend"],
+    "instructions": [
+      "Step the left foot back 3 feet, back foot angled 45 degrees, hips squared forward.",
+      "Place hands on the hips and lengthen the spine.",
+      "Exhale and hinge forward over the front leg, hands to blocks or the floor on either side of the front foot.",
+      "Keep both legs straight and active; release the crown toward the shin.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Stretches hamstrings, hips, and spine",
+      "Improves balance and posture",
+      "Calms the mind"
+    ],
+    "contraindications": [
+      "High blood pressure",
+      "Hamstring injury (keep a generous bend in the front knee)"
+    ]
+  },
+  {
+    "id": "cobra",
+    "english_name": "Cobra Pose",
+    "sanskrit_name": "Bhujangasana",
+    "image": "/public/poses/categories/backbend.svg",
+    "difficulty": "Beginner",
+    "categories": ["Backbend"],
+    "instructions": [
+      "Lie face down with legs extended and tops of the feet pressing into the mat.",
+      "Place palms under the shoulders, elbows hugged into the ribs.",
+      "Inhale and press the chest forward and up, keeping the lower ribs on the mat.",
+      "Draw the shoulders down the back; lengthen the back of the neck.",
+      "Use very little hand pressure; let the back muscles do the work."
+    ],
+    "benefits": [
+      "Strengthens the spine and back muscles",
+      "Opens the chest and lungs",
+      "Soothes sciatica"
+    ],
+    "contraindications": [
+      "Back injury",
+      "Carpal tunnel syndrome",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "upward-dog",
+    "english_name": "Upward Facing Dog",
+    "sanskrit_name": "Urdhva Mukha Svanasana",
+    "image": "/public/poses/categories/backbend.svg",
+    "difficulty": "Beginner",
+    "categories": ["Backbend"],
+    "instructions": [
+      "From Chaturanga, untuck the toes so the tops of the feet press into the mat.",
+      "Straighten the arms and roll over the toes, lifting the chest forward and up.",
+      "Press the thighs and knees off the mat by engaging the legs.",
+      "Roll shoulders back; lengthen the tailbone toward the heels.",
+      "Gaze forward, jaw soft."
+    ],
+    "benefits": [
+      "Strengthens spine, arms, and wrists",
+      "Stretches chest, lungs, shoulders, and abdomen",
+      "Improves posture"
+    ],
+    "contraindications": [
+      "Back injury",
+      "Carpal tunnel",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "bridge",
+    "english_name": "Bridge Pose",
+    "sanskrit_name": "Setu Bandha Sarvangasana",
+    "image": "/public/poses/categories/backbend.svg",
+    "difficulty": "Beginner",
+    "categories": ["Backbend"],
+    "instructions": [
+      "Lie on your back with knees bent, feet flat hip-width apart, heels close to the sit bones.",
+      "Press into the feet and lift the hips toward the ceiling.",
+      "Interlace the hands under the back; roll the shoulders under.",
+      "Lift the chest toward the chin and keep the chin lifted slightly off the chest.",
+      "Hold, then release slowly, vertebra by vertebra."
+    ],
+    "benefits": [
+      "Stretches chest, neck, spine, and hips",
+      "Strengthens back, glutes, and hamstrings",
+      "Calms the brain and reduces anxiety"
+    ],
+    "contraindications": [
+      "Neck injury (avoid turning the head)",
+      "Lower back pain (use a block under the sacrum)"
+    ]
+  },
+  {
+    "id": "wheel",
+    "english_name": "Wheel Pose",
+    "sanskrit_name": "Urdhva Dhanurasana",
+    "image": "/public/poses/categories/backbend.svg",
+    "difficulty": "Advanced",
+    "categories": ["Backbend"],
+    "instructions": [
+      "Lie on your back with knees bent, feet flat and hip-width apart, close to the sit bones.",
+      "Bend the elbows and place the palms on the mat beside the ears, fingers pointing toward the shoulders.",
+      "Press into the hands and feet to lift the hips and crown of the head off the floor.",
+      "Straighten the arms as much as possible; lift the chest toward the back wall.",
+      "Lower slowly, tucking the chin to release."
+    ],
+    "benefits": [
+      "Strengthens arms, wrists, legs, glutes, and spine",
+      "Opens chest, shoulders, and hip flexors deeply",
+      "Increases energy and counters depression"
+    ],
+    "contraindications": [
+      "Back injury",
+      "Carpal tunnel syndrome",
+      "Headache, heart problems, or high blood pressure"
+    ]
+  },
+  {
+    "id": "camel",
+    "english_name": "Camel Pose",
+    "sanskrit_name": "Ustrasana",
+    "image": "/public/poses/categories/backbend.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Backbend"],
+    "instructions": [
+      "Kneel with knees hip-width apart, shins and tops of feet pressing into the mat.",
+      "Place hands on the lower back, fingers pointing down, and lift the chest.",
+      "Begin to arch back; if accessible, reach the hands one at a time to the heels.",
+      "Press the hips forward over the knees; keep the neck long.",
+      "To exit, bring hands to the lower back and lift up slowly."
+    ],
+    "benefits": [
+      "Stretches the entire front of the body",
+      "Strengthens back muscles",
+      "Improves posture and counters slouching"
+    ],
+    "contraindications": [
+      "High or low blood pressure",
+      "Migraine or insomnia",
+      "Serious low back or neck injury"
+    ]
+  },
+  {
+    "id": "bow",
+    "english_name": "Bow Pose",
+    "sanskrit_name": "Dhanurasana",
+    "image": "/public/poses/categories/backbend.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Backbend"],
+    "instructions": [
+      "Lie face down with arms by your sides.",
+      "Bend the knees and reach back to grasp the outsides of the ankles.",
+      "Inhale and press the feet into the hands to lift the chest and thighs off the floor.",
+      "Draw the shoulders back; gaze forward.",
+      "Breathe steadily and release gently."
+    ],
+    "benefits": [
+      "Stretches the entire front of the body, chest, and hip flexors",
+      "Strengthens the back muscles",
+      "Stimulates abdominal organs"
+    ],
+    "contraindications": [
+      "Lower back or neck injury",
+      "High or low blood pressure",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "locust",
+    "english_name": "Locust Pose",
+    "sanskrit_name": "Salabhasana",
+    "image": "/public/poses/categories/backbend.svg",
+    "difficulty": "Beginner",
+    "categories": ["Backbend"],
+    "instructions": [
+      "Lie face down with arms by the sides, palms up, forehead on the mat.",
+      "Inhale and lift the head, chest, arms, and legs off the floor.",
+      "Reach the fingertips back toward the feet; keep the gaze low to protect the neck.",
+      "Press the pubic bone into the mat; engage the glutes lightly.",
+      "Hold for several breaths and release."
+    ],
+    "benefits": [
+      "Strengthens the back of the body — spine, glutes, hamstrings",
+      "Stimulates the abdominal organs",
+      "Improves posture"
+    ],
+    "contraindications": [
+      "Headache",
+      "Serious back injury",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "downward-dog",
+    "english_name": "Downward Facing Dog",
+    "sanskrit_name": "Adho Mukha Svanasana",
+    "image": "/public/poses/categories/inversion.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing", "Forward Bend", "Inversion"],
+    "instructions": [
+      "Start on hands and knees with wrists under shoulders, knees under hips.",
+      "Tuck the toes and lift the hips up and back, forming an inverted V.",
+      "Press the floor away through the palms; spread the fingers wide.",
+      "Send the heels toward the floor (they don't need to touch).",
+      "Let the head hang between the arms; gaze toward the navel."
+    ],
+    "benefits": [
+      "Stretches hamstrings, calves, shoulders, and hands",
+      "Strengthens arms, shoulders, and legs",
+      "Calms the nervous system and energizes the body"
+    ],
+    "contraindications": [
+      "Wrist injury or carpal tunnel",
+      "Late-stage pregnancy",
+      "High blood pressure (modify with head supported on a block)"
+    ]
+  },
+  {
+    "id": "dolphin",
+    "english_name": "Dolphin Pose",
+    "sanskrit_name": "Ardha Pincha Mayurasana",
+    "image": "/public/poses/categories/inversion.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Inversion"],
+    "instructions": [
+      "From hands and knees, lower the forearms to the mat with elbows shoulder-width apart.",
+      "Interlace the fingers or keep palms flat, parallel.",
+      "Tuck the toes and lift the hips up and back, like Downward Dog on the forearms.",
+      "Press the forearms firmly down and lift the shoulders away from the ears.",
+      "Walk the feet in slightly to deepen the stretch."
+    ],
+    "benefits": [
+      "Strengthens shoulders, arms, and core",
+      "Stretches hamstrings and calves",
+      "Prepares the body for inversions"
+    ],
+    "contraindications": [
+      "Shoulder injury",
+      "High blood pressure",
+      "Neck issues"
+    ]
+  },
+  {
+    "id": "headstand",
+    "english_name": "Headstand",
+    "sanskrit_name": "Sirsasana",
+    "image": "/public/poses/categories/inversion.svg",
+    "difficulty": "Advanced",
+    "categories": ["Inversion"],
+    "instructions": [
+      "Kneel and interlace the fingers, creating a basket on the mat with elbows shoulder-width apart.",
+      "Place the crown of the head on the mat, cradled by the hands.",
+      "Tuck the toes and lift the hips, walking the feet in.",
+      "Slowly lift one knee, then the other, to the chest; carefully extend the legs straight up.",
+      "Press the forearms down to lift weight off the head; engage the core."
+    ],
+    "benefits": [
+      "Strengthens shoulders, arms, and core",
+      "Improves focus and circulation",
+      "Said to calm the mind and reduce stress"
+    ],
+    "contraindications": [
+      "Neck or back injury",
+      "High blood pressure",
+      "Pregnancy, menstruation, headache, or glaucoma"
+    ]
+  },
+  {
+    "id": "shoulder-stand",
+    "english_name": "Shoulder Stand",
+    "sanskrit_name": "Sarvangasana",
+    "image": "/public/poses/categories/inversion.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Inversion"],
+    "instructions": [
+      "Lie on your back; lift the legs straight up to 90 degrees.",
+      "Press the palms into the floor and swing the legs overhead, hips off the mat.",
+      "Support the back with the hands, elbows shoulder-width apart on the mat.",
+      "Lift the legs straight up toward the ceiling, weight resting on shoulders, not the neck.",
+      "Lower slowly with control."
+    ],
+    "benefits": [
+      "Calms the brain and helps relieve stress",
+      "Stretches the shoulders and neck",
+      "Stimulates the thyroid and abdominal organs"
+    ],
+    "contraindications": [
+      "Neck injury",
+      "High blood pressure",
+      "Pregnancy, menstruation, or detached retina"
+    ]
+  },
+  {
+    "id": "legs-up-the-wall",
+    "english_name": "Legs Up the Wall",
+    "sanskrit_name": "Viparita Karani",
+    "image": "/public/poses/categories/restorative.svg",
+    "difficulty": "Beginner",
+    "categories": ["Inversion", "Restorative"],
+    "instructions": [
+      "Sit sideways against a wall; swing the legs up the wall as you lie back.",
+      "Scoot the sit bones as close to the wall as is comfortable.",
+      "Rest the arms by the sides, palms up.",
+      "Soften the face and breathe; remain for 5 to 15 minutes.",
+      "To exit, bend the knees, roll to one side, and rest before sitting up."
+    ],
+    "benefits": [
+      "Relieves tired legs and feet",
+      "Calms the nervous system",
+      "Gently stretches the hamstrings and back of the neck"
+    ],
+    "contraindications": [
+      "Serious back or neck issues",
+      "Glaucoma",
+      "Menstruation (per traditional teachings)"
+    ]
+  },
+  {
+    "id": "tree",
+    "english_name": "Tree Pose",
+    "sanskrit_name": "Vrksasana",
+    "image": "/public/poses/categories/balance.svg",
+    "difficulty": "Beginner",
+    "categories": ["Standing", "Balance"],
+    "instructions": [
+      "Stand in Mountain Pose. Shift weight into the left foot.",
+      "Bend the right knee and place the sole of the right foot on the inner left calf or thigh (avoid the knee).",
+      "Press the foot and inner leg into each other.",
+      "Bring hands to heart center or sweep them overhead.",
+      "Fix the gaze on a steady point. Switch sides."
+    ],
+    "benefits": [
+      "Strengthens ankles, calves, thighs, and spine",
+      "Improves balance, focus, and posture",
+      "Calms and grounds the mind"
+    ],
+    "contraindications": [
+      "Recent ankle injury",
+      "Low blood pressure",
+      "Headache or insomnia"
+    ]
+  },
+  {
+    "id": "half-moon",
+    "english_name": "Half Moon Pose",
+    "sanskrit_name": "Ardha Chandrasana",
+    "image": "/public/poses/categories/balance.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Standing", "Balance"],
+    "instructions": [
+      "From Triangle on the right side, bend the right knee and walk the right hand forward about a foot.",
+      "Shift weight into the right foot and right hand (or a block) as you lift the left leg parallel to the floor.",
+      "Straighten the standing leg; flex the lifted foot, top hip stacked over the bottom.",
+      "Extend the left arm to the ceiling; gaze up if balance allows.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Strengthens ankles, thighs, and abdominal muscles",
+      "Stretches the groin, hamstrings, calves, and chest",
+      "Improves coordination and balance"
+    ],
+    "contraindications": [
+      "Headache, migraine, or insomnia",
+      "Low blood pressure",
+      "Neck issues (look forward instead of up)"
+    ]
+  },
+  {
+    "id": "eagle",
+    "english_name": "Eagle Pose",
+    "sanskrit_name": "Garudasana",
+    "image": "/public/poses/categories/balance.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Standing", "Balance"],
+    "instructions": [
+      "Stand in Mountain Pose; bend both knees slightly.",
+      "Lift the right leg and cross it over the left thigh; hook the right foot behind the left calf if possible.",
+      "Cross the left arm under the right at the elbows; wrap forearms so palms meet.",
+      "Lift the elbows to shoulder height; press palms together.",
+      "Sit deeper into the standing leg. Switch sides."
+    ],
+    "benefits": [
+      "Strengthens and stretches the ankles, calves, thighs, hips, and shoulders",
+      "Improves concentration and balance",
+      "Loosens the upper back"
+    ],
+    "contraindications": [
+      "Knee injury",
+      "Shoulder injury",
+      "Pregnancy (later trimesters)"
+    ]
+  },
+  {
+    "id": "dancer",
+    "english_name": "Dancer Pose",
+    "sanskrit_name": "Natarajasana",
+    "image": "/public/poses/categories/balance.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Standing", "Balance", "Backbend"],
+    "instructions": [
+      "Stand in Mountain Pose; shift weight into the left foot.",
+      "Bend the right knee and reach back with the right hand to grasp the inside of the right foot or ankle.",
+      "Extend the left arm forward at shoulder height for a focal point.",
+      "Begin to kick the right foot back and up, hinging the torso forward.",
+      "Maintain a strong standing leg and steady breath. Switch sides."
+    ],
+    "benefits": [
+      "Strengthens legs and ankles",
+      "Stretches shoulders, chest, thighs, groin, and abdomen",
+      "Develops focus and grace"
+    ],
+    "contraindications": [
+      "Low blood pressure",
+      "Ankle, knee, or back injury"
+    ]
+  },
+  {
+    "id": "crow",
+    "english_name": "Crow Pose",
+    "sanskrit_name": "Bakasana",
+    "image": "/public/poses/categories/balance.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Balance", "Core"],
+    "instructions": [
+      "Squat with feet together, knees wide.",
+      "Place palms shoulder-width apart on the mat in front of you.",
+      "Lift the hips, bend the elbows, and place the knees high on the backs of the upper arms.",
+      "Shift weight forward into the hands; lift one foot at a time, then both.",
+      "Gaze slightly forward; engage the core."
+    ],
+    "benefits": [
+      "Strengthens arms, wrists, and abdominal muscles",
+      "Tones the abdomen and improves digestion",
+      "Builds confidence and focus"
+    ],
+    "contraindications": [
+      "Wrist injury or carpal tunnel",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "side-plank",
+    "english_name": "Side Plank",
+    "sanskrit_name": "Vasisthasana",
+    "image": "/public/poses/categories/balance.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Balance", "Core"],
+    "instructions": [
+      "From Plank Pose, shift weight onto the right hand and outer edge of the right foot.",
+      "Stack the left foot on top of the right; lift the hips so the body forms a long diagonal.",
+      "Extend the left arm to the ceiling; gaze up if comfortable.",
+      "Engage the core and press the bottom hand strongly into the mat.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Strengthens arms, core, wrists, and legs",
+      "Stretches and strengthens the wrists",
+      "Improves balance and concentration"
+    ],
+    "contraindications": [
+      "Wrist, elbow, or shoulder injury"
+    ]
+  },
+  {
+    "id": "hand-to-big-toe",
+    "english_name": "Extended Hand-to-Big-Toe",
+    "sanskrit_name": "Utthita Hasta Padangusthasana",
+    "image": "/public/poses/categories/balance.svg",
+    "difficulty": "Advanced",
+    "categories": ["Standing", "Balance"],
+    "instructions": [
+      "Stand in Mountain Pose. Shift weight into the left foot.",
+      "Bend the right knee and hook the first two fingers around the right big toe (use a strap if needed).",
+      "Extend the right leg forward, straightening as much as possible.",
+      "Left hand on hip; stand tall.",
+      "For the deeper variation, open the leg out to the right side. Switch sides."
+    ],
+    "benefits": [
+      "Strengthens legs and ankles",
+      "Stretches hamstrings",
+      "Improves balance and focus"
+    ],
+    "contraindications": [
+      "Ankle or lower back injury",
+      "Recent hip surgery"
+    ]
+  },
+  {
+    "id": "easy-pose",
+    "english_name": "Easy Pose",
+    "sanskrit_name": "Sukhasana",
+    "image": "/public/poses/categories/seated.svg",
+    "difficulty": "Beginner",
+    "categories": ["Seated"],
+    "instructions": [
+      "Sit on the mat with legs crossed at the shins, each foot under the opposite knee.",
+      "Sit on a folded blanket or block to lift the hips if the lower back rounds.",
+      "Rest the hands on the knees or in the lap.",
+      "Lengthen the spine; relax the shoulders down.",
+      "Breathe softly; close the eyes if it feels right."
+    ],
+    "benefits": [
+      "Opens the hips and lengthens the spine",
+      "Calms the mind for meditation or pranayama",
+      "Reduces stress and anxiety"
+    ],
+    "contraindications": [
+      "Knee or hip injury (sit on a cushion or in a chair)"
+    ]
+  },
+  {
+    "id": "staff",
+    "english_name": "Staff Pose",
+    "sanskrit_name": "Dandasana",
+    "image": "/public/poses/categories/seated.svg",
+    "difficulty": "Beginner",
+    "categories": ["Seated"],
+    "instructions": [
+      "Sit with legs extended straight in front of you, feet flexed.",
+      "Press the palms into the mat beside the hips.",
+      "Lengthen the spine; engage the thigh muscles.",
+      "Lift through the crown of the head; relax the shoulders down.",
+      "Hold and breathe."
+    ],
+    "benefits": [
+      "Strengthens the back muscles and core",
+      "Improves posture",
+      "Stretches the chest and shoulders"
+    ],
+    "contraindications": [
+      "Wrist injury (don't press palms down)",
+      "Lower back pain (sit on a folded blanket)"
+    ]
+  },
+  {
+    "id": "hero",
+    "english_name": "Hero Pose",
+    "sanskrit_name": "Virasana",
+    "image": "/public/poses/categories/seated.svg",
+    "difficulty": "Beginner",
+    "categories": ["Seated"],
+    "instructions": [
+      "Kneel with knees together and feet slightly wider than hips, tops of the feet flat on the mat.",
+      "Lower the hips between the heels; use a block or folded blanket under the sit bones if needed.",
+      "Rest the hands on the thighs, palms down.",
+      "Lengthen the spine; soften the shoulders.",
+      "Hold for as long as is comfortable."
+    ],
+    "benefits": [
+      "Stretches the thighs, knees, and ankles",
+      "Improves digestion",
+      "Strengthens arches of the feet"
+    ],
+    "contraindications": [
+      "Knee or ankle injury",
+      "Headache (sit higher on a block)"
+    ]
+  },
+  {
+    "id": "bound-angle",
+    "english_name": "Bound Angle / Butterfly",
+    "sanskrit_name": "Baddha Konasana",
+    "image": "/public/poses/categories/hip-opener.svg",
+    "difficulty": "Beginner",
+    "categories": ["Seated", "Hip Opener"],
+    "instructions": [
+      "Sit with the spine long; bend the knees and bring the soles of the feet together.",
+      "Let the knees fall out to the sides; clasp the feet or ankles.",
+      "Sit tall; gently encourage the knees toward the floor without forcing.",
+      "Optional: hinge forward from the hips for a deeper stretch.",
+      "Release slowly."
+    ],
+    "benefits": [
+      "Opens the hips and inner thighs",
+      "Stimulates abdominal organs and pelvic circulation",
+      "Soothes menstrual discomfort"
+    ],
+    "contraindications": [
+      "Groin or knee injury (support knees with blocks or blankets)"
+    ]
+  },
+  {
+    "id": "seated-forward-fold",
+    "english_name": "Seated Forward Fold",
+    "sanskrit_name": "Paschimottanasana",
+    "image": "/public/poses/categories/forward-bend.svg",
+    "difficulty": "Beginner",
+    "categories": ["Seated", "Forward Bend"],
+    "instructions": [
+      "Sit in Staff Pose with legs extended.",
+      "Inhale and lift the arms overhead; lengthen the spine.",
+      "Exhale and hinge forward from the hips, reaching for the shins, ankles, or feet.",
+      "Keep the spine long; bend the knees slightly if the back rounds.",
+      "Let the head and neck soften."
+    ],
+    "benefits": [
+      "Stretches the spine, hamstrings, and shoulders",
+      "Calms the mind",
+      "Improves digestion"
+    ],
+    "contraindications": [
+      "Lower back injury (keep a generous bend in the knees)",
+      "Asthma or diarrhea"
+    ]
+  },
+  {
+    "id": "half-lord-of-the-fishes",
+    "english_name": "Half Lord of the Fishes",
+    "sanskrit_name": "Ardha Matsyendrasana",
+    "image": "/public/poses/categories/twist.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Seated", "Twist"],
+    "instructions": [
+      "From Staff Pose, bend the right knee and step the right foot outside the left thigh.",
+      "Bend the left knee and tuck the left foot beside the right hip (or keep the left leg extended).",
+      "Inhale, lengthen the spine; exhale and twist to the right, left elbow outside the right knee.",
+      "Right hand on the mat behind you; gaze over the right shoulder.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Stimulates digestive organs",
+      "Stretches shoulders, hips, and neck",
+      "Energizes the spine"
+    ],
+    "contraindications": [
+      "Back or spine injury",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "revolved-triangle",
+    "english_name": "Revolved Triangle",
+    "sanskrit_name": "Parivrtta Trikonasana",
+    "image": "/public/poses/categories/twist.svg",
+    "difficulty": "Advanced",
+    "categories": ["Standing", "Twist"],
+    "instructions": [
+      "Step the left foot back about 3 feet, back foot angled in, hips squared forward.",
+      "Hinge forward over the front leg and place the left hand on the floor or a block outside the right foot.",
+      "Open the chest to the right; extend the right arm to the ceiling.",
+      "Press both legs straight and active; gaze up if comfortable.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Strengthens and stretches the legs",
+      "Detoxifies abdominal organs",
+      "Improves balance and concentration"
+    ],
+    "contraindications": [
+      "Lower back injury",
+      "Low blood pressure",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "seated-twist",
+    "english_name": "Seated Twist",
+    "sanskrit_name": "Marichyasana C",
+    "image": "/public/poses/categories/twist.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Seated", "Twist"],
+    "instructions": [
+      "From Staff Pose, bend the right knee and place the right foot flat on the mat close to the sit bones.",
+      "Press the left leg active and long.",
+      "Inhale and lengthen; exhale and twist to the right, hooking the left elbow outside the right knee.",
+      "Right hand on the floor behind you.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Releases tension in the spine and shoulders",
+      "Improves digestion",
+      "Calms the mind"
+    ],
+    "contraindications": [
+      "Back injury",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "supine-twist",
+    "english_name": "Supine Spinal Twist",
+    "sanskrit_name": "Supta Matsyendrasana",
+    "image": "/public/poses/categories/twist.svg",
+    "difficulty": "Beginner",
+    "categories": ["Twist", "Restorative"],
+    "instructions": [
+      "Lie on your back. Hug the right knee into the chest.",
+      "Cross the right knee over to the left side of the body.",
+      "Extend the right arm out to the right at shoulder height; gaze over the right hand.",
+      "Press the right shoulder toward the floor; breathe into the twist.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Releases lower back tension",
+      "Stretches the chest, shoulders, and outer hips",
+      "Calms the nervous system"
+    ],
+    "contraindications": [
+      "Recent abdominal surgery",
+      "Severe disc injury"
+    ]
+  },
+  {
+    "id": "revolved-chair",
+    "english_name": "Revolved Chair",
+    "sanskrit_name": "Parivrtta Utkatasana",
+    "image": "/public/poses/categories/twist.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Standing", "Twist"],
+    "instructions": [
+      "From Chair Pose, bring the palms together at heart center.",
+      "Inhale to lengthen; exhale and twist to the right, hooking the left elbow outside the right thigh.",
+      "Press the palms firmly together; keep the knees even with each other.",
+      "Open the chest to the right; gaze up if your neck allows.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Strengthens legs and core",
+      "Improves digestion and detoxifies",
+      "Stretches the chest and shoulders"
+    ],
+    "contraindications": [
+      "Pregnancy",
+      "Low back pain",
+      "Knee injury"
+    ]
+  },
+  {
+    "id": "pigeon",
+    "english_name": "Pigeon Pose",
+    "sanskrit_name": "Eka Pada Rajakapotasana",
+    "image": "/public/poses/categories/hip-opener.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Hip Opener"],
+    "instructions": [
+      "From Downward Dog, bring the right knee forward toward the right wrist; shin angled toward the left wrist.",
+      "Extend the left leg straight back, top of the foot on the mat, hips squared.",
+      "Use a folded blanket under the right hip if it's lifted.",
+      "Stay upright on the fingertips, or fold forward over the front leg for a deeper release.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Deeply opens the hips and glutes",
+      "Stretches the hip flexors of the back leg",
+      "Releases stored tension and emotion"
+    ],
+    "contraindications": [
+      "Knee injury (skip this pose or try Figure 4 on the back)",
+      "Sacroiliac issues"
+    ]
+  },
+  {
+    "id": "lizard",
+    "english_name": "Lizard Pose",
+    "sanskrit_name": "Utthan Pristhasana",
+    "image": "/public/poses/categories/hip-opener.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Hip Opener"],
+    "instructions": [
+      "From Downward Dog, step the right foot to the outside of the right hand.",
+      "Lower the left knee to the mat (or keep it lifted for a deeper variation).",
+      "Walk the right foot wider and angle the toes slightly out.",
+      "Lower to the forearms onto a block or the mat.",
+      "Stay and breathe; switch sides."
+    ],
+    "benefits": [
+      "Stretches the hips, hamstrings, and hip flexors",
+      "Opens the groin",
+      "Strengthens the legs"
+    ],
+    "contraindications": [
+      "Knee or lower back injury",
+      "Tight hips (work on the forearms on blocks)"
+    ]
+  },
+  {
+    "id": "cow-face",
+    "english_name": "Cow Face Pose",
+    "sanskrit_name": "Gomukhasana",
+    "image": "/public/poses/categories/hip-opener.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Seated", "Hip Opener"],
+    "instructions": [
+      "Sit with legs extended. Bend the right knee under the left, right heel beside the left hip.",
+      "Cross the left leg over the right, stacking the knees, left heel beside the right hip.",
+      "Reach the right arm up and bend the elbow down behind the head.",
+      "Reach the left arm down and bend it up behind the back; clasp the hands or use a strap.",
+      "Sit tall and breathe. Switch sides."
+    ],
+    "benefits": [
+      "Stretches ankles, hips, thighs, shoulders, armpits, and triceps",
+      "Improves posture",
+      "Counters the effects of sitting"
+    ],
+    "contraindications": [
+      "Serious neck or shoulder injury",
+      "Knee injury"
+    ]
+  },
+  {
+    "id": "happy-baby",
+    "english_name": "Happy Baby",
+    "sanskrit_name": "Ananda Balasana",
+    "image": "/public/poses/categories/hip-opener.svg",
+    "difficulty": "Beginner",
+    "categories": ["Hip Opener", "Restorative"],
+    "instructions": [
+      "Lie on your back. Hug the knees into the chest.",
+      "Catch the outsides of the feet with the hands (or grab the big toes, or use a strap).",
+      "Open the knees wider than the torso, drawing them toward the armpits.",
+      "Keep the ankles directly over the knees; flex the feet.",
+      "Gently rock side to side if it feels good."
+    ],
+    "benefits": [
+      "Opens the hips and inner thighs",
+      "Releases the lower back",
+      "Calms the brain and relieves stress"
+    ],
+    "contraindications": [
+      "Knee or neck injury",
+      "Pregnancy (after first trimester)"
+    ]
+  },
+  {
+    "id": "garland",
+    "english_name": "Garland Pose / Yogi Squat",
+    "sanskrit_name": "Malasana",
+    "image": "/public/poses/categories/hip-opener.svg",
+    "difficulty": "Beginner",
+    "categories": ["Hip Opener"],
+    "instructions": [
+      "Stand with feet slightly wider than hip-width, toes turned out about 45 degrees.",
+      "Bend the knees deeply and lower the hips into a squat.",
+      "Bring the palms together at heart center; press the elbows lightly into the inner knees to open the hips.",
+      "Lift the chest; lengthen the spine.",
+      "Place a block under the sit bones if heels lift off the mat."
+    ],
+    "benefits": [
+      "Opens the hips, groin, and ankles",
+      "Strengthens the metabolism and digestion",
+      "Tones the belly"
+    ],
+    "contraindications": [
+      "Knee, lower back, or ankle injury"
+    ]
+  },
+  {
+    "id": "plank",
+    "english_name": "Plank Pose",
+    "sanskrit_name": "Phalakasana",
+    "image": "/public/poses/categories/core.svg",
+    "difficulty": "Beginner",
+    "categories": ["Core"],
+    "instructions": [
+      "From hands and knees, step the feet back so the body forms one long line.",
+      "Stack the shoulders directly over the wrists; spread the fingers wide.",
+      "Engage the core; press the heels back as you reach the crown forward.",
+      "Avoid lifting the hips or letting them drop.",
+      "Breathe and hold."
+    ],
+    "benefits": [
+      "Strengthens the arms, wrists, and core",
+      "Builds full-body endurance",
+      "Tones the abdomen and spine"
+    ],
+    "contraindications": [
+      "Wrist injury or carpal tunnel (try forearm plank)",
+      "Late-stage pregnancy"
+    ]
+  },
+  {
+    "id": "chaturanga",
+    "english_name": "Four-Limbed Staff",
+    "sanskrit_name": "Chaturanga Dandasana",
+    "image": "/public/poses/categories/core.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Core"],
+    "instructions": [
+      "From Plank Pose, shift forward slightly onto the balls of the feet.",
+      "Hug the elbows in close to the ribs as you lower the body halfway down.",
+      "Stop when the elbows form a 90-degree angle, shoulders even with the elbows.",
+      "Keep the body in one long line; engage the legs and core.",
+      "Modify by lowering the knees first if needed."
+    ],
+    "benefits": [
+      "Strengthens the arms, wrists, and core",
+      "Prepares the body for arm balances",
+      "Builds body awareness and integrity"
+    ],
+    "contraindications": [
+      "Wrist, elbow, or shoulder injury",
+      "Pregnancy",
+      "Carpal tunnel syndrome"
+    ]
+  },
+  {
+    "id": "boat",
+    "english_name": "Boat Pose",
+    "sanskrit_name": "Navasana",
+    "image": "/public/poses/categories/core.svg",
+    "difficulty": "Intermediate",
+    "categories": ["Core"],
+    "instructions": [
+      "Sit with knees bent, feet on the floor.",
+      "Lean back slightly and lift the feet, bringing the shins parallel to the floor.",
+      "Extend the arms forward, parallel to the floor at shoulder height.",
+      "Optional: straighten the legs so the body forms a V.",
+      "Engage the core; keep the spine long, not rounded."
+    ],
+    "benefits": [
+      "Strengthens the abdomen, hip flexors, and spine",
+      "Stimulates the kidneys, thyroid, and intestines",
+      "Improves balance and digestion"
+    ],
+    "contraindications": [
+      "Lower back injury",
+      "Insomnia, headache, or diarrhea",
+      "Pregnancy or menstruation"
+    ]
+  },
+  {
+    "id": "childs-pose",
+    "english_name": "Child's Pose",
+    "sanskrit_name": "Balasana",
+    "image": "/public/poses/categories/restorative.svg",
+    "difficulty": "Beginner",
+    "categories": ["Restorative", "Forward Bend"],
+    "instructions": [
+      "Kneel on the mat with big toes touching and knees apart (or together).",
+      "Sit the hips back toward the heels.",
+      "Walk the hands forward and lower the forehead toward the mat.",
+      "Rest the arms extended forward or alongside the body.",
+      "Breathe deeply; rest as long as you need."
+    ],
+    "benefits": [
+      "Releases the back, shoulders, and neck",
+      "Calms the mind and reduces stress",
+      "Gently stretches hips, thighs, and ankles"
+    ],
+    "contraindications": [
+      "Knee injury (place a blanket behind the knees)",
+      "Pregnancy (keep knees wide, no compression on the belly)"
+    ]
+  },
+  {
+    "id": "corpse",
+    "english_name": "Corpse Pose",
+    "sanskrit_name": "Savasana",
+    "image": "/public/poses/categories/restorative.svg",
+    "difficulty": "Beginner",
+    "categories": ["Restorative"],
+    "instructions": [
+      "Lie flat on your back with legs slightly apart, feet relaxed open.",
+      "Rest the arms by the sides, a few inches away from the body, palms up.",
+      "Close the eyes; soften the face, jaw, tongue, and breath.",
+      "Allow the body to be completely still and heavy.",
+      "Rest for at least 5 minutes."
+    ],
+    "benefits": [
+      "Calms the central nervous system",
+      "Lowers blood pressure and reduces anxiety",
+      "Integrates the benefits of practice"
+    ],
+    "contraindications": [
+      "Pregnancy (lie on the left side with support)",
+      "Back pain (place a bolster under the knees)"
+    ]
+  },
+  {
+    "id": "reclined-bound-angle",
+    "english_name": "Reclined Bound Angle",
+    "sanskrit_name": "Supta Baddha Konasana",
+    "image": "/public/poses/categories/restorative.svg",
+    "difficulty": "Beginner",
+    "categories": ["Restorative", "Hip Opener"],
+    "instructions": [
+      "Lie on your back. Bend the knees and bring the soles of the feet together.",
+      "Let the knees fall open to the sides; support them with blocks or blankets.",
+      "Rest one hand on the belly and one on the heart, or open the arms wide.",
+      "Soften the body completely.",
+      "Stay for 5 to 10 minutes."
+    ],
+    "benefits": [
+      "Opens the hips and chest",
+      "Calms the nervous system",
+      "Eases menstrual discomfort and mild depression"
+    ],
+    "contraindications": [
+      "Groin or knee injury (use ample support under knees)",
+      "Lower back issues (place a bolster under the spine)"
+    ]
+  },
+  {
+    "id": "cat",
+    "english_name": "Cat Pose",
+    "sanskrit_name": "Marjaryasana",
+    "image": "/public/poses/categories/restorative.svg",
+    "difficulty": "Beginner",
+    "categories": ["Restorative"],
+    "instructions": [
+      "Start on hands and knees, wrists under shoulders, knees under hips.",
+      "Exhale and round the spine toward the ceiling; tuck the tailbone.",
+      "Drop the head toward the chest.",
+      "Pair with Cow Pose, flowing breath to movement.",
+      "Repeat for 5 to 10 rounds."
+    ],
+    "benefits": [
+      "Stretches the back, torso, and neck",
+      "Gently massages the spine and abdominal organs",
+      "Releases tension between the shoulder blades"
+    ],
+    "contraindications": [
+      "Wrist injury (come onto forearms or fists)",
+      "Neck injury (keep the head in line with the spine)"
+    ]
+  },
+  {
+    "id": "cow",
+    "english_name": "Cow Pose",
+    "sanskrit_name": "Bitilasana",
+    "image": "/public/poses/categories/backbend.svg",
+    "difficulty": "Beginner",
+    "categories": ["Backbend"],
+    "instructions": [
+      "Start on hands and knees, wrists under shoulders, knees under hips.",
+      "Inhale and drop the belly toward the mat as you lift the chest and tailbone.",
+      "Soften the shoulders down the back; gaze gently forward and up.",
+      "Pair with Cat Pose, linking breath to movement.",
+      "Repeat for 5 to 10 rounds."
+    ],
+    "benefits": [
+      "Mobilizes the spine",
+      "Opens the chest and lungs",
+      "Massages the abdominal organs"
+    ],
+    "contraindications": [
+      "Neck injury (keep the head neutral)",
+      "Wrist pain (come onto forearms or fists)"
+    ]
+  },
+  {
+    "id": "thunderbolt",
+    "english_name": "Thunderbolt Pose",
+    "sanskrit_name": "Vajrasana",
+    "image": "/public/poses/categories/seated.svg",
+    "difficulty": "Beginner",
+    "categories": ["Seated", "Restorative"],
+    "instructions": [
+      "Kneel with knees together, tops of the feet flat on the mat, big toes touching.",
+      "Sit back on the heels.",
+      "Rest the hands on the thighs, palms down.",
+      "Lengthen the spine; relax the shoulders down.",
+      "Breathe steadily; place a folded blanket between the calves and thighs if needed."
+    ],
+    "benefits": [
+      "Aids digestion (traditionally practiced after meals)",
+      "Improves posture",
+      "Calms the mind"
+    ],
+    "contraindications": [
+      "Knee or ankle injury",
+      "Recent leg surgery"
+    ]
+  },
+  {
+    "id": "revolved-half-moon",
+    "english_name": "Revolved Half Moon",
+    "sanskrit_name": "Parivrtta Ardha Chandrasana",
+    "image": "/public/poses/categories/twist.svg",
+    "difficulty": "Advanced",
+    "categories": ["Balance", "Twist"],
+    "instructions": [
+      "From a standing forward fold, place the left fingertips on the floor or a block in front of the right foot.",
+      "Lift the left leg straight back, parallel to the floor, foot flexed.",
+      "Twist the chest open to the right; reach the right hand to the ceiling.",
+      "Stack the hips; gaze up if your neck allows.",
+      "Switch sides."
+    ],
+    "benefits": [
+      "Strengthens the legs, ankles, and core",
+      "Detoxifies the abdomen",
+      "Improves balance and concentration"
+    ],
+    "contraindications": [
+      "Lower back injury",
+      "Low blood pressure",
+      "Pregnancy"
+    ]
+  },
+  {
+    "id": "tortoise",
+    "english_name": "Tortoise Pose",
+    "sanskrit_name": "Kurmasana",
+    "image": "/public/poses/categories/forward-bend.svg",
+    "difficulty": "Advanced",
+    "categories": ["Seated", "Forward Bend", "Hip Opener"],
+    "instructions": [
+      "Sit with legs wider than hip-width, knees bent, feet on the mat.",
+      "Slide each arm under the corresponding knee, palms down.",
+      "Lower the chest toward the mat between the legs.",
+      "Straighten the legs as much as is comfortable, drawing the heels forward.",
+      "Soften the head and rest deeply."
+    ],
+    "benefits": [
+      "Deeply stretches the back, hips, and inner thighs",
+      "Calms the nervous system",
+      "Tones the abdomen"
+    ],
+    "contraindications": [
+      "Lower back, shoulder, or hamstring injury",
+      "Sciatica"
+    ]
+  },
+  {
+    "id": "firefly",
+    "english_name": "Firefly Pose",
+    "sanskrit_name": "Tittibhasana",
+    "image": "/public/poses/categories/balance.svg",
+    "difficulty": "Advanced",
+    "categories": ["Balance", "Core"],
+    "instructions": [
+      "Stand with feet hip-width apart. Fold forward and walk the hands behind the feet.",
+      "Bend the knees and work the shoulders behind the thighs, palms flat on the mat.",
+      "Sit the hips back onto the upper arms; press the hands firmly down.",
+      "Shift weight into the hands and extend the legs out to the sides, parallel to the floor.",
+      "Engage the core; flex the feet."
+    ],
+    "benefits": [
+      "Strengthens the arms, wrists, and core",
+      "Stretches the inner thighs and back",
+      "Improves balance and focus"
+    ],
+    "contraindications": [
+      "Wrist, elbow, shoulder, or lower back injury",
+      "Pregnancy"
+    ]
+  }
+]

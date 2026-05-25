@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#f4f1ea">
+<title>Routine — Angelica's Yoga</title>
+<link rel="icon" type="image/svg+xml" href="/public/favicon.svg">
+<link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page-routine">
+<header class="topbar">
+  <a href="/" class="brand">
+    <img src="/public/logo.svg" alt="" class="brand-mark">
+    <span class="brand-text">Angelica's Yoga</span>
+  </a>
+  <nav class="topnav">
+    <a href="/poses">Poses</a>
+    <a href="/routines">Routines</a>
+  </nav>
+</header>
+
+<main class="container container-narrow" id="routine-main">
+  <a href="/routines" class="back-link">← All routines</a>
+
+  <div id="routine-loading" class="loading">Loading…</div>
+
+  <article id="routine-article" hidden>
+    <header class="routine-header">
+      <p class="routine-type" id="routine-type"></p>
+      <h1 id="routine-name"></h1>
+      <p id="routine-sanskrit" class="routine-sanskrit"></p>
+      <div class="routine-meta">
+        <span class="meta-item"><span class="meta-label">Duration</span><span class="meta-val" id="routine-duration"></span></span>
+        <span class="meta-item"><span class="meta-label">Level</span><span class="meta-val" id="routine-level"></span></span>
+        <span class="meta-item"><span class="meta-label">Poses</span><span class="meta-val" id="routine-pose-count"></span></span>
+      </div>
+      <p class="routine-description" id="routine-description"></p>
+    </header>
+
+    <h2 class="section-heading">The flow</h2>
+    <ol class="flow-list" id="flow-list"></ol>
+  </article>
+
+  <div id="routine-error" class="empty-state" hidden>
+    <p>That routine wasn't found.</p>
+    <a href="/routines" class="btn-ghost">Back to all routines</a>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <p>Made with care for Angelica</p>
+</footer>
+
+<script src="/js/app.js"></script>
+<script src="/js/routine.js"></script>
+</body>
+</html>
