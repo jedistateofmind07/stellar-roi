@@ -1,5 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="30" fill="#9bb19c"/>
-  <circle cx="32" cy="20" r="5" fill="#f4f1ea"/>
-  <path d="M32 27c-5 0-9 4-9 9v3l-5 9h4l3-7h14l3 7h4l-5-9v-3c0-5-4-9-9-9z" fill="#f4f1ea"/>
+  <defs>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#d4a23f"/>
+      <stop offset="100%" stop-color="#c8693a"/>
+    </radialGradient>
+  </defs>
+  <g fill="#c8693a">
+    <path d="M32 2 L34 14 L30 14 Z"/>
+    <path d="M32 62 L30 50 L34 50 Z"/>
+    <path d="M2 32 L14 30 L14 34 Z"/>
+    <path d="M62 32 L50 30 L50 34 Z"/>
+    <path d="M11 11 L20 18 L18 20 Z"/>
+    <path d="M53 53 L46 44 L44 46 Z"/>
+    <path d="M53 11 L46 20 L44 18 Z"/>
+    <path d="M11 53 L18 44 L20 46 Z"/>
+  </g>
+  <circle cx="32" cy="32" r="16" fill="url(#sun)"/>
+  <circle cx="32" cy="28" r="3" fill="#fbf6e8"/>
+  <path d="M32 32c-3 0-5 2-5 5v2l-3 5h2l2-4h8l2 4h2l-3-5v-2c0-3-2-5-5-5z" fill="#fbf6e8"/>
 </svg>
