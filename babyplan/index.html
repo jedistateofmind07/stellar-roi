@@ -252,6 +252,7 @@
   footer .wrap{display:flex;flex-direction:column;gap:.5rem;}
   footer b{color:#fff;}
   .src{font-size:.72rem;color:var(--ink-faint);}
+  .askbtn{background:var(--plum);}
   .u-files{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem;}
   .u-files img{max-width:150px;max-height:150px;border-radius:8px;border:1px solid var(--line);display:block;}
   .u-doc{font-size:.85rem;align-self:center;}
@@ -968,7 +969,8 @@
             <span class="es">Adjuntar foto / archivo</span><span class="en">Attach photo / file</span>
             <input type="file" id="ai-file" accept="image/*,.pdf" multiple hidden>
           </label>
-          <button class="sendbtn" id="ai-send"><span class="es">Enviar</span><span class="en">Send</span></button>
+          <button class="sendbtn" id="ai-send"><span class="es">Guardar</span><span class="en">Save</span></button>
+          <button class="sendbtn askbtn" id="ai-ask"><span class="es">Preguntar a Claude</span><span class="en">Ask Claude</span></button>
         </div>
         <div class="ai-status" id="ai-status"></div>
       </div>
@@ -1025,6 +1027,9 @@
     ph_text:{es:"Escribe aquí lo que quieras agregar… (por ejemplo: “Mi resultado dice Factor V Leiden heterocigoto” o adjunta la foto del laboratorio)",en:"Write anything you want to add… (e.g. “My result says Factor V Leiden heterozygous” or attach a photo of the lab)"},
     ph_code:{es:"Código",en:"Passcode"},
     sending:{es:"Guardando…",en:"Saving…"},
+    asking:{es:"Consultando al asistente…",en:"Asking the assistant…"},
+    ask_need:{es:"Escribe tu pregunta primero.",en:"Write your question first."},
+    ask_ok:{es:"Respuesta agregada abajo.",en:"Answer added below."},
     need_text:{es:"Escribe una nota o adjunta un archivo primero.",en:"Write a note or attach a file first."},
     need_code:{es:"Ingresa el código para enviar.",en:"Enter the passcode to send."},
     ok:{es:"¡Listo! Se agregó abajo.",en:"Done! Added below."},
@@ -1176,6 +1181,26 @@
         status.textContent=(e&&e.message==='auth')?t('err'):t('err_net');
       })
       .finally(function(){sendBtn.disabled=false;});
+    });
+
+    var askBtn=document.getElementById('ai-ask');
+    askBtn.addEventListener('click',function(){
+      var text=textEl.value.trim();
+      if(!text){status.textContent=t('ask_need');return;}
+      askBtn.disabled=true; sendBtn.disabled=true; status.textContent=t('asking');
+      fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({question:text,files:files,lang:curLang()})})
+      .then(function(r){
+        if(!r.ok){throw new Error('http');}
+        return r.json();
+      })
+      .then(function(d){
+        status.textContent=t('ask_ok');
+        textEl.value=''; files=[]; renderThumbs();
+        if(d&&d.updates)renderAll(d.updates);
+      })
+      .catch(function(){status.textContent=t('err_net');})
+      .finally(function(){askBtn.disabled=false; sendBtn.disabled=false;});
     });
 
     // load prior notes
