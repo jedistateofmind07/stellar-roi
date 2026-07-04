@@ -5,7 +5,7 @@ const { put } = require('@vercel/blob');
 const { readUpdates, DEFAULT_PATH } = require('./state.js');
 const { storeFiles } = require('./add-info.js');
 
-const MAX_REQUEST_FILES = 4;
+const MAX_REQUEST_FILES = 10;
 const MAX_STORED_FILES = 4;
 const MAX_HISTORY = 15;
 const DATA_URL_RE = /^data:(image\/(?:jpeg|png|gif|webp)|application\/pdf);base64,[A-Za-z0-9+/=]+$/;
@@ -116,7 +116,7 @@ module.exports = async (req, res) => {
     }
     const reqFiles = (Array.isArray(body.files) ? body.files : [])
       .slice(0, MAX_REQUEST_FILES)
-      .filter(validFile);
+      .filter(usableAttachment);
 
     const { updates, pathname } = await readUpdates();
 

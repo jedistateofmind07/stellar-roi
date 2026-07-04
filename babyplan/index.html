@@ -1030,7 +1030,9 @@
     asking:{es:"Consultando al asistente…",en:"Asking the assistant…"},
     ask_need:{es:"Escribe tu pregunta primero.",en:"Write your question first."},
     ask_ok:{es:"Respuesta agregada abajo.",en:"Answer added below."},
-    err_big:{es:"Archivo(s) demasiado grandes. Envía menos fotos a la vez, o toma fotos de las páginas del PDF (máx ~3MB por archivo).",en:"File(s) too large. Send fewer photos at a time, or photograph the PDF pages (max ~3MB per file)."},
+    err_big:{es:"Archivo demasiado grande (máx 25MB).",en:"File too large (max 25MB)."},
+    uploading:{es:"Subiendo archivo(s)…",en:"Uploading file(s)…"},
+    upload_err:{es:"No se pudo subir un archivo. Inténtalo de nuevo.",en:"A file failed to upload. Please try again."},
     need_text:{es:"Escribe una nota o adjunta un archivo primero.",en:"Write a note or attach a file first."},
     need_code:{es:"Ingresa el código para enviar.",en:"Enter the passcode to send."},
     ok:{es:"¡Listo! Se agregó abajo.",en:"Done! Added below."},
@@ -1083,7 +1085,9 @@
 
   // ---- add info ----
   (function(){
-    var files=[]; // {name, type, dataUrl}
+    var files=[]; // {name, type, url} (direct upload) or {name, type, dataUrl} (fallback)
+    var blobUpload=null;
+    try{import('https://esm.sh/@vercel/blob@1/client').then(function(m){blobUpload=m.upload;}).catch(function(){});}catch(e){}
     var textEl=document.getElementById('ai-text');
     var fileEl=document.getElementById('ai-file');
     var thumbs=document.getElementById('ai-thumbs');
@@ -1091,13 +1095,11 @@
     var sendBtn=document.getElementById('ai-send');
     var updatesEl=document.getElementById('ai-updates');
 
-        function downscale(file){
+        function processFile(file){
       return new Promise(function(resolve){
         if(!/^image\//.test(file.type)){
-          if(file.size>3145728){resolve({name:file.name,tooBig:true});return;}
-          var r=new FileReader();
-          r.onload=function(){resolve({name:file.name,type:file.type,dataUrl:r.result});};
-          r.readAsDataURL(file); return;
+          resolve({name:file.name,type:file.type||'application/pdf',blob:file});
+          return;
         }
         var img=new Image(); var url=URL.createObjectURL(file);
         img.onload=function(){
@@ -1106,17 +1108,25 @@
           var c=document.createElement('canvas');c.width=w;c.height=h;
           c.getContext('2d').drawImage(img,0,0,w,h);
           URL.revokeObjectURL(url);
-          resolve({name:file.name,type:'image/jpeg',dataUrl:c.toDataURL('image/jpeg',0.75)});
+          c.toBlob(function(b){resolve(b?{name:file.name,type:'image/jpeg',blob:b}:null);},'image/jpeg',0.78);
         };
         img.onerror=function(){URL.revokeObjectURL(url);resolve(null);};
         img.src=url;
+      });
+    }
+    function readAsDataUrl(item){
+      return new Promise(function(resolve){
+        if(item.blob.size>3145728){resolve({name:item.name,tooBig:true});return;}
+        var r=new FileReader();
+        r.onload=function(){resolve({name:item.name,type:item.type,dataUrl:r.result});};
+        r.readAsDataURL(item.blob);
       });
     }
     function renderThumbs(){
       thumbs.innerHTML='';
       files.forEach(function(f,i){
         var d=document.createElement('div');d.className='thumb'+(/^image\//.test(f.type)?'':' file');
-        if(/^image\//.test(f.type)){d.innerHTML='<img src="'+f.dataUrl+'" alt="">';}
+        if(/^image\//.test(f.type)){d.innerHTML='<img src="'+(f.dataUrl||f.url)+'" alt="">';}
         else{d.textContent=f.name.slice(0,10);}
         var b=document.createElement('button');b.className='rm';b.textContent='×';
         b.onclick=function(){files.splice(i,1);renderThumbs();};
@@ -1125,14 +1135,31 @@
     }
     fileEl.addEventListener('change',function(){
       var list=[].slice.call(fileEl.files);
-      Promise.all(list.map(downscale)).then(function(res){
-        var big=false;
-        res.forEach(function(r){
-          if(r&&r.tooBig){big=true;return;}
-          if(r&&files.length<6)files.push(r);
+      fileEl.value='';
+      if(!list.length)return;
+      status.textContent=t('uploading');
+      Promise.all(list.map(processFile)).then(function(items){
+        items=items.filter(Boolean);
+        var chain=Promise.resolve(); var big=false, failed=false;
+        items.forEach(function(item){
+          chain=chain.then(function(){
+            if(files.length>=10)return;
+            if(item.blob.size>26214400){big=true;return;}
+            if(blobUpload){
+              return blobUpload(item.name,item.blob,{access:'public',handleUploadUrl:'/api/upload',contentType:item.type})
+                .then(function(res){files.push({name:item.name,type:item.type,url:res.url});renderThumbs();})
+                .catch(function(){failed=true;});
+            }
+            return readAsDataUrl(item).then(function(r){
+              if(r&&r.tooBig){big=true;return;}
+              if(r){files.push(r);renderThumbs();}
+            });
+          });
         });
-        renderThumbs(); fileEl.value='';
-        status.textContent=big?t('err_big'):'';
+        chain.then(function(){
+          renderThumbs();
+          status.textContent=big?t('err_big'):(failed?t('upload_err'):'');
+        });
       });
     });
 

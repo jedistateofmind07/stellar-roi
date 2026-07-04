@@ -1,8 +1,16 @@
 const { put } = require('@vercel/blob');
 const { readUpdates, DEFAULT_PATH } = require('./state.js');
 
-const MAX_FILES = 6;
+const MAX_FILES = 10;
 const DATA_URL_RE = /^data:(image\/(?:jpeg|png|gif|webp)|application\/pdf);base64,[A-Za-z0-9+/=]+$/;
+const BLOB_URL_RE = /^https:\/\/[a-z0-9-]+\.public\.blob\.vercel-storage\.com\//;
+const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'application/pdf'];
+
+function acceptedFile(f) {
+  if (!f) return false;
+  if (typeof f.dataUrl === 'string' && DATA_URL_RE.test(f.dataUrl)) return true;
+  return typeof f.url === 'string' && BLOB_URL_RE.test(f.url) && ALLOWED_TYPES.includes(f.type);
+}
 
 function extFor(type) {
   if (type === 'application/pdf') return '.pdf';
@@ -17,8 +25,13 @@ function extFor(type) {
 async function storeFiles(rawFiles) {
   const stored = [];
   for (const f of rawFiles) {
-    const type = f.dataUrl.slice(5, f.dataUrl.indexOf(';'));
     const name = typeof f.name === 'string' ? f.name.slice(0, 120) : '';
+    if (typeof f.url === 'string') {
+      // Already uploaded directly from the browser to Blob.
+      stored.push({ name, type: f.type, url: f.url });
+      continue;
+    }
+    const type = f.dataUrl.slice(5, f.dataUrl.indexOf(';'));
     if (!process.env.BLOB_READ_WRITE_TOKEN) {
       stored.push({ name, type, dataUrl: f.dataUrl });
       continue;
@@ -45,7 +58,7 @@ module.exports = async (req, res) => {
     const text = typeof body.text === 'string' ? body.text.trim() : '';
     const rawFiles = (Array.isArray(body.files) ? body.files : [])
       .slice(0, MAX_FILES)
-      .filter(f => f && typeof f.dataUrl === 'string' && DATA_URL_RE.test(f.dataUrl));
+      .filter(acceptedFile);
     if (!text && rawFiles.length === 0) {
       res.status(400).json({ error: 'empty' });
       return;
