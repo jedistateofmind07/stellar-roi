@@ -2,7 +2,6 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { put } = require('@vercel/blob');
-const { query } = require('@anthropic-ai/claude-agent-sdk');
 const { readUpdates, DEFAULT_PATH } = require('./state.js');
 const { storeFiles } = require('./add-info.js');
 
@@ -69,6 +68,9 @@ async function askClaude(question, attachments, history) {
       : '',
     'Question: ' + question
   ].filter(Boolean).join('\n\n');
+
+  // The Agent SDK is ESM-only — load it with a dynamic import from CommonJS.
+  const { query } = await import('@anthropic-ai/claude-agent-sdk');
 
   let resultText = '';
   const q = query({
