@@ -3,6 +3,6 @@
   "private": true,
   "dependencies": {
     "@vercel/blob": "latest",
-    "@anthropic-ai/sdk": "latest"
+    "@anthropic-ai/claude-agent-sdk": "latest"
   }
 }

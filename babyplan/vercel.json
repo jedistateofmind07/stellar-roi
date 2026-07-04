@@ -1,5 +1,8 @@
 {
   "functions": {
-    "api/ask.js": { "maxDuration": 60 }
+    "api/ask.js": {
+      "maxDuration": 180,
+      "includeFiles": "node_modules/@anthropic-ai/claude-agent-sdk/**"
+    }
   }
 }

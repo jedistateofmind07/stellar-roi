@@ -14,7 +14,7 @@ Changes vs. the original deployment:
   (thrombophilia priority, Colmédica vs Medisanitas insurance details and
   deadlines), all previously saved notes, recent saved photos/PDFs, and any
   files attached to the question. The bilingual answer is saved to the notes
-  list. This is the one feature that calls the Claude API server-side.
+  list. Runs on the Claude Max subscription via the Agent SDK — no API billing.
 
 ## Structure
 
@@ -22,8 +22,9 @@ Changes vs. the original deployment:
 - `api/state.js` — GET `/api/state`, returns saved notes `{ updates: [...] }`
 - `api/add-info.js` — POST `/api/add-info` `{ text, files[] }`; saves the note
   and attachments (no AI)
-- `api/ask.js` — POST `/api/ask` `{ question, files[], lang }`; Claude answer
-  with plan + notes + attachments as context (`claude-opus-4-8`), saved as a note
+- `api/ask.js` — POST `/api/ask` `{ question, files[], lang }`; runs headless
+  Claude Code (Agent SDK, Max-subscription auth) with plan + notes + attachments
+  as context; the bilingual answer is saved as a note
 - `api/diag.js` — GET `/api/diag?k=bp-diag-7f3k9x2m`, shows env var *names* and
   blob contents (for debugging; remove later)
 
@@ -31,9 +32,12 @@ Changes vs. the original deployment:
 
 - `BLOB_READ_WRITE_TOKEN` — auto-added when a Blob store is connected
   (Storage tab → Create/Connect Blob store). Needed for notes to persist.
-- `ANTHROPIC_API_KEY` — needed only for the "Ask Claude" button (console.anthropic.com
-  API key; pay-per-use). Saving notes works without it, and the button explains
-  it isn't configured when the key is missing.
+- `CLAUDE_CODE_OAUTH_TOKEN` — needed only for the "Ask Claude" button. Runs the
+  Claude Agent SDK on the **Claude Max subscription** (no pay-per-use API).
+  Generate once with `claude setup-token` on a machine logged into the Max
+  account, and paste the token into this env var. (`ANTHROPIC_API_KEY` also
+  works as a fallback.) Saving notes works without either; the button explains
+  itself when unconfigured.
 
 ## Deploy
 
