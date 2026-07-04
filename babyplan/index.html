@@ -1,0 +1,1178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Plan de Embarazo · Bogotá</title>
+<style>
+  :root{
+    --ground:#F4F6F2; --panel:#FFFFFF; --panel-2:#EEF2EC;
+    --ink:#1C2A25; --ink-soft:#42544C; --ink-faint:#6B7A72;
+    --line:#DCE3DA; --line-strong:#C4D0C4;
+    --teal:#2E6E62; --teal-deep:#234f47; --teal-tint:#E4EFEA;
+    --clay:#D98C6A; --clay-tint:#F7E7DD;
+    --amber:#B0791F; --amber-tint:#F6ECD6;
+    --crimson:#B23A3A; --crimson-tint:#F6E2E0;
+    --plum:#6E5079; --plum-tint:#EFE7F2;
+    --gold:#9C7A2A;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --sp:clamp(1.1rem,4vw,2rem);
+    --maxw:860px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+    font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--sp);}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;text-wrap:balance;margin:0;}
+  p{margin:0 0 .85em;}
+  a{color:var(--teal-deep);text-underline-offset:2px;}
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;
+    font-size:.7rem;font-weight:700;color:var(--teal);margin:0 0 .55rem;}
+  .tnum{font-variant-numeric:tabular-nums;}
+
+  /* language toggle visibility */
+  [data-lang="es"] .en{display:none;}
+  [data-lang="en"] .es{display:none;}
+  /* inline variants keep flow */
+  span.en,span.es{display:inline;}
+  [data-lang="es"] span.en{display:none;}
+  [data-lang="en"] span.es{display:none;}
+
+  /* language button */
+  .langbtn{position:fixed;top:.8rem;right:.8rem;z-index:50;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
+    border:1px solid var(--line-strong);border-radius:999px;
+    padding:.45rem .9rem;font-family:var(--sans);font-size:.82rem;font-weight:700;
+    color:var(--teal-deep);cursor:pointer;box-shadow:0 2px 8px rgba(28,42,37,.12);
+    display:flex;align-items:center;gap:.4rem;}
+  .langbtn:hover{background:#fff;}
+  .langbtn:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;}
+
+  /* HERO */
+  .hero{background:
+      radial-gradient(120% 90% at 82% -10%, rgba(217,140,106,.20), transparent 55%),
+      radial-gradient(120% 100% at 0% 0%, rgba(46,110,98,.16), transparent 50%),
+      var(--teal-deep);
+    color:#F3F7F3;padding:clamp(2.6rem,7vw,4.2rem) 0 clamp(2rem,6vw,3.2rem);}
+  .hero .eyebrow{color:#B9E0D2;}
+  .hero h1{font-size:clamp(2.05rem,6.2vw,3.4rem);color:#FCFEFB;letter-spacing:-.01em;}
+  .hero .lede{font-size:clamp(1.02rem,2.5vw,1.2rem);color:#D6E7DF;max-width:58ch;margin-top:.9rem;}
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem;}
+  .chip{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.22);color:#EAF3EE;border-radius:999px;
+    padding:.34rem .7rem;font-size:.8rem;font-weight:600;}
+  .chip b{color:#fff;font-weight:700;}
+
+  nav.jump{position:sticky;top:0;z-index:20;background:rgba(244,246,242,.92);
+    backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  nav.jump .wrap{display:flex;gap:.15rem;overflow-x:auto;padding-top:.5rem;padding-bottom:.5rem;scrollbar-width:thin;}
+  nav.jump a{white-space:nowrap;font-size:.82rem;font-weight:650;color:var(--ink-soft);
+    text-decoration:none;padding:.4rem .7rem;border-radius:8px;}
+  nav.jump a:hover{background:var(--teal-tint);color:var(--teal-deep);}
+
+  section{padding:clamp(2.2rem,6vw,3.4rem) 0;border-bottom:1px solid var(--line);}
+  section:last-of-type{border-bottom:none;}
+  .sec-head{margin-bottom:1.4rem;}
+  .sec-head h2{font-size:clamp(1.5rem,4vw,2.05rem);}
+  .sec-head p.intro{color:var(--ink-soft);max-width:66ch;margin-top:.5rem;}
+
+  .disclaimer{background:var(--amber-tint);border:1px solid #E6D3A6;border-radius:12px;
+    padding:.85rem 1.05rem;font-size:.9rem;color:#5f4a17;display:flex;gap:.65rem;align-items:flex-start;}
+  .disclaimer svg{flex:0 0 auto;margin-top:2px;}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:1.15rem 1.25rem;box-shadow:0 1px 2px rgba(28,42,37,.04);}
+  .grid{display:grid;gap:1rem;}
+  @media(min-width:640px){.grid.two{grid-template-columns:1fr 1fr;}}
+
+  /* priority (thrombophilia) */
+  .priority{background:linear-gradient(180deg,var(--plum-tint),var(--panel));
+    border:1px solid #DCC8E4;border-radius:16px;padding:1.4rem 1.4rem;}
+  .priority .badge{display:inline-flex;align-items:center;gap:.45rem;background:var(--plum);
+    color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.03em;border-radius:999px;
+    padding:.35rem .8rem;text-transform:uppercase;}
+  .priority h3{font-size:1.3rem;margin:.85rem 0 .5rem;}
+  .keybox{background:#fff;border:1px solid #DCC8E4;border-radius:12px;padding:1rem 1.1rem;margin-top:1rem;}
+  .keybox .eyebrow{color:var(--plum);}
+  .qlist{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.55rem;}
+  .qlist li{display:flex;gap:.6rem;align-items:flex-start;font-size:.93rem;}
+  .qlist li::before{content:"?";flex:0 0 auto;width:1.4rem;height:1.4rem;border-radius:50%;
+    background:var(--plum-tint);color:var(--plum);display:grid;place-items:center;font-weight:800;font-size:.82rem;margin-top:1px;}
+  .reassure{background:var(--teal-tint);border-radius:12px;padding:.85rem 1.05rem;margin-top:1rem;
+    font-size:.93rem;color:var(--teal-deep);display:flex;gap:.6rem;align-items:flex-start;}
+
+  /* verdict */
+  .verdict{background:linear-gradient(180deg,var(--teal-tint),var(--panel));
+    border:1px solid var(--line-strong);border-radius:16px;padding:1.4rem 1.4rem;}
+  .verdict .badge{display:inline-flex;align-items:center;gap:.45rem;background:var(--teal);
+    color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.03em;border-radius:999px;
+    padding:.35rem .8rem;text-transform:uppercase;}
+  .verdict h3{font-size:1.3rem;margin:.85rem 0 .5rem;}
+  .rows{display:grid;gap:.6rem;margin-top:1rem;}
+  .row{display:flex;gap:.7rem;align-items:flex-start;font-size:.94rem;}
+  .row .k{flex:0 0 auto;width:1.4rem;height:1.4rem;border-radius:50%;background:var(--teal-tint);
+    color:var(--teal-deep);display:grid;place-items:center;font-weight:800;font-size:.8rem;margin-top:1px;}
+
+  table{width:100%;border-collapse:collapse;font-size:.88rem;}
+  .tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin-top:1rem;}
+  th,td{text-align:left;padding:.6rem .75rem;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:var(--panel-2);font-family:var(--sans);font-weight:700;font-size:.75rem;
+    text-transform:uppercase;letter-spacing:.05em;color:var(--ink-soft);white-space:nowrap;}
+  tr:last-child td{border-bottom:none;}
+  td b{color:var(--ink);}
+
+  .urgent-band{display:grid;gap:1rem;}
+  @media(min-width:640px){.urgent-band{grid-template-columns:1fr 1fr;}}
+  .urgent{border-left:4px solid var(--clay);background:var(--clay-tint);border-radius:0 12px 12px 0;padding:1.05rem 1.15rem;}
+  .urgent .tag{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#9c5a38;}
+  .urgent h3{font-size:1.05rem;margin:.35rem 0 .45rem;}
+  .urgent p{font-size:.9rem;margin-bottom:.4rem;color:#4a3a30;}
+  .urgent .when{font-size:.8rem;font-weight:700;color:#8a4f30;}
+
+  .tabs{display:flex;gap:.4rem;background:var(--panel-2);padding:.32rem;border-radius:12px;border:1px solid var(--line);flex-wrap:wrap;}
+  .tabs button{flex:1 1 auto;min-width:150px;font-family:var(--sans);font-size:.86rem;font-weight:700;
+    color:var(--ink-soft);background:transparent;border:0;border-radius:9px;padding:.6rem .5rem;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:.1rem;}
+  .tabs button .wk{font-size:.72rem;font-weight:600;color:var(--ink-faint);}
+  .tabs button[aria-selected="true"]{background:var(--teal);color:#fff;box-shadow:0 1px 3px rgba(35,79,71,.3);}
+  .tabs button[aria-selected="true"] .wk{color:#cfe6dd;}
+  .tabs button:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;}
+  .tpanel{margin-top:1.4rem;}
+  .tpanel[hidden]{display:none;}
+  .tri-intro{background:var(--teal-tint);border-radius:12px;padding:.9rem 1.1rem;font-size:.92rem;color:var(--teal-deep);margin-bottom:1.3rem;}
+
+  .milestone{display:grid;grid-template-columns:auto 1fr;gap:1rem;padding:1.05rem 0;border-top:1px solid var(--line);}
+  .milestone:first-of-type{border-top:none;}
+  .week-badge{flex:0 0 auto;background:var(--panel);border:1.5px solid var(--teal);color:var(--teal-deep);
+    border-radius:11px;min-width:76px;height:fit-content;padding:.5rem .3rem;text-align:center;font-weight:800;line-height:1.05;}
+  .week-badge small{display:block;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);}
+  .week-badge .n{font-size:1.1rem;font-variant-numeric:tabular-nums;}
+  .m-body h4{font-family:var(--serif);font-size:1.1rem;font-weight:600;margin:.05rem 0 .5rem;}
+  .m-list{list-style:none;margin:0;padding:0;display:grid;gap:.5rem;}
+  .m-list li{display:flex;gap:.55rem;font-size:.92rem;align-items:flex-start;}
+  .m-list li::before{content:"";flex:0 0 auto;width:.5rem;height:.5rem;border-radius:50%;background:var(--teal);margin-top:.5rem;}
+  .m-list li.dev::before{background:var(--clay);}
+  .m-list li.admin::before{background:var(--gold);}
+  .m-list li.risk::before{background:var(--plum);}
+  .pill{display:inline-block;font-size:.64rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;
+    padding:.12rem .45rem;border-radius:6px;margin-left:.3rem;vertical-align:middle;}
+  .pill.ama{background:var(--crimson-tint);color:#8f2d2d;}
+  .pill.dev{background:var(--clay-tint);color:#9c5a38;}
+  .pill.admin{background:var(--amber-tint);color:#7d5a12;}
+  .pill.risk{background:var(--plum-tint);color:#5b3d68;}
+  .legend{display:flex;flex-wrap:wrap;gap:1rem;font-size:.78rem;color:var(--ink-soft);margin-top:1.3rem;padding-top:1rem;border-top:1px dashed var(--line-strong);}
+  .legend span{display:inline-flex;align-items:center;gap:.4rem;}
+  .dot{width:.6rem;height:.6rem;border-radius:50%;display:inline-block;}
+
+  .supp-note{font-size:.82rem;color:var(--ink-faint);margin-top:.5rem;}
+  .avoid{background:var(--crimson-tint);border:1px solid #E7C4C1;border-radius:12px;padding:1rem 1.15rem;margin-top:1rem;}
+  .avoid h4{font-family:var(--sans);font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:#8f2d2d;font-weight:800;margin:0 0 .5rem;}
+  .avoid ul{margin:0;padding-left:1.1rem;font-size:.9rem;color:#5c3230;}
+
+  .diet-cols{display:grid;gap:1rem;}
+  @media(min-width:720px){.diet-cols{grid-template-columns:repeat(3,1fr);}}
+  .diet-col{border-radius:12px;padding:1rem 1.1rem;border:1px solid var(--line);}
+  .diet-col.eat{background:var(--teal-tint);border-color:#BFDBCF;}
+  .diet-col.limit{background:var(--amber-tint);border-color:#E6D3A6;}
+  .diet-col.avoid-c{background:var(--crimson-tint);border-color:#E7C4C1;}
+  .diet-col h4{font-family:var(--sans);font-size:.82rem;text-transform:uppercase;letter-spacing:.05em;font-weight:800;margin:0 0 .6rem;}
+  .diet-col.eat h4{color:var(--teal-deep);}
+  .diet-col.limit h4{color:#7d5a12;}
+  .diet-col.avoid-c h4{color:#8f2d2d;}
+  .diet-col ul{margin:0;padding-left:1.05rem;font-size:.88rem;line-height:1.5;}
+  .diet-col li{margin-bottom:.3rem;}
+  .co-tag{font-size:.72rem;color:var(--ink-faint);font-style:italic;}
+
+  .ex-week{display:grid;gap:.8rem;}
+  @media(min-width:640px){.ex-week{grid-template-columns:repeat(3,1fr);}}
+  .ex-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.95rem 1rem;}
+  .ex-card .t{font-weight:800;font-size:.74rem;text-transform:uppercase;letter-spacing:.06em;color:var(--teal);margin-bottom:.5rem;}
+  .ex-card ul{margin:0;padding-left:1rem;font-size:.87rem;}
+  .ex-card li{margin-bottom:.28rem;}
+
+  .emergency{background:#fff;border:2px solid var(--crimson);border-radius:16px;overflow:hidden;}
+  .emergency .top{background:var(--crimson);color:#fff;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.6rem;}
+  .emergency .top h3{color:#fff;font-size:1.15rem;}
+  .emergency .body{padding:1.1rem 1.3rem;}
+  .emergency ul{margin:0;padding-left:1.15rem;columns:2;column-gap:1.6rem;font-size:.92rem;}
+  @media(max-width:560px){.emergency ul{columns:1;}}
+  .emergency li{margin-bottom:.4rem;break-inside:avoid;}
+  .emergency .foot{margin-top:.9rem;font-size:.9rem;background:var(--crimson-tint);border-radius:10px;padding:.7rem .9rem;color:#7c2727;}
+
+  .phase{margin-bottom:1.5rem;}
+  .phase h3{font-size:1.1rem;margin-bottom:.2rem;}
+  .phase .sub{font-size:.8rem;color:var(--ink-faint);margin-bottom:.7rem;}
+  .check{display:flex;gap:.7rem;align-items:flex-start;padding:.5rem .7rem;border-radius:10px;cursor:pointer;user-select:none;}
+  .check:hover{background:var(--panel-2);}
+  .check input{flex:0 0 auto;width:1.2rem;height:1.2rem;margin-top:.15rem;accent-color:var(--teal);cursor:pointer;}
+  .check span{font-size:.93rem;}
+  .check input:checked ~ .lbl{color:var(--ink-faint);text-decoration:line-through;}
+  .progress{font-size:.8rem;color:var(--teal-deep);font-weight:700;margin-left:.3rem;}
+
+  /* ADD INFO */
+  .addinfo{background:linear-gradient(180deg,#eef4f0,var(--panel));border:1px solid var(--line-strong);border-radius:16px;padding:1.3rem 1.4rem;}
+  .addinfo textarea{width:100%;min-height:96px;border:1px solid var(--line-strong);border-radius:10px;padding:.7rem .8rem;font-family:var(--sans);font-size:.95rem;resize:vertical;background:#fff;color:var(--ink);}
+  .addinfo textarea:focus{outline:2px solid var(--teal);outline-offset:1px;}
+  .ai-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.7rem;}
+  .filebtn{display:inline-flex;align-items:center;gap:.4rem;background:#fff;border:1px solid var(--line-strong);border-radius:9px;padding:.5rem .8rem;font-size:.85rem;font-weight:650;cursor:pointer;color:var(--ink-soft);}
+  .filebtn:hover{background:var(--panel-2);}
+  .sendbtn{background:var(--teal);color:#fff;border:0;border-radius:9px;padding:.55rem 1.1rem;font-size:.9rem;font-weight:700;cursor:pointer;}
+  .sendbtn:hover{background:var(--teal-deep);}
+  .sendbtn:disabled{opacity:.55;cursor:default;}
+  .code-in{border:1px solid var(--line-strong);border-radius:9px;padding:.5rem .7rem;font-size:.9rem;background:#fff;color:var(--ink);max-width:180px;}
+  .thumbs{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem;}
+  .thumb{position:relative;width:56px;height:56px;border-radius:8px;overflow:hidden;border:1px solid var(--line-strong);background:var(--panel-2);}
+  .thumb img{width:100%;height:100%;object-fit:cover;}
+  .thumb .rm{position:absolute;top:0;right:0;background:rgba(0,0,0,.55);color:#fff;border:0;width:18px;height:18px;font-size:.7rem;cursor:pointer;line-height:1;}
+  .thumb.file{display:grid;place-items:center;font-size:.6rem;color:var(--ink-soft);text-align:center;padding:2px;}
+  .ai-status{font-size:.85rem;margin-top:.7rem;min-height:1.2em;color:var(--ink-soft);}
+  .updates{margin-top:1.3rem;display:grid;gap:.9rem;}
+  .update{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:0 12px 12px 0;padding:.9rem 1.1rem;}
+  .update.urgent-u{border-left-color:var(--crimson);background:var(--crimson-tint);}
+  .update .u-time{font-size:.72rem;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.05em;}
+  .update h4{font-family:var(--serif);font-size:1.05rem;margin:.2rem 0 .4rem;}
+  .update .u-you{font-size:.85rem;color:var(--ink-soft);background:var(--panel-2);border-radius:8px;padding:.5rem .7rem;margin-bottom:.5rem;font-style:italic;}
+  .update p{font-size:.93rem;margin-bottom:.4rem;}
+
+  .robbie{background:linear-gradient(180deg,#f0f4ee,var(--panel));border:1px solid var(--line-strong);border-radius:16px;padding:1.3rem 1.4rem;}
+  .money{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;align-items:baseline;margin:.8rem 0;font-variant-numeric:tabular-nums;}
+  .money .big{font-family:var(--serif);font-size:2rem;color:var(--teal-deep);font-weight:700;}
+  .money .arrow{color:var(--clay);font-size:1.3rem;}
+
+  details.sources{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.4rem 1rem;}
+  details.sources summary{cursor:pointer;font-weight:700;padding:.6rem 0;font-size:.92rem;}
+  details.sources ul{font-size:.82rem;color:var(--ink-soft);line-height:1.5;padding-left:1.1rem;}
+  details.sources li{margin-bottom:.35rem;}
+
+  footer{background:var(--teal-deep);color:#cfe1d9;padding:2rem 0;font-size:.85rem;}
+  footer .wrap{display:flex;flex-direction:column;gap:.5rem;}
+  footer b{color:#fff;}
+  .src{font-size:.72rem;color:var(--ink-faint);}
+</style>
+</head>
+<body data-lang="es">
+
+<button class="langbtn" id="langbtn" aria-label="Switch language">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+  <span class="es">English</span><span class="en">Español</span>
+</button>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow"><span class="es">Una guía de embarazo · Bogotá 2026–2027</span><span class="en">A pregnancy companion · Bogotá 2026–2027</span></p>
+    <h1><span class="es">Nueve meses, un solo plan.</span><span class="en">Nine months, one plan.</span></h1>
+    <p class="lede">
+      <span class="es">Todo investigado en un solo lugar — la clínica de al lado, un plan semana a semana, las vitaminas, la comida, el ejercicio, y lo más importante para tu caso: la trombofilia y tu historia. Hecho para ustedes dos y su bebé.</span>
+      <span class="en">Everything researched in one place — the hospital next door, a week-by-week plan, the vitamins, the food, the movement, and — most important for you — your thrombophilia and history. Built for the two of you and your baby.</span>
+    </p>
+    <div class="chips">
+      <span class="chip">🗓️ <span class="es">Fecha ~feb–mar 2027</span><span class="en">Due ~Feb–Mar 2027</span></span>
+      <span class="chip">🏥 <b>Clínica La Colina</b></span>
+      <span class="chip">👶 <span class="es">Primer bebé</span><span class="en">First baby</span></span>
+      <span class="chip">🩺 <span class="es">Embarazo de alto riesgo — bien cuidado</span><span class="en">High-risk — well cared for</span></span>
+    </div>
+  </div>
+</header>
+
+<nav class="jump" aria-label="Navigation">
+  <div class="wrap">
+    <a href="#priority"><span class="es">Prioridad</span><span class="en">Priority</span></a>
+    <a href="#hospital"><span class="es">Hospital</span><span class="en">Hospital</span></a>
+    <a href="#now"><span class="es">Ahora</span><span class="en">Do now</span></a>
+    <a href="#insurance"><span class="es">Seguro</span><span class="en">Insurance</span></a>
+    <a href="#timeline"><span class="es">Semana a semana</span><span class="en">Week by week</span></a>
+    <a href="#supplements"><span class="es">Vitaminas</span><span class="en">Vitamins</span></a>
+    <a href="#diet"><span class="es">Dieta</span><span class="en">Diet</span></a>
+    <a href="#exercise"><span class="es">Ejercicio</span><span class="en">Exercise</span></a>
+    <a href="#emergency"><span class="es">Señales de alarma</span><span class="en">Warning signs</span></a>
+    <a href="#logistics"><span class="es">Lista</span><span class="en">Checklist</span></a>
+    <a href="#addinfo"><span class="es">Agregar info</span><span class="en">Add info</span></a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section style="border-bottom:none;padding-bottom:0;">
+    <div class="disclaimer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a6d1f" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><circle cx="12" cy="16.5" r="0.4" fill="#8a6d1f" stroke="#8a6d1f"/></svg>
+      <div>
+        <span class="es">Esto es investigación bien documentada para <b>llevar a tu ginecólogo/a y especialista</b> y decidir juntos — no es un diagnóstico ni reemplaza a tu médico. Donde las guías médicas difieren, lo decimos. Las dosis, medicamentos y vacunas las define tu médico.</span>
+        <span class="en">This is well-sourced research to <b>bring to your OB and specialist</b> and decide together — not a diagnosis or a replacement for your doctor. Where guidelines disagree, we say so. Doses, medications and vaccines are your doctor's call.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRIORITY: THROMBOPHILIA -->
+  <section id="priority">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Lo más importante primero</span><span class="en">First things first</span></p>
+      <h2><span class="es">Tu trombofilia y tu historia</span><span class="en">Your thrombophilia &amp; history</span></h2>
+      <p class="intro">
+        <span class="es">Una trombofilia genética junto con dos pérdidas te da todo el derecho a ser cuidada de cerca — y la buena noticia es que, con el manejo correcto, el pronóstico es muy bueno.</span>
+        <span class="en">A genetic thrombophilia together with two losses is every reason to be closely cared for — and the good news is that, with the right management, the outlook is very good.</span>
+      </p>
+    </div>
+
+    <div class="priority">
+      <span class="badge">◆ <span class="es">Máxima prioridad</span><span class="en">Top priority</span></span>
+      <h3>
+        <span class="es">Un solo dato cambia todo el plan: saber exactamente qué trombofilia tienes.</span>
+        <span class="en">One fact drives the whole plan: knowing exactly which thrombophilia you have.</span>
+      </h3>
+      <p>
+        <span class="es">“Trombofilia” es un término amplio. Hay dos escenarios muy distintos, y el tratamiento correcto depende de cuál sea el tuyo:</span>
+        <span class="en">“Thrombophilia” is a broad term. There are two very different scenarios, and the right treatment depends on which one is yours:</span>
+      </p>
+      <div class="rows">
+        <div class="row"><span class="k">A</span><div>
+          <span class="es"><b>Síndrome antifosfolípido (SAF)</b> — es autoinmune (no genético, aunque a veces se agrupa con las trombofilias). Es <b>la causa tratable más importante</b> de pérdidas repetidas: aspirina + heparina mejora mucho las probabilidades de un bebé sano. Se confirma con anticuerpos (anticoagulante lúpico, anticardiolipina, anti-β2-glicoproteína I), <b>positivos en dos ocasiones separadas ≥12 semanas</b>.</span>
+          <span class="en"><b>Antiphospholipid syndrome (APS)</b> — autoimmune (not genetic, though often lumped in with thrombophilias). It's <b>the single most treatable cause</b> of recurrent loss: aspirin + heparin substantially improves the odds of a healthy baby. Confirmed by antibodies (lupus anticoagulant, anticardiolipin, anti-β2-glycoprotein I), <b>positive on two occasions ≥12 weeks apart</b>.</span>
+        </div></div>
+        <div class="row"><span class="k">B</span><div>
+          <span class="es"><b>Trombofilia hereditaria</b> (Factor V Leiden, protrombina G20210A, deficiencia de proteína C/S o antitrombina) — es genética. Aquí lo honesto es esto: los estudios recientes (ensayo <b>ALIFE2, 2023</b>) muestran que la heparina <b>NO mejora</b> la tasa de bebés vivos cuando la causa es una trombofilia hereditaria (sin SAF). En estos casos la heparina se usa para <b>prevenir un coágulo en la mamá</b> — según el tipo y tus antecedentes — no como “tratamiento para no perder el embarazo”.</span>
+          <span class="en"><b>Inherited thrombophilia</b> (Factor V Leiden, prothrombin G20210A, protein C/S or antithrombin deficiency) — genetic. Here's the honest part: recent trials (<b>ALIFE2, 2023</b>) show heparin does <b>NOT</b> improve live-birth rates when the cause is an inherited thrombophilia (without APS). In these cases heparin is used to <b>prevent a clot in you</b> — depending on the type and your history — not as a “treatment to prevent miscarriage.”</span>
+        </div></div>
+      </div>
+
+      <div class="keybox">
+        <p class="eyebrow"><span class="es">Preguntas para tu especialista (medicina materno-fetal + hematología)</span><span class="en">Questions for your specialist (maternal-fetal medicine + hematology)</span></p>
+        <ul class="qlist">
+          <li><span class="es"><b>¿Exactamente cuál trombofilia tengo?</b> Pide el resultado por escrito: el nombre, y si es <b>heterocigota u homocigota</b>. Eso define todo el manejo.</span><span class="en"><b>Which thrombophilia exactly?</b> Get the written result: the name, and whether it's <b>heterozygous or homozygous</b>. This alone decides the management.</span></li>
+          <li><span class="es"><b>¿Ya me descartaron o confirmaron SAF?</b> Es la prueba clave dadas tus pérdidas.</span><span class="en"><b>Has APS been ruled in or out?</b> This is the pivotal test given your losses.</span></li>
+          <li><span class="es"><b>¿El diagnóstico es solo “MTHFR”?</b> Si es así, tranquila: por sí sola, la MTHFR <b>no</b> es una trombofilia con riesgo real de coágulos, y <b>no</b> cambia la dosis de ácido fólico (ACOG/ACMG).</span><span class="en"><b>Is the diagnosis only “MTHFR”?</b> If so, that's reassuring: on its own, MTHFR is <b>not</b> a clinically significant clotting risk and does <b>not</b> change your folic-acid dose (ACOG/ACMG).</span></li>
+          <li><span class="es"><b>¿Tengo antecedente personal o familiar de trombosis</b> (trombo/TVP/embolia)? Define si necesito heparina durante el embarazo.</span><span class="en"><b>Any personal or family history of clots</b> (DVT/PE)? This decides whether you need heparin during pregnancy.</span></li>
+          <li><span class="es"><b>Plan concreto:</b> dosis y semana de inicio de la aspirina; si va heparina (enoxaparina), qué dosis, cuándo, y el plan para la epidural y el posparto.</span><span class="en"><b>The concrete plan:</b> aspirin dose &amp; start week; if heparin (enoxaparin) is used, what dose, when, and the plan for the epidural and postpartum.</span></li>
+        </ul>
+      </div>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr>
+            <th><span class="es">Qué</span><span class="en">What</span></th>
+            <th><span class="es">Qué dice la evidencia</span><span class="en">What the evidence says</span></th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><b><span class="es">Aspirina dosis baja (81 mg)</span><span class="en">Low-dose aspirin (81 mg)</span></b></td>
+              <td><span class="es">Razonable desde la <b>semana 12–16</b> por tu perfil de riesgo de preeclampsia (edad + antecedentes). Es para prevenir preeclampsia, no “para no perder el bebé”. Confírmalo con tu médico.</span><span class="en">Reasonable from <b>weeks 12–16</b> for your preeclampsia risk profile (age + history). It's for preeclampsia prevention, not “to stop miscarriage.” Confirm with your doctor.</span></td>
+            </tr>
+            <tr>
+              <td><b><span class="es">Heparina (enoxaparina / Clexane)</span><span class="en">Heparin (enoxaparin / Clexane)</span></b></td>
+              <td><span class="es"><b>Si es SAF:</b> aspirina + heparina profiláctica es el estándar y funciona. <b>Si es hereditaria:</b> depende del tipo y tus antecedentes de trombosis (guía ACOG PB 197), no de las pérdidas. No la sobrevendas como tratamiento antipérdida.</span><span class="en"><b>If APS:</b> aspirin + prophylactic heparin is standard and works. <b>If inherited:</b> depends on the type and your clot history (ACOG PB 197), not on the losses. Don't oversell it as anti-miscarriage therapy.</span></td>
+            </tr>
+            <tr>
+              <td><b>Warfarina</b></td>
+              <td><span class="es"><b>Contraindicada</b> en el embarazo (daña al bebé). La heparina no cruza la placenta y es la preferida.</span><span class="en"><b>Contraindicated</b> in pregnancy (harms the baby). Heparin doesn't cross the placenta and is preferred.</span></td>
+            </tr>
+            <tr>
+              <td><b><span class="es">Posparto (6 semanas)</span><span class="en">Postpartum (6 weeks)</span></b></td>
+              <td><span class="es">Es la ventana de <b>mayor riesgo de coágulo</b> (30–60× lo normal). En tipos de alto riesgo o con antecedente de trombosis se suele dar heparina profiláctica por ~6 semanas.</span><span class="en">The <b>highest clot-risk window</b> (30–60× baseline). For high-risk types or a prior clot, prophylactic heparin for ~6 weeks is common.</span></td>
+            </tr>
+            <tr>
+              <td><b><span class="es">Vigilancia</span><span class="en">Monitoring</span></b></td>
+              <td><span class="es">Referencia a <b>materno-fetal + hematología</b> desde ya; ecografías de crecimiento seriadas, Doppler de arteria uterina, control más estricto de tensión/preeclampsia y más citas.</span><span class="en">Referral to <b>maternal-fetal medicine + hematology</b> now; serial growth scans, uterine-artery Doppler, tighter BP/preeclampsia monitoring, and more visits.</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reassure">
+        <span style="font-size:1.1rem;">💛</span>
+        <div>
+          <span class="es"><b>Que esto no te asuste.</b> Tras varias pérdidas, la probabilidad de un bebé vivo en el siguiente embarazo ronda el <b>75%</b> — y es aún mayor cuando se encuentra y se trata una causa como el SAF. La ansiedad después de una pérdida es normal y esperable; el seguimiento cercano y el apoyo emocional por sí solos mejoran los resultados. La Colina y su Centro Materno Fetal están preparados para acompañarte en esto.</span>
+          <span class="en"><b>Don't let this scare you.</b> After several losses, the chance of a live birth next pregnancy is around <b>75%</b> — and higher still when a treatable cause like APS is found and treated. Anxiety after a loss is normal and expected; close monitoring and emotional support on their own improve outcomes. La Colina and its Maternal-Fetal Center are equipped to walk this with you.</span>
+        </div>
+      </div>
+      <p class="src" style="margin-top:.9rem;"><span class="es">Fuentes: ACOG PB 197; ensayo ALIFE2 (Lancet 2023); ESHRE 2023; AAFP (SAF); RCOG GTG 37a. En Colombia la enoxaparina está disponible (Clexane ~COP 152.000/caja de 10; genérico Clenox más económico) — confirma con tu medicina prepagada la cobertura del estudio y de la heparina antes y 6 semanas después del parto.</span><span class="en">Sources: ACOG PB 197; ALIFE2 trial (Lancet 2023); ESHRE 2023; AAFP (APS); RCOG GTG 37a. In Colombia enoxaparin is available (Clexane ~COP 152,000/box of 10; generic Clenox cheaper) — confirm with your prepagada that the workup and antepartum + 6-week postpartum heparin are covered.</span></p>
+    </div>
+  </section>
+
+  <!-- HOSPITAL -->
+  <section id="hospital">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">El veredicto</span><span class="en">The verdict</span></p>
+      <h2><span class="es">¿Es la Clínica La Colina un buen lugar para tener a tu bebé?</span><span class="en">Is Clínica La Colina a good place to have your baby?</span></h2>
+      <p class="intro"><span class="es">Respuesta corta: sí — y vivir al lado es una ventaja médica real, no solo comodidad.</span><span class="en">Short answer: yes — and living next door is a genuine clinical advantage, not just convenience.</span></p>
+    </div>
+
+    <div class="verdict">
+      <span class="badge">✓ <span class="es">Recomendada</span><span class="en">Recommended</span></span>
+      <h3><span class="es">Una clínica privada de alta complejidad, con un Centro Materno Fetal y UCI neonatal — justo en tu puerta.</span><span class="en">A high-complexity private clinic with a Maternal-Fetal Center and NICU — right at your doorstep.</span></h3>
+      <p><span class="es">La Colina pertenece al grupo de la <b>Clínica del Country</b> y comparte su <b>Centro Materno Fetal y Neonatal</b> (medicina materno-fetal, genética, neonatología). Para un embarazo de alto riesgo como el tuyo, eso es exactamente el nivel de atención adecuado — y estar a dos minutos de la puerta cuando empiece el trabajo de parto vale mucho.</span><span class="en">La Colina is part of the <b>Clínica del Country</b> group and shares its <b>Maternal-Fetal &amp; Neonatal Center</b> (maternal-fetal medicine, genetics, neonatology). For a high-risk pregnancy like yours, that's exactly the right level of care — and being two minutes from the door when labor starts is worth a lot.</span></p>
+      <div class="rows">
+        <div class="row"><span class="k">✓</span><div><span class="es"><b>Certificada IAMII (2023)</b> — contacto piel con piel, lactancia temprana, alojamiento conjunto, y un plan de parto humanizado que llenas por adelantado.</span><span class="en"><b>Mother-baby-friendly certified (IAMII, 2023)</b> — skin-to-skin, early breastfeeding, rooming-in, and a humanized birth plan you fill out in advance.</span></div></div>
+        <div class="row"><span class="k">✓</span><div><span class="es"><b>UCI neonatal completa</b> que maneja prematuros extremos, con acompañamiento de los padres 24 h — importante dado el riesgo de restricción de crecimiento/prematuridad en tu caso.</span><span class="en"><b>Full neonatal ICU</b> handling extreme prematurity, with 24-h parent access — important given your growth-restriction/prematurity risk profile.</span></div></div>
+        <div class="row"><span class="k">✓</span><div><span class="es">Al llegar <b>preadmitida</b> para tu parto te saltas la congestión de urgencias (la queja más común en reseñas).</span><span class="en">Arriving <b>pre-admitted</b> for your delivery lets you skip the ER congestion (the most common review complaint).</span></div></div>
+      </div>
+
+      <div class="card" style="margin-top:1.2rem;background:var(--panel-2);border:none;">
+        <p class="eyebrow"><span class="es">Confirma por teléfono con la clínica</span><span class="en">Confirm by phone with the clinic</span></p>
+        <p style="margin-bottom:.3rem;font-size:.92rem;"><span class="es">Llama al Centro Materno Fetal (<b class="tnum">+57 601 390 5099</b>, WhatsApp <b class="tnum">333 033 4054</b>) o a la clínica (<b class="tnum">+57 601 390 5355</b>) para confirmar:</span><span class="en">Call the Maternal-Fetal Center (<b class="tnum">+57 601 390 5099</b>, WhatsApp <b class="tnum">333 033 4054</b>) or the clinic (<b class="tnum">+57 601 390 5355</b>) to confirm:</span></p>
+        <ul style="margin:.3rem 0 0;padding-left:1.1rem;font-size:.9rem;">
+          <li><span class="es">¿Manejan <b>partos con anticoagulación</b> (heparina) y cuál es el protocolo de suspensión de la heparina para poder poner la <b>epidural</b>?</span><span class="en">Do you manage <b>anticoagulated (heparin) deliveries</b>, and what's the protocol for holding heparin so an <b>epidural</b> stays possible?</span></li>
+          <li><span class="es">¿Hay <b>cobertura de materno-fetal y hematología</b> en la unidad de partos?</span><span class="en">Is there <b>maternal-fetal and hematology coverage</b> on the labor unit?</span></li>
+          <li><span class="es">¿Puede Robbie estar presente en una <b>cesárea</b>? ¿Epidural disponible 24/7?</span><span class="en">Can Robbie be present for a <b>cesarean</b>? Is the epidural available 24/7?</span></li>
+          <li><span class="es">Que tu ginecólogo/a sea <b>“adscrito”</b> — en tu red de prepagada <em>y</em> con privilegios para atender partos en La Colina.</span><span class="en">That your OB is <b>“adscrito”</b> — in your prepagada network <em>and</em> with delivery privileges at La Colina.</span></li>
+        </ul>
+      </div>
+      <p class="src" style="margin-top:.9rem;"><span class="es">Fundación Santa Fe de Bogotá (hospital #2 del país) vale como opción de escalamiento si el embarazo se complica más allá del alcance de La Colina — pero para tu caso, con buen manejo materno-fetal, La Colina es apropiada. Nota: las clínicas privadas en Bogotá tienen tasas altas de cesárea (~50%); habla temprano con tu médico sobre su criterio.</span><span class="en">Fundación Santa Fe de Bogotá (the country's #2 hospital) is worth keeping as an escalation option if the pregnancy becomes more complex — but for your case, with good maternal-fetal management, La Colina is appropriate. Note: Bogotá private clinics run high cesarean rates (~50%); talk to your OB early about their philosophy.</span></p>
+    </div>
+  </section>
+
+  <!-- DO NOW -->
+  <section id="now">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Con fecha límite · próximas semanas</span><span class="en">Time-sensitive · next few weeks</span></p>
+      <h2><span class="es">Dos cosas fáciles de olvidar — y caras si se pasan</span><span class="en">Two things easy to miss — and costly if you do</span></h2>
+    </div>
+    <div class="urgent-band">
+      <div class="urgent">
+        <div class="tag">◆ <span class="es">Verifica ya</span><span class="en">Verify now</span></div>
+        <h3><span class="es">Confirma que tu prepagada cubre <em>este</em> embarazo</span><span class="en">Confirm your prepagada covers <em>this</em> pregnancy</span></h3>
+        <p><span class="es">Los planes tienen un período de carencia de maternidad, y la regla es sobre cuándo <b>empezó</b> el embarazo respecto al contrato, no la fecha de parto. Colmédica: mes 3 del contrato; Colsanitas: mes 8. Lee la cláusula “carencia / maternidad”.</span><span class="en">Plans have a maternity waiting period, and the rule is about when the pregnancy <b>started</b> vs. your contract — not the due date. Colmédica: month 3; Colsanitas: month 8. Read the “carencia / maternidad” clause.</span></p>
+        <p class="when"><span class="es">→ Y confirma que la prepagada cubre el estudio de trombofilia y la enoxaparina (antes y 6 semanas después del parto).</span><span class="en">→ And confirm the plan covers the thrombophilia workup and enoxaparin (antepartum + 6 weeks postpartum).</span></p>
+      </div>
+      <div class="urgent">
+        <div class="tag">◆ <span class="es">Hacia el mes 5 (oct–nov 2026)</span><span class="en">By ~month 5 (Oct–Nov 2026)</span></div>
+        <h3><span class="es">Afilia al bebé “en gestación”</span><span class="en">Enroll the baby “en gestación”</span></h3>
+        <p><span class="es">Inscribe al bebé en la prepagada <b>antes de nacer</b> (Colmédica “Programa Bebé”: hasta el 5º mes). Esto elimina carencias y exclusiones por condiciones congénitas del recién nacido.</span><span class="en">Sign the baby up with your prepagada <b>before birth</b> (Colmédica “Programa Bebé”: by month 5). This erases waiting periods and congenital-condition exclusions for the newborn.</span></p>
+        <p class="when"><span class="es">→ Es lo que hace que una UCI neonatal quede cubierta sin pelear.</span><span class="en">→ This is what makes a NICU stay covered without a fight.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSURANCE -->
+  <section id="insurance">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Seguro y afiliación · con fecha límite</span><span class="en">Insurance &amp; enrollment · time-sensitive</span></p>
+      <h2><span class="es">Qué seguro contratar para La Colina</span><span class="en">Which insurance to get for La Colina</span></h2>
+      <p class="intro"><span class="es">Porque ya estás embarazada, la elección tiene una estructura específica. Esto es orientación para hablar con un asesor — no asesoría financiera. Confirma cifras y coberturas directamente con Colmédica.</span><span class="en">Because she's already pregnant, the choice has a specific structure. This is guidance to bring to an advisor — not financial advice. Confirm figures and coverage directly with Colmédica.</span></p>
+    </div>
+
+    <div class="verdict">
+      <span class="badge">✓ <span class="es">Recomendado</span><span class="en">Recommended</span></span>
+      <h3><span class="es">Colmédica — es del mismo grupo que La Colina.</span><span class="en">Colmédica — it's the same group as La Colina.</span></h3>
+      <p><span class="es">La Colina pertenece al grupo de la Clínica del Country, y <b>Colmédica es la prepagada del mismo grupo</b>. Por eso La Colina tiene en su red los planes de Colmédica (incluidos los planes <b>“Colina Integral”</b> y <b>“Rubí Integral”</b>) para atender el parto. Es el encaje más limpio para dar a luz en La Colina — más que Colsanitas, cuya red gira en torno a sus propias clínicas.</span><span class="en">La Colina belongs to the Clínica del Country group, and <b>Colmédica is that group's prepagada</b>. That's why La Colina lists Colmédica plans (including <b>“Colina Integral”</b> and <b>“Rubí Integral”</b>) as in-network for delivery. It's the cleanest fit for delivering at La Colina — more than Colsanitas, whose network centers on its own clinics.</span></p>
+    </div>
+
+    <div class="urgent" style="margin-top:1.2rem;">
+      <div class="tag">◆ <span class="es">El detalle que lo cambia todo</span><span class="en">The catch that changes everything</span></div>
+      <h3><span class="es">Un plan nuevo NO cubre este parto por sí solo</span><span class="en">A new plan alone won't cover this birth</span></h3>
+      <p><span class="es">La cobertura de maternidad solo aplica si el embarazo <b>empieza después</b> de afiliarte (la carencia). Como ya estás embarazada, un plan que compres ahora no cubre este parto con su beneficio normal. Lo que sí lo cubre es el <b>Anexo de Maternidad</b> — un pago único diseñado justo para mujeres ya embarazadas. <b>Cómpralo antes de la semana 27.</b></span><span class="en">Maternity coverage only applies if the pregnancy <b>begins after</b> you enroll (the carencia). Since she's already pregnant, a plan bought now won't cover this delivery under its normal benefit. What does cover it is the <b>Anexo de Maternidad</b> — a one-time rider made exactly for already-pregnant women. <b>Buy it before week 27.</b></span></p>
+      <p class="when"><span class="es">→ Está en ~semana 10. La fecha límite (~sem. 27) cae a fines de octubre 2026 — actúa en 1–2 meses.</span><span class="en">→ She's ~week 10. The deadline (~wk 27) lands late October 2026 — act within 1–2 months.</span></p>
+    </div>
+
+    <div style="margin-top:1.3rem;">
+      <p class="eyebrow"><span class="es">La estructura exacta que debes pedir</span><span class="en">The exact structure to ask for</span></p>
+      <div class="rows">
+        <div class="row"><span class="k">1</span><div><span class="es"><b>Plan base: Rubí Integral</b> o <b>Colina Integral</b> — su red hospitalaria incluye la Clínica La Colina con habitación individual.</span><span class="en"><b>Base plan: Rubí Integral</b> or <b>Colina Integral</b> — their hospital network includes Clínica La Colina with a private room.</span></div></div>
+        <div class="row"><span class="k">2</span><div><span class="es"><b>+ Anexo de Maternidad</b> (obligatorio en tu caso). Cubre el parto/cesárea, hospitalización, honorarios del médico, sala de partos, medicamentos, el recién nacido su primer mes y 3 ecografías. Antes de la semana 27.</span><span class="en"><b>+ Anexo de Maternidad</b> (mandatory in your case). Covers delivery/C-section, hospitalization, physician fees, delivery room, meds, the newborn's first month, and 3 ultrasounds. Before week 27.</span></div></div>
+        <div class="row"><span class="k">3</span><div><span class="es"><b>+ Bebé Colmédica</b> — inscribe al bebé antes de nacer, <b>hasta el 5º mes (~octubre 2026)</b>. Elimina exclusiones por preexistencias/congénitas del recién nacido → hace que la <b>UCI neonatal quede cubierta sin pelear</b>.</span><span class="en"><b>+ Bebé Colmédica</b> — enroll the baby before birth, <b>by month 5 (~October 2026)</b>. Removes the newborn's pre-existing/congenital exclusions → makes a <b>NICU stay covered without a fight</b>.</span></div></div>
+        <div class="row"><span class="k">4</span><div><span class="es"><b>Una EPS es obligatoria primero</b> — no puedes tener Colmédica sin estar afiliada a una EPS (la EPS hermana es Aliansalud, pero sirve cualquiera). Por ley, la EPS también cubre el parto como respaldo.</span><span class="en"><b>An EPS is mandatory first</b> — you can't hold Colmédica without an EPS (the sister EPS is Aliansalud, but any works). By law the EPS also covers the birth as a safety net.</span></div></div>
+      </div>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th><span class="es">Concepto</span><span class="en">Item</span></th><th><span class="es">Costo aproximado</span><span class="en">Approx. cost</span></th></tr></thead>
+        <tbody>
+          <tr><td><b><span class="es">Anexo de Maternidad</span><span class="en">Maternity rider (Anexo)</span></b> <span class="co-tag">(Rubí / Esmeralda)</span></td><td class="tnum">COP $8.810.445 <span class="es">(pago único)</span><span class="en">(one-time)</span></td></tr>
+          <tr><td><b><span class="es">Anexo de Maternidad</span><span class="en">Maternity rider (Anexo)</span></b> <span class="co-tag">(Zafiro)</span></td><td class="tnum">COP $10.192.455 <span class="es">(pago único)</span><span class="en">(one-time)</span></td></tr>
+          <tr><td><b><span class="es">Plan base</span><span class="en">Base plan</span></b> <span class="co-tag">(Rubí)</span></td><td class="tnum"><span class="es">desde ~COP $282.000 / mes</span><span class="en">from ~COP $282,000 / month</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="supp-note"><span class="es">Presupuesto realista: ~COP 9–11 millones por una sola vez (el anexo) más la mensualidad del plan base. Cifras 2025–26, confírmalas con el asesor.</span><span class="en">Realistic budget: ~COP 9–11M one-time (the anexo) plus the base plan's monthly premium. 2025–26 figures — confirm with the advisor.</span></p>
+
+    <div class="card" style="margin-top:1.1rem;">
+      <p class="eyebrow"><span class="es">¿Se puede hacer en línea?</span><span class="en">Can you sign up online?</span></p>
+      <p style="font-size:.93rem;margin:0;"><span class="es"><b>En parte:</b> empiezas en línea en <b>colmedica.com</b> (formulario “Me interesa” / portal), pero <b>un asesor comercial completa la afiliación</b> — no es autoservicio total. Lleva: copias de documentos, certificado de afiliación a EPS, y una declaración de salud. Es bueno que intervenga un asesor: así estructura bien el anexo para tu caso.</span><span class="en"><b>Partly:</b> you start online at <b>colmedica.com</b> (the “Me interesa” form / portal), but <b>a commercial advisor completes the affiliation</b> — not full self-checkout. Bring: ID copies, proof of EPS affiliation, and a health declaration. The advisor step is a good thing — they structure the anexo correctly for your case.</span></p>
+    </div>
+
+    <div style="margin-top:2rem;">
+      <p class="eyebrow"><span class="es">La alternativa seria: Colsanitas Plan Integral</span><span class="en">The serious alternative: Colsanitas Plan Integral</span></p>
+      <h3 style="font-size:1.25rem;margin-bottom:.6rem;"><span class="es">Colmédica vs. Colsanitas — comparación honesta</span><span class="en">Colmédica vs. Colsanitas — an honest comparison</span></h3>
+      <p style="font-size:.93rem;color:var(--ink-soft);max-width:66ch;"><span class="es">Colsanitas es la prepagada más grande del país y su Plan Integral también está en los convenios de La Colina. Ambas pueden funcionar — estas son las diferencias que importan para tu caso:</span><span class="en">Colsanitas is the country's largest prepagada and its Plan Integral is also on La Colina's convenios list. Both can work — these are the differences that matter for your case:</span></p>
+
+      <div class="tablewrap">
+        <table>
+          <thead><tr>
+            <th></th>
+            <th>Colmédica</th>
+            <th>Colsanitas Plan Integral</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><b><span class="es">Parto en La Colina</span><span class="en">Delivery at La Colina</span></b></td>
+              <td><span class="es"><b>Red propia</b> — mismo grupo empresarial que la clínica; el parto ahí es lo normal, con la mayor oferta de ginecólogos con privilegios.</span><span class="en"><b>Home network</b> — same corporate group as the clinic; delivering there is the default, with the widest choice of OBs with privileges.</span></td>
+              <td><span class="es"><b>Convenio</b> — el Plan Integral aparece en la lista de La Colina, pero su sistema gira en torno a sus propias clínicas. <b>Pide por escrito</b> que el parto (no solo consultas) esté autorizado en La Colina.</span><span class="en"><b>Convenio</b> — Plan Integral is on La Colina's list, but their system centers on their own clinics. <b>Get it in writing</b> that childbirth (not just consultations) is authorized at La Colina.</span></td>
+            </tr>
+            <tr>
+              <td><b><span class="es">Cubre este embarazo</span><span class="en">Covers this pregnancy</span></b></td>
+              <td><span class="es">Sí — Anexo de Maternidad hasta la <b>semana 27</b>, precio publicado (~COP $8,81M ≈ US$2.600), incluye Bebé Colmédica.</span><span class="en">Yes — Anexo de Maternidad until <b>week 27</b>, published price (~COP $8.81M ≈ US$2,600), includes Bebé Colmédica.</span></td>
+              <td><span class="es">Sí — contrato de maternidad antes de la <b>semana 31</b>; pero el anexo “Bebé en Gestación” (el que protege al bebé de exclusiones congénitas) solo se puede tomar <b>entre las semanas 12 y 22</b>, con valoración ginecológica y ecografía recientes. Precio: solo por cotización.</span><span class="en">Yes — maternity contract before <b>week 31</b>; but the “Bebé en Gestación” annex (the one shielding the baby from congenital exclusions) can only be taken <b>between weeks 12 and 22</b>, with a recent OB assessment and ultrasound. Price: quote only.</span></td>
+            </tr>
+            <tr>
+              <td><b><span class="es">Mensualidad (adulto)</span><span class="en">Monthly (adult)</span></b></td>
+              <td class="tnum"><span class="es">~US$100–160 según edad</span><span class="en">~US$100–160 by age</span></td>
+              <td class="tnum"><span class="es">~US$122 (tarifa colectiva 2026, &lt;64 años; individual algo más)</span><span class="en">~US$122 (2026 collective rate, under 64; individual somewhat higher)</span></td>
+            </tr>
+            <tr>
+              <td><b><span class="es">Clínicas insignia de maternidad</span><span class="en">Flagship maternity hospitals</span></b></td>
+              <td><span class="es">Country / <b>La Colina — al lado de casa</b></span><span class="en">Country / <b>La Colina — next door</b></span></td>
+              <td><span class="es">Reina Sofía y Clínica Universitaria Colombia — excelentes, pero a 30–45+ min al otro lado de la ciudad</span><span class="en">Reina Sofía and Clínica Universitaria Colombia — excellent, but 30–45+ min across town</span></td>
+            </tr>
+            <tr>
+              <td><b><span class="es">Reputación</span><span class="en">Reputation</span></b></td>
+              <td><span class="es">Sólida; su fortaleza es justo el grupo Country/La Colina</span><span class="en">Solid; its strength is exactly the Country/La Colina group</span></td>
+              <td><span class="es">La prepagada más grande de Colombia (grupo Keralty), integrada con sus propios hospitales</span><span class="en">Colombia's largest prepagada (Keralty group), vertically integrated with its own hospitals</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="reassure" style="margin-top:1rem;">
+        <span style="font-size:1.1rem;">⚖️</span>
+        <div><span class="es"><b>Nuestra lectura:</b> Colmédica sigue siendo la recomendación porque todo el plan gira en torno a dar a luz al lado de casa, en La Colina — es la opción de encaje garantizado y precio publicado. Pero Colsanitas no sería un error si un asesor confirma <b>por escrito</b> el parto en La Colina a un costo total competitivo. Pidan las dos cotizaciones este mes: la ventana del anexo de Colsanitas (sem. 12–22) es la fecha límite más próxima del tablero.</span><span class="en"><b>Our read:</b> Colmédica remains the recommendation because the whole plan is built around delivering next door at La Colina — it's the guaranteed-fit option with a published price. But Colsanitas wouldn't be a mistake if an advisor confirms <b>in writing</b> childbirth at La Colina at a competitive total cost. Get both quotes this month: Colsanitas' annex window (wks 12–22) is the earliest deadline on your board.</span></div>
+      </div>
+    </div>
+
+    <div class="keybox" style="margin-top:1.1rem;background:var(--teal-tint);border-color:#BFDBCF;">
+      <p class="eyebrow" style="color:var(--teal-deep);"><span class="es">Léele esto al asesor — y pídelo por escrito antes de pagar</span><span class="en">Read this to the advisor — and get it in writing before paying</span></p>
+      <ol style="margin:.4rem 0 0;padding-left:1.2rem;display:grid;gap:.7rem;font-size:.9rem;">
+        <li>“¿El plan cubre el <b>parto en la Clínica La Colina</b>, en habitación individual?”<br><span class="src">Does the plan cover delivery at Clínica La Colina, in a private room?</span></li>
+        <li>“¿El <b>anexo de maternidad cubre este embarazo</b> (ya en curso y de alto riesgo): el parto o cesárea, la hospitalización, y el <b>recién nacido incluyendo UCI neonatal</b>?”<br><span class="src">Does the maternity rider cover this (ongoing, high-risk) pregnancy — delivery or C-section, hospitalization, and the newborn including NICU?</span></li>
+        <li>“Tengo <b>trombofilia genética</b> y embarazo de alto riesgo. ¿El plan base cubre <b>medicina materno-fetal, hematología, ecografías adicionales y la enoxaparina</b> durante el embarazo? ¿Hay carencias o preexistencias que las excluyan?”<br><span class="src">I have genetic thrombophilia and a high-risk pregnancy. Does the base plan cover maternal-fetal medicine, hematology, extra ultrasounds, and enoxaparin during pregnancy? Any carencia / pre-existing exclusions?</span></li>
+        <li>“¿<b>Hasta qué semana</b> puedo comprar el anexo y cuál es el <b>costo total</b>?”<br><span class="src">Until what week can I buy the rider, and what's the total cost?</span></li>
+        <li>“¿Cómo inscribo al bebé con <b>‘Bebé Colmédica’</b> antes de nacer, y hasta qué mes?”<br><span class="src">How do I enroll the baby with 'Bebé Colmédica' before birth, and by what month?</span></li>
+      </ol>
+    </div>
+
+    <p class="src" style="margin-top:1rem;"><span class="es"><b>Nota para Robbie (extranjero):</b> para ser titular o beneficiario necesitas <b>cédula de extranjería</b> + EPS. Si tu pareja es colombiana con EPS, ella es la titular natural y te agrega a ti y al bebé. Fuentes: colmedica.com (maternidad, afiliación) y clinicalacolina.com (convenios Colmédica).</span><span class="en"><b>Note for Robbie (foreigner):</b> to be a policyholder or beneficiary you need a <b>cédula de extranjería</b> + EPS. If your partner is Colombian with an EPS, she's the natural policyholder and adds you and the baby. Sources: colmedica.com (maternity, affiliation) and clinicalacolina.com (Colmédica convenios).</span></p>
+  </section>
+
+  <!-- TIMELINE -->
+  <section id="timeline">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">El plan</span><span class="en">The plan</span></p>
+      <h2><span class="es">Semana a semana, trimestre a trimestre</span><span class="en">Week by week, trimester by trimester</span></h2>
+      <p class="intro"><span class="es">Toca un trimestre. Cada hito reúne lo que toca — citas y exámenes, vitaminas, movimiento, comida, el crecimiento de tu bebé, y los trámites.</span><span class="en">Tap a trimester. Each milestone gathers what's due — appointments and tests, vitamins, movement, food, your baby's growth, and admin.</span></p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="Trimesters">
+      <button role="tab" id="tab-t1" aria-controls="panel-t1" aria-selected="true"><span class="es">Primer trimestre</span><span class="en">First trimester</span><span class="wk"><span class="es">Ahora – sem. 13</span><span class="en">Now – week 13</span></span></button>
+      <button role="tab" id="tab-t2" aria-controls="panel-t2" aria-selected="false" tabindex="-1"><span class="es">Segundo trimestre</span><span class="en">Second trimester</span><span class="wk"><span class="es">Sem. 14 – 27</span><span class="en">Weeks 14 – 27</span></span></button>
+      <button role="tab" id="tab-t3" aria-controls="panel-t3" aria-selected="false" tabindex="-1"><span class="es">Tercer trimestre</span><span class="en">Third trimester</span><span class="wk"><span class="es">Sem. 28 – parto</span><span class="en">Weeks 28 – birth</span></span></button>
+    </div>
+
+    <!-- T1 -->
+    <div class="tpanel" id="panel-t1" role="tabpanel" aria-labelledby="tab-t1">
+      <div class="tri-intro"><span class="es">Estás aquí. El tema es <b>organizarse</b>: primera cita, exámenes de base, empezar las vitaminas correctas, y sobre todo la referencia a <b>materno-fetal + hematología</b> por tu trombofilia. Sin calorías extra todavía.</span><span class="en">You're here. The theme is <b>get set up</b>: first appointment, baseline tests, start the right vitamins, and above all the referral to <b>maternal-fetal medicine + hematology</b> for your thrombophilia. No extra calories yet.</span></div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">6–8</span></div>
+        <div class="m-body">
+          <h4><span class="es">Primera cita prenatal + referencia a especialista</span><span class="en">First prenatal visit + specialist referral</span></h4>
+          <ul class="m-list">
+            <li class="risk"><span class="es"><b>Pide referencia a medicina materno-fetal y hematología</b> por la trombofilia y las pérdidas — idealmente co-manejo desde el primer trimestre.</span><span class="en"><b>Ask for referral to maternal-fetal medicine and hematology</b> for the thrombophilia and losses — ideally co-managed from the first trimester.</span> <span class="pill risk"><span class="es">Alto riesgo</span><span class="en">High-risk</span></span></li>
+            <li><span class="es"><b>Exámenes de base:</b> grupo y Rh, hemograma, VIH/sífilis/hepatitis B, inmunidad a rubéola/varicela, uro-análisis + urocultivo, glicemia, TSH, y toxoplasma IgG/IgM (estándar en Colombia; si sale negativo, se repite mensual).</span><span class="en"><b>Baseline labs:</b> blood type + Rh, CBC, HIV/syphilis/hepatitis B, rubella/varicella immunity, urine test + culture, glucose, TSH, and toxoplasma IgG/IgM (a Colombian standard; if negative, repeated monthly).</span></li>
+            <li><span class="es"><b>Ecografía de datación</b> para confirmar viabilidad y fecha exacta. Lleva <b>lista completa de medicamentos/suplementos</b>.</span><span class="en"><b>Dating ultrasound</b> for viability and an accurate due date. Bring a <b>full list of medications/supplements</b>.</span></li>
+            <li class="admin"><span class="es">Elige un <b>ginecólogo/a adscrito a La Colina</b> en tu red de prepagada.</span><span class="en">Choose an <b>OB adscrito to La Colina</b> in your prepagada network.</span> <span class="pill admin"><span class="es">Trámite</span><span class="en">Admin</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Week</span></small><span class="n">6+</span></div>
+        <div class="m-body">
+          <h4><span class="es">Empieza las vitaminas correctas</span><span class="en">Start the right supplements</span></h4>
+          <ul class="m-list">
+            <li><span class="es"><b>Ácido fólico 400+ mcg al día</b> — el imprescindible, hasta la semana 12. (Si el diagnóstico incluye MTHFR, la dosis normal sigue estando bien.)</span><span class="en"><b>Folic acid 400+ mcg daily</b> — the essential one, through week 12. (If your diagnosis includes MTHFR, the normal dose is still fine.)</span></li>
+            <li><span class="es">Un prenatal que incluya <b>yodo, DHA, hierro y vitamina D</b> — en Colombia <b>Gestavit DHA</b> o <b>Materna DHA</b> son buenas opciones. Añade <b>calcio</b> aparte (la dieta colombiana es baja en calcio; ayuda a prevenir preeclampsia).</span><span class="en">A prenatal with <b>iodine, DHA, iron and vitamin D</b> — in Colombia <b>Gestavit DHA</b> or <b>Materna DHA</b> work well. Add <b>calcium</b> separately (Colombian diets are low in calcium; it helps prevent preeclampsia).</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">6–13</span></div>
+        <div class="m-body">
+          <h4><span class="es">Náuseas, comida segura y movimiento suave</span><span class="en">Nausea, food safety &amp; gentle movement</span></h4>
+          <ul class="m-list">
+            <li><span class="es">Náuseas: comidas pequeñas y frecuentes, galletas antes de levantarte, jengibre. Si es fuerte, pregunta por <b>vitamina B6 ± doxilamina</b> (la primera opción, muy segura).</span><span class="en">Nausea: small frequent meals, crackers before getting up, ginger. If it's rough, ask about <b>vitamin B6 ± doxylamine</b> (the safe first-line option).</span></li>
+            <li><span class="es">Hábitos de comida segura: cero alcohol, cafeína bajo 200 mg (~1–2 tintos), nada de quesos frescos sin pasteurizar, embutidos ni pescado crudo. <b>Que otra persona cambie la arena del gato.</b></span><span class="en">Food-safety habits: no alcohol, caffeine under 200 mg (~1–2 tintos), no unpasteurized fresh cheeses, deli meats or raw fish. <b>Someone else changes the cat litter.</b></span></li>
+            <li><span class="es">Empieza el hábito: hacia <b>150 min/semana</b> de caminata y <b>ejercicios de piso pélvico (Kegel) a diario</b>.</span><span class="en">Start the habit: toward <b>150 min/week</b> of walking and <b>daily pelvic-floor (Kegel) exercises</b>.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Week</span></small><span class="n">10+</span></div>
+        <div class="m-body">
+          <h4><span class="es">Tamizaje genético — decide con tu médico</span><span class="en">Genetic screening — decide with your doctor</span></h4>
+          <ul class="m-list">
+            <li><span class="es"><b>NIPT / ADN fetal</b> (desde la semana 10): el tamizaje más preciso para síndrome de Down y trisomías 18/13. ACOG lo recomienda para todas, y a los 35 su valor es mayor. Suele ser <b>particular en Bogotá (~COP 1.9–3.9M)</b>.</span><span class="en"><b>NIPT / cfDNA</b> (from week 10): the most accurate screen for Down syndrome and trisomy 18/13. ACOG recommends offering it to all, and at 35 its value is higher. Usually <b>out of pocket in Bogotá (~COP 1.9–3.9M)</b>.</span> <span class="pill ama"><span class="es">Edad 35</span><span class="en">Age 35</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">11–16</span></div>
+        <div class="m-body">
+          <h4><span class="es">Eco del primer trimestre + inicio de aspirina/heparina</span><span class="en">First-trimester scan + starting aspirin/heparin</span></h4>
+          <ul class="m-list">
+            <li><span class="es"><b>Eco de translucencia nucal (semana 11–13⁺⁶)</b> — vale la pena aunque te hagas NIPT, porque detecta hallazgos estructurales que la sangre no ve.</span><span class="en"><b>Nuchal-translucency scan (weeks 11–13⁺⁶)</b> — worth doing even with NIPT, because it catches structural findings a blood test can't.</span></li>
+            <li class="risk"><span class="es"><b>Aspirina 81 mg/día desde la semana 12–16</b> (para preeclampsia). Y, según lo que definan materno-fetal + hematología, posible inicio de <b>enoxaparina</b>. Confirma dosis y fechas con ellos.</span><span class="en"><b>Aspirin 81 mg/day from weeks 12–16</b> (for preeclampsia). And, per what maternal-fetal + hematology decide, possible start of <b>enoxaparin</b>. Confirm dose and timing with them.</span> <span class="pill risk"><span class="es">Alto riesgo</span><span class="en">High-risk</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- T2 -->
+    <div class="tpanel" id="panel-t2" role="tabpanel" aria-labelledby="tab-t2" hidden>
+      <div class="tri-intro"><span class="es">Suele ser la etapa más llevadera. El tema son <b>las ecografías grandes</b> (anatomía + diabetes) y <b>los trámites</b> mientras te sientes bien. Suma ~340 kcal/día.</span><span class="en">Usually the easiest stretch. The theme is <b>the big scans</b> (anatomy + diabetes) and <b>the admin</b> while you feel good. Add ~340 kcal/day.</span></div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Cada</span><span class="en">Every</span></small><span class="n"><span class="es">2–4 s</span><span class="en">2–4 w</span></span></div>
+        <div class="m-body">
+          <h4><span class="es">Controles (más seguidos por alto riesgo)</span><span class="en">Check-ups (more frequent, high-risk)</span></h4>
+          <ul class="m-list">
+            <li><span class="es">Tensión, peso, altura uterina, latidos del bebé y orina en cada cita. Por ser alto riesgo, materno-fetal puede pedir controles más frecuentes y <b>Doppler de arteria uterina</b>.</span><span class="en">BP, weight, fundal height, baby's heartbeat and urine at each visit. Being high-risk, maternal-fetal may want more frequent visits and <b>uterine-artery Doppler</b>.</span></li>
+            <li class="risk"><span class="es">Continúa aspirina, calcio y (si aplica) enoxaparina. Toma el hierro aparte del calcio y el café; combínalo con vitamina C.</span><span class="en">Continue aspirin, calcium and (if applicable) enoxaparin. Take iron apart from calcium and coffee; pair with vitamin C.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Mes</span><span class="en">Month</span></small><span class="n">~5</span></div>
+        <div class="m-body">
+          <h4><span class="es">La tanda de trámites</span><span class="en">The admin sprint</span></h4>
+          <ul class="m-list">
+            <li class="admin"><span class="es"><b>Afilia al bebé “en gestación”</b> (ver “Ahora”).</span><span class="en"><b>Enroll the baby “en gestación”</b> (see “Do now”).</span> <span class="pill admin"><span class="es">Fecha límite</span><span class="en">Deadline</span></span></li>
+            <li class="admin"><span class="es">Inscríbete al <b>curso psicoprofiláctico</b> — gratis por la EPS, o privado/virtual en el norte de Bogotá. Pregunta si hay opción en inglés para Robbie.</span><span class="en">Sign up for the <b>curso psicoprofiláctico</b> (childbirth class) — free via EPS, or private/virtual in north Bogotá. Ask about an English option for Robbie.</span></li>
+            <li class="admin"><span class="es">Pide nombres de <b>pediatras adscritos a La Colina</b>; entrevista a uno hacia la semana 28–32.</span><span class="en">Get names of <b>pediatricians adscritos to La Colina</b>; interview one by weeks 28–32.</span></li>
+            <li class="admin"><span class="es">Decide sobre <b>banco de sangre de cordón</b> (ACOG/AAP no recomiendan el banco privado de rutina sin indicación familiar).</span><span class="en">Decide on <b>cord-blood banking</b> (ACOG/AAP don't recommend routine private banking without a family indication).</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">18–22</span></div>
+        <div class="m-body">
+          <h4><span class="es">Ecografía de detalle anatómico</span><span class="en">Anatomy scan</span></h4>
+          <ul class="m-list">
+            <li><span class="es">La ecografía detallada del desarrollo de tu bebé — suele ser cuando puedes saber el sexo si quieres.</span><span class="en">The detailed scan of your baby's development — often when you can learn the sex if you want.</span></li>
+            <li class="dev"><span class="es">Por estas semanas empiezas a sentir movimiento. Tamaño de un mango a una papaya.</span><span class="en">Around now you start to feel movement. Size of a mango to a papaya.</span> <span class="pill dev"><span class="es">Bebé</span><span class="en">Baby</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">24–28</span></div>
+        <div class="m-body">
+          <h4><span class="es">Diabetes gestacional + Tdap</span><span class="en">Gestational diabetes + Tdap</span></h4>
+          <ul class="m-list">
+            <li><span class="es"><b>Prueba de glucosa (PTOG 75g)</b> para diabetes gestacional. Y hemograma de control (anemia; anti-D si eres Rh negativo).</span><span class="en"><b>Glucose test (75g OGTT)</b> for gestational diabetes. Plus a repeat CBC (anemia; anti-D if Rh-negative).</span></li>
+            <li><span class="es"><b>Vacuna Tdap</b> contra la tosferina (en Colombia desde la semana 26). Vacuna de <b>influenza</b> en cualquier trimestre.</span><span class="en"><b>Tdap vaccine</b> for whooping cough (Colombia from week 26). <b>Flu</b> vaccine any trimester.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- T3 -->
+    <div class="tpanel" id="panel-t3" role="tabpanel" aria-labelledby="tab-t3" hidden>
+      <div class="tri-intro"><span class="es">La recta final. El tema es <b>vigilancia y preparación</b>: más citas, últimas vacunas, la maleta, y el plan de la heparina alrededor del parto. Suma ~450 kcal/día.</span><span class="en">The home stretch. The theme is <b>monitoring &amp; getting ready</b>: more visits, final vaccines, the bag, and the heparin plan around delivery. Add ~450 kcal/day.</span></div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">28–36</span></div>
+        <div class="m-body">
+          <h4><span class="es">Más citas + vacuna VSR + crecimiento</span><span class="en">More visits + RSV vaccine + growth</span></h4>
+          <ul class="m-list">
+            <li><span class="es">Citas cada 2 semanas. Empieza a <b>contar movimientos</b> a diario. <b>Ecografías de crecimiento seriadas</b> (~sem. 32–36), importantes en tu caso.</span><span class="en">Visits every 2 weeks. Start <b>counting kicks</b> daily. <b>Serial growth ultrasounds</b> (~weeks 32–36), important in your case.</span></li>
+            <li><span class="es"><b>Vacuna materna del VSR (Abrysvo)</b>, nueva en Colombia desde fines de 2025, protege al bebé del VSR grave. Confirma disponibilidad para tu fecha.</span><span class="en"><b>RSV maternal vaccine (Abrysvo)</b>, new in Colombia since late 2025, protects your newborn from severe RSV. Confirm availability for your date.</span> <span class="pill admin"><span class="es">Confirmar</span><span class="en">Confirm</span></span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">32–36</span></div>
+        <div class="m-body">
+          <h4><span class="es">Prepárate + plan de la heparina</span><span class="en">Get ready + heparin plan</span></h4>
+          <ul class="m-list">
+            <li class="risk"><span class="es"><b>Acuerda el plan periparto de la enoxaparina:</b> se suspende ~24 h antes (dosis terapéutica) o ~12 h (profiláctica) para poder poner la <b>epidural</b>, y se reinicia después del parto. Esto se planea con anticipación.</span><span class="en"><b>Agree the peripartum enoxaparin plan:</b> it's held ~24 h before (therapeutic dose) or ~12 h (prophylactic) so the <b>epidural</b> stays possible, and restarted after birth. Plan this ahead.</span> <span class="pill risk"><span class="es">Alto riesgo</span><span class="en">High-risk</span></span></li>
+            <li class="admin"><span class="es"><b>Arma la maleta</b> (sem. 32–34): documentos, carné de prepagada, todos tus exámenes y ecografías, ropa cómoda, ropa del bebé. <b>Compra e instala la silla de carro</b> (mirando hacia atrás).</span><span class="en"><b>Pack the bag</b> (weeks 32–34): IDs, prepagada card, all your labs and ultrasounds, comfy clothes, baby clothes. <b>Buy and install the car seat</b> (rear-facing).</span></li>
+            <li><span class="es">Desde la semana ~34–35, <b>masaje perineal</b> 1–2×/semana (reduce desgarros en primerizas). El ejercicio pasa a <b>nadar y caminar</b>.</span><span class="en">From ~34–35 weeks, <b>perineal massage</b> 1–2×/week (reduces tearing in first-time mothers). Exercise shifts to <b>swimming and walking</b>.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">35–37</span></div>
+        <div class="m-body">
+          <h4><span class="es">Estreptococo B + preadmisión</span><span class="en">Group B strep + pre-admission</span></h4>
+          <ul class="m-list">
+            <li><span class="es"><b>Cultivo de estreptococo grupo B (EGB)</b> — que sea <b>vaginal Y rectal</b> (solo vaginal se pierde la mayoría de casos). Repite VIH/sífilis.</span><span class="en"><b>Group B strep (GBS) culture</b> — make sure it's <b>vaginal AND rectal</b> (vaginal-only misses most cases). Repeat HIV/syphilis.</span></li>
+            <li class="admin"><span class="es"><b>Haz la preadmisión en La Colina</b> y finaliza el plan de parto.</span><span class="en"><b>Complete pre-admission at La Colina</b> and finalize the birth plan.</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="milestone">
+        <div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">37–40</span></div>
+        <div class="m-body">
+          <h4><span class="es">Citas semanales y la meta</span><span class="en">Weekly visits &amp; the finish line</span></h4>
+          <ul class="m-list">
+            <li><span class="es">Citas cada semana. Tu equipo materno-fetal define el mejor momento y modo del parto según cómo evolucione todo.</span><span class="en">Weekly visits. Your maternal-fetal team decides the best timing and mode of delivery based on how everything is going.</span></li>
+            <li class="dev"><span class="es">Bebé a término. Vivir al lado te deja transitar el inicio del trabajo de parto con calma en casa — una ventaja real.</span><span class="en">Baby is full-term. Living next door lets you ride out early labor calmly at home — a real advantage.</span> <span class="pill dev"><span class="es">Bebé</span><span class="en">Baby</span></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="legend">
+      <span><i class="dot" style="background:var(--teal)"></i> <span class="es">Cuidado y exámenes</span><span class="en">Care &amp; tests</span></span>
+      <span><i class="dot" style="background:var(--plum)"></i> <span class="es">Trombofilia / alto riesgo</span><span class="en">Thrombophilia / high-risk</span></span>
+      <span><i class="dot" style="background:var(--clay)"></i> <span class="es">Crecimiento del bebé</span><span class="en">Baby's growth</span></span>
+      <span><i class="dot" style="background:var(--gold)"></i> <span class="es">Trámites</span><span class="en">Admin</span></span>
+    </div>
+  </section>
+
+  <!-- SUPPLEMENTS -->
+  <section id="supplements">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Vitaminas y suplementos</span><span class="en">Vitamins &amp; supplements</span></p>
+      <h2><span class="es">Qué tomar — y qué evitar</span><span class="en">What to take — and what to skip</span></h2>
+      <p class="intro"><span class="es">Un buen prenatal cubre casi todo en una pastilla. Lo que suelen quedar cortos en Colombia es calcio y DHA. Confirma dosis con tu médico.</span><span class="en">A good prenatal covers most of this in one pill. What they run short on in Colombia is calcium and DHA. Confirm doses with your doctor.</span></p>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th><span class="es">Nutriente</span><span class="en">Nutrient</span></th><th><span class="es">Dosis</span><span class="en">Dose</span></th><th><span class="es">Por qué</span><span class="en">Why</span></th></tr></thead>
+        <tbody>
+          <tr><td><b><span class="es">Ácido fólico</span><span class="en">Folic acid</span></b></td><td class="tnum">400+ mcg</td><td><span class="es">Previene defectos del tubo neural. El esencial, hasta la semana 12.</span><span class="en">Prevents neural-tube defects. The essential one, through week 12.</span></td></tr>
+          <tr><td><b><span class="es">Hierro</span><span class="en">Iron</span></b></td><td class="tnum">30–60 mg</td><td><span class="es">Previene anemia — importa más en la altura de Bogotá. Aparte del calcio/café; con vitamina C.</span><span class="en">Prevents anemia — matters more at Bogotá's altitude. Apart from calcium/coffee; with vitamin C.</span></td></tr>
+          <tr><td><b><span class="es">Calcio</span><span class="en">Calcium</span></b> <span class="pill admin"><span class="es">extra</span><span class="en">top-up</span></span></td><td class="tnum">1000 mg+</td><td><span class="es">La dieta colombiana es de las más bajas en calcio; ayuda a prevenir preeclampsia. Ningún prenatal trae suficiente — tómalo aparte del hierro.</span><span class="en">Colombian diets are among the lowest in calcium; it helps prevent preeclampsia. No prenatal has enough — take it apart from iron.</span></td></tr>
+          <tr><td><b><span class="es">Vitamina D</span><span class="en">Vitamin D</span></b></td><td class="tnum">600–2000 IU</td><td><span class="es">Huesos e inmunidad.</span><span class="en">Bone &amp; immune development.</span></td></tr>
+          <tr><td><b><span class="es">Yodo</span><span class="en">Iodine</span></b></td><td class="tnum">150 mcg</td><td><span class="es">Cerebro y tiroides del bebé.</span><span class="en">Baby's brain &amp; thyroid.</span></td></tr>
+          <tr><td><b>DHA (omega-3)</b> <span class="pill admin"><span class="es">quizá extra</span><span class="en">maybe</span></span></td><td class="tnum">200–300 mg</td><td><span class="es">Cerebro y visión; puede reducir parto prematuro.</span><span class="en">Brain &amp; eyes; may reduce preterm birth.</span></td></tr>
+          <tr><td><b>Colina</b></td><td class="tnum">~450 mg</td><td><span class="es">Cerebro — suele faltar en prenatales; apóyate en huevos y carnes magras.</span><span class="en">Brain — usually missing from prenatals; lean on eggs and lean meats.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="supp-note"><span class="es"><b>Altura:</b> Bogotá está a 2.640 m, así que el umbral de anemia es <b>más alto</b> que a nivel del mar (~Hb &lt;12.3 en vez de &lt;11.0 g/dL). Una hemoglobina que parece “normal” puede estar baja aquí — que tu laboratorio use el rango ajustado por altura y que tu médico lo interprete con la ferritina.</span><span class="en"><b>Altitude:</b> Bogotá is at 2,640 m, so the anemia threshold is <b>higher</b> than at sea level (~Hb &lt;12.3 vs &lt;11.0 g/dL). A hemoglobin that looks “normal” may be low here — have your lab use the altitude-adjusted range and your doctor read it with ferritin.</span></p>
+    <div class="card" style="margin-top:1.1rem;">
+      <p class="eyebrow"><span class="es">Prenatales que consigues en Colombia</span><span class="en">Prenatals you can buy in Colombia</span></p>
+      <p style="font-size:.92rem;margin-bottom:.2rem;"><span class="es"><b>Gestavit DHA</b> (Procaps) — la mejor en una sola pastilla: folato, hierro, yodo 150 mcg, DHA y vitamina D, y económica. · <b>Materna DHA</b> (Nestlé) — completa, con 200 mg de DHA. · <b>Natele</b> (Bayer) — muy disponible, confiable en folato/hierro, pero baja en DHA y calcio.</span><span class="en"><b>Gestavit DHA</b> (Procaps) — best single pill: folate, iron, iodine 150 mcg, DHA and vitamin D, and cheap. · <b>Materna DHA</b> (Nestlé) — full spectrum, 200 mg DHA. · <b>Natele</b> (Bayer) — very available, reliable on folate/iron, but light on DHA and calcium.</span></p>
+      <p class="supp-note"><span class="es">Con cualquiera, añade <b>calcio</b> aparte, y <b>DHA</b> o <b>yodo</b> solo si tu marca queda corta.</span><span class="en">With any of them, add <b>calcium</b> separately, and <b>DHA</b> or <b>iodine</b> only if your brand runs low.</span></p>
+    </div>
+    <div class="avoid">
+      <h4><span class="es">En la lista de evitar</span><span class="en">On the avoid list</span></h4>
+      <ul>
+        <li><span class="es"><b>Vitamina A (retinol) en dosis altas</b> (&gt;10.000 UI/día) — puede dañar al bebé. Los prenatales usan beta-caroteno, que es seguro; evita aceite de hígado de bacalao.</span><span class="en"><b>High-dose vitamin A (retinol)</b> (&gt;10,000 IU/day) — can harm the baby. Prenatals use safe beta-carotene; skip cod-liver oil.</span></li>
+        <li><span class="es"><b>Ruda, poleo, perejil/salvia en infusión medicinal</b> y otras aguas aromáticas “de remedio” — varias son abortivas. En cantidades de cocina no hay problema; concentradas sí.</span><span class="en"><b>Ruda (rue), poleo (pennyroyal), high-dose parsley/sage teas</b> and other medicinal infusions — several are abortifacients. Culinary amounts are fine; concentrated ones aren't.</span></li>
+        <li><span class="es">Cualquier suplemento o hierba “natural” no aprobado por tu médico — potencia y pureza no reguladas.</span><span class="en">Any herbal or “natural” supplement not cleared by your doctor — unregulated potency and purity.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- DIET -->
+  <section id="diet">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Comer por dos (un poquito)</span><span class="en">Eating for two (a little)</span></p>
+      <h2><span class="es">Dieta y comida segura, para Bogotá</span><span class="en">Diet &amp; food safety, mapped to Bogotá</span></h2>
+      <p class="intro"><span class="es">Sin calorías extra en el primer trimestre, luego ~+340 en el segundo y ~+450 en el tercero. Apunta a ~71 g de proteína al día.</span><span class="en">No extra calories in the first trimester, then ~+340 in the second and ~+450 in the third. Aim for ~71 g of protein a day.</span></p>
+    </div>
+    <div class="diet-cols">
+      <div class="diet-col eat">
+        <h4>✓ <span class="es">Prioriza</span><span class="en">Lean into</span></h4>
+        <ul>
+          <li><span class="es"><b>Trucha</b> y <b>tilapia/mojarra</b> — bajo mercurio, buen DHA</span><span class="en"><b>Trout</b> &amp; <b>tilapia/mojarra</b> — low-mercury, good DHA</span></li>
+          <li><span class="es"><b>Atún claro en lata</b>, sardinas, camarón</span><span class="en"><b>Canned light tuna</b>, sardines, shrimp</span></li>
+          <li><span class="es"><b>Lentejas, fríjoles, garbanzos</b> — proteína + hierro + folato</span><span class="en"><b>Lentils, beans, chickpeas</b> — protein + iron + folate</span></li>
+          <li><span class="es"><b>Huevos</b> (bien cocidos) — colina</span><span class="en"><b>Eggs</b> (fully cooked) — choline</span></li>
+          <li><span class="es"><b>Aguacate Hass</b> — folato y grasas buenas</span><span class="en"><b>Hass avocado</b> — folate &amp; healthy fats</span></li>
+          <li><span class="es">Lácteos pasteurizados (Alpina, Alquería, Colanta)</span><span class="en">Pasteurized dairy (Alpina, Alquería, Colanta)</span></li>
+          <li><span class="es">Fruta con vitamina C — <b>guayaba, cítricos, papaya, uchuva</b> — para absorber hierro</span><span class="en">Vitamin-C fruit — <b>guava, citrus, papaya, uchuva</b> — to absorb iron</span></li>
+        </ul>
+      </div>
+      <div class="diet-col limit">
+        <h4>◐ <span class="es">Con medida</span><span class="en">Limit</span></h4>
+        <ul>
+          <li><span class="es"><b>Cafeína bajo 200 mg/día</b> ≈ 1–2 tintos; cuenta té, gaseosa y chocolate</span><span class="en"><b>Caffeine under 200 mg/day</b> ≈ 1–2 tintos; count tea, cola &amp; chocolate</span></li>
+          <li><span class="es"><b>Nada de bebidas energéticas / guaraná</b></span><span class="en"><b>No energy drinks / guaraná</b></span></li>
+          <li><span class="es"><b>Mero, atún blanco/aleta amarilla</b> — máx. 1 porción/semana</span><span class="en"><b>Grouper, white/yellowfin tuna</b> — max 1 serving/week</span></li>
+          <li><span class="es"><b>Manzanilla</b> — solo ocasional y suave</span><span class="en"><b>Chamomile</b> — occasional &amp; mild only</span></li>
+          <li><span class="es">Hígado y paté — altos en retinol</span><span class="en">Liver &amp; pâté — high in retinol</span></li>
+        </ul>
+      </div>
+      <div class="diet-col avoid-c">
+        <h4>✕ <span class="es">Evita</span><span class="en">Avoid</span></h4>
+        <ul>
+          <li><span class="es"><b>Alcohol</b> — cero, sin cantidad segura</span><span class="en"><b>Alcohol</b> — zero, no safe amount</span></li>
+          <li><span class="es"><b>Quesos frescos sin pasteurizar:</b> campesino, cuajada, costeño, suero costeño <span class="co-tag">(salvo que diga “pasteurizado” o esté bien cocido)</span></span><span class="en"><b>Fresh unpasteurized cheeses:</b> campesino, cuajada, costeño, suero costeño <span class="co-tag">(unless labeled pasteurizado or cooked hot)</span></span></li>
+          <li><span class="es"><b>Crudos:</b> ceviche, sushi (crudo), carpaccio, tartar</span><span class="en"><b>Raw:</b> ceviche, sushi (raw), carpaccio, tartare</span></li>
+          <li><span class="es"><b>Embutidos y fiambres</b> (jamón, mortadela) salvo bien calientes</span><span class="en"><b>Deli meats</b> (ham, mortadela) unless reheated hot</span></li>
+          <li><span class="es"><b>Huevo crudo, mayonesa casera</b>; chorizo/morcilla poco cocidos</span><span class="en"><b>Runny egg, homemade mayo</b>; undercooked chorizo/morcilla</span></li>
+          <li><span class="es"><b>Pescados de alto mercurio:</b> tiburón, pez espada, marlín, “blanquillo”</span><span class="en"><b>High-mercury fish:</b> shark, swordfish, marlin, “blanquillo”</span></li>
+          <li class="co-tag"><span class="es">Pescado de río de zonas mineras (bagre, bocachico) — mejor trucha/tilapia de cultivo</span><span class="en">Freshwater fish from mining regions (bagre, bocachico) — prefer farmed trout/tilapia</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid two" style="margin-top:1.1rem;">
+      <div class="card">
+        <p class="eyebrow"><span class="es">Agua e higiene</span><span class="en">Water &amp; hygiene</span></p>
+        <p style="font-size:.92rem;margin:0;"><span class="es">El agua del grifo en Bogotá es <b>potable</b> — segura para tomar. Para evitar toxoplasmosis: <b>lava y pela</b> frutas y verduras, cocina bien la carne (sin rosado), lávate las manos tras carne cruda o tierra, y que otra persona maneje la arena del gato.</span><span class="en">Bogotá tap water is <b>potable</b> — safe to drink. To avoid toxoplasmosis: <b>wash and peel</b> produce, cook meat through (no pink), wash hands after raw meat or soil, and have someone else handle the cat litter.</span></p>
+      </div>
+      <div class="card">
+        <p class="eyebrow"><span class="es">Altura</span><span class="en">Altitude</span></p>
+        <p style="font-size:.92rem;margin:0;"><span class="es">Como resides hace tiempo en Bogotá, estás <b>aclimatada</b> — lo que preocupa a los visitantes no aplica igual. Solo toma un poco más de agua (el aire seco reseca) y cuida el hierro.</span><span class="en">As a long-term Bogotá resident you're <b>acclimatized</b> — what worries visitors doesn't apply the same way. Just drink a bit more water (the dry air dehydrates) and keep iron up.</span></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXERCISE -->
+  <section id="exercise">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Movimiento</span><span class="en">Movement</span></p>
+      <h2><span class="es">Ejercicio: 150 minutos a la semana, adaptándose</span><span class="en">Exercise: 150 minutes a week, adapting as you grow</span></h2>
+      <p class="intro"><span class="es">Mantenerte activa reduce ~40% el riesgo de diabetes gestacional, hipertensión y preeclampsia, y no aumenta el riesgo de aborto ni de parto prematuro. Intensidad: la <b>prueba del habla</b> — deberías poder conversar. (La vieja regla de “bajo 140 pulsaciones” quedó obsoleta.)</span><span class="en">Staying active cuts the risk of gestational diabetes, high blood pressure and preeclampsia by ~40%, and does not raise the risk of miscarriage or preterm birth. Intensity: the <b>talk test</b> — you should be able to hold a conversation. (The old “heart rate under 140” rule is obsolete.)</span></p>
+    </div>
+    <div class="ex-week">
+      <div class="ex-card">
+        <div class="t"><span class="es">1er trimestre · crear el hábito</span><span class="en">First trimester · build the habit</span></div>
+        <ul>
+          <li><span class="es">5 × 30 min de caminata (o natación / bici estática)</span><span class="en">5 × 30-min walks (or swimming / stationary bike)</span></li>
+          <li><span class="es">2 × fuerza suave — exhala en el esfuerzo</span><span class="en">2 × light strength — exhale on effort</span></li>
+          <li><span class="es">Piso pélvico a diario: 3 series de 8</span><span class="en">Daily pelvic floor: 3 sets of 8</span></li>
+          <li><span class="es">Días de náusea: haz lo que puedas</span><span class="en">Nausea days: do what you can</span></li>
+        </ul>
+      </div>
+      <div class="ex-card">
+        <div class="t"><span class="es">2º trimestre · mejor momento</span><span class="en">Second trimester · peak window</span></div>
+        <ul>
+          <li><span class="es">Mantén 150+ min/semana</span><span class="en">Keep 150+ min/week</span></li>
+          <li><span class="es">Desde la sem. 16, evita ejercicios boca arriba</span><span class="en">From wk 16, avoid flat-on-back moves</span></li>
+          <li><span class="es">Yoga prenatal o pilates (no yoga caliente)</span><span class="en">Prenatal yoga or Pilates (not hot yoga)</span></li>
+          <li><span class="es">Cuida el equilibrio al crecer la barriga</span><span class="en">Mind your balance as the bump grows</span></li>
+        </ul>
+      </div>
+      <div class="ex-card">
+        <div class="t"><span class="es">3er trimestre · nadar, caminar, preparar</span><span class="en">Third trimester · swim, walk, prep</span></div>
+        <ul>
+          <li><span class="es">Natación y caminata — el agua alivia las articulaciones</span><span class="en">Swimming &amp; walking — water unloads the joints</span></li>
+          <li><span class="es">Sentadillas, básculas de pelvis, gato-vaca</span><span class="en">Squats, pelvic tilts, cat-cow</span></li>
+          <li><span class="es">Masaje perineal 1–2×/sem desde la sem. 34–35</span><span class="en">Perineal massage 1–2×/wk from wk 34–35</span></li>
+          <li><span class="es">Intensidad moderada — sin subir a mayor altura</span><span class="en">Moderate intensity — no higher-altitude climbs</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="avoid" style="background:var(--amber-tint);border-color:#E6D3A6;margin-top:1.1rem;">
+      <h4 style="color:#7d5a12;"><span class="es">Evita siempre</span><span class="en">Skip these throughout</span></h4>
+      <ul style="color:#5f4a17;">
+        <li><span class="es">Deportes de contacto y con riesgo de caída (esquí, equitación, ciclismo de montaña, gimnasia)</span><span class="en">Contact sports and fall-risk activities (skiing, horseback riding, mountain biking, gymnastics)</span></li>
+        <li><span class="es">Buceo, paracaidismo, yoga caliente / sauna (sobrecalentamiento)</span><span class="en">Scuba diving, skydiving, hot yoga / sauna (overheating)</span></li>
+        <li><span class="es">Levantamiento pesado con aguante de la respiración</span><span class="en">Heavy lifting with breath-holding</span></li>
+        <li><span class="es">Como vives a 2.640 m estás aclimatada — solo evita <b>subir</b> a mucha más altura para esfuerzos fuertes</span><span class="en">Since you live at 2,640 m you're acclimatized — just avoid <b>climbing</b> to notably higher altitude for hard exertion</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- EMERGENCY -->
+  <section id="emergency">
+    <div class="emergency">
+      <div class="top">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M12 2 2 21h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.5" r="0.5" fill="#fff"/></svg>
+        <h3><span class="es">Llama a tu médico o ve a La Colina de inmediato si…</span><span class="en">Call your doctor or go to La Colina now if…</span></h3>
+      </div>
+      <div class="body">
+        <ul>
+          <li><span class="es">Sangrado vaginal</span><span class="en">Vaginal bleeding</span></li>
+          <li><span class="es">Salida de líquido (rompe fuente)</span><span class="en">Fluid leaking (waters breaking)</span></li>
+          <li><span class="es">Contracciones regulares y dolorosas antes de la sem. 37</span><span class="en">Regular painful contractions before week 37</span></li>
+          <li><span class="es">Notas menos movimiento del bebé</span><span class="en">A noticeable drop in baby's movements</span></li>
+          <li><span class="es">Dolor de cabeza fuerte o persistente</span><span class="en">Severe or persistent headache</span></li>
+          <li><span class="es">Visión borrosa o ver lucecitas</span><span class="en">Blurred vision or seeing spots</span></li>
+          <li><span class="es">Hinchazón súbita de cara/manos o dolor arriba de la barriga <span class="co-tag" style="color:#a15;">(preeclampsia)</span></span><span class="en">Sudden face/hand swelling or upper-belly pain <span class="co-tag" style="color:#a15;">(preeclampsia)</span></span></li>
+          <li><span class="es"><b>Dolor o hinchazón en una pantorrilla</b> <span class="co-tag" style="color:#a15;">(coágulo — clave con trombofilia)</span></span><span class="en"><b>Pain or swelling in one calf</b> <span class="co-tag" style="color:#a15;">(clot — key with thrombophilia)</span></span></li>
+          <li><span class="es"><b>Dolor de pecho o falta de aire</b> <span class="co-tag" style="color:#a15;">(coágulo)</span></span><span class="en"><b>Chest pain or shortness of breath</b> <span class="co-tag" style="color:#a15;">(clot)</span></span></li>
+          <li><span class="es">Fiebre o ardor al orinar</span><span class="en">Fever or burning when urinating</span></li>
+          <li><span class="es">Mareo o desmayo</span><span class="en">Dizziness or fainting</span></li>
+        </ul>
+        <div class="foot"><span class="es"><b>Cuando empiece el trabajo de parto a término:</b> ve cuando las contracciones estén cada ~5 min, de 30–60 s, por al menos una hora — o de inmediato si rompes fuente, sangras o baja el movimiento. Vivir al lado te da el lujo de esperar en casa hasta que sea claramente activo.</span><span class="en"><b>When labor starts at term:</b> go in when contractions are ~5 min apart, 30–60 s long, for at least an hour — or immediately if your waters break, you bleed, or movements drop. Living next door gives you the luxury of waiting at home until it's clearly active.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOGISTICS -->
+  <section id="logistics">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Trámites y organización</span><span class="en">Paperwork &amp; life admin</span></p>
+      <h2><span class="es">Lista: todo lo demás por organizar <span class="progress" id="prog"></span></span><span class="en">Checklist: everything else to line up <span class="progress" id="progen"></span></span></h2>
+      <p class="intro"><span class="es">Toca para marcar — se guarda en este dispositivo.</span><span class="en">Tap to check off — saved on this device.</span></p>
+    </div>
+
+    <div class="phase">
+      <h3><span class="es">Primer trimestre · ahora</span><span class="en">First trimester · now</span></h3>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Verificar que la carencia de la prepagada cubre este embarazo</span><span class="en">Verify the prepagada waiting period covers this pregnancy</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Confirmar cobertura del estudio de trombofilia y de la enoxaparina</span><span class="en">Confirm coverage of the thrombophilia workup and enoxaparin</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Referencia a materno-fetal + hematología</span><span class="en">Referral to maternal-fetal medicine + hematology</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Elegir ginecólogo/a que atienda en La Colina y esté en tu red</span><span class="en">Choose an OB who delivers at La Colina and is in your network</span></span></label>
+    </div>
+    <div class="phase">
+      <h3><span class="es">Segundo trimestre</span><span class="en">Second trimester</span></h3>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Afiliar al bebé “en gestación” (hacia el mes 5)</span><span class="en">Enroll the baby “en gestación” (by ~month 5)</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Inscribirse al curso psicoprofiláctico (pregunta por opción en inglés)</span><span class="en">Sign up for the childbirth class (ask about an English option)</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Elegir pediatra adscrito a La Colina</span><span class="en">Choose a pediatrician adscrito to La Colina</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Decidir sobre banco de sangre de cordón</span><span class="en">Decide on cord-blood banking</span></span></label>
+    </div>
+    <div class="phase">
+      <h3><span class="es">Tercer trimestre</span><span class="en">Third trimester</span></h3>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Acordar el plan periparto de la heparina (epidural)</span><span class="en">Agree the peripartum heparin plan (epidural)</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Hacer la preadmisión en La Colina y confirmar autorización del parto</span><span class="en">Complete pre-admission at La Colina and confirm the birth authorization</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Armar la maleta (sem. 32–34) e instalar la silla de carro</span><span class="en">Pack the bag (weeks 32–34) and install the car seat</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Padre: pasaporte / cédula de extranjería listos para el registro</span><span class="en">Father: passport / cédula de extranjería ready for registration</span></span></label>
+    </div>
+    <div class="phase">
+      <h3><span class="es">Después del parto</span><span class="en">After the birth</span></h3>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Recoger el certificado de nacido vivo y el grupo sanguíneo del bebé</span><span class="en">Collect the live-birth certificate and baby's blood-type certificate</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Confirmar vacunas al nacer (BCG + hepatitis B) y tamizaje neonatal</span><span class="en">Confirm birth vaccines (BCG + hep B) and newborn screening</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Registro civil dentro del primer mes — pedir varias copias</span><span class="en">Register the birth (registro civil) within one month — get several copies</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Formalizar la afiliación del bebé a EPS y prepagada</span><span class="en">Formalize the baby's EPS and prepagada enrollment</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Padre: licencia de paternidad (2 sem.); madre: licencia de maternidad (18 sem.)</span><span class="en">Father: paternity leave (2 wks); mother: maternity leave (18 wks)</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Control posparto (día 3–5) y primera cita del pediatra</span><span class="en">Postpartum check (day 3–5) and first pediatrician visit</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Si aplica: trámite de la otra ciudadanía del bebé en el consulado/embajada</span><span class="en">If applicable: the baby's second citizenship at the consulate/embassy</span></span></label>
+      <label class="check"><input type="checkbox"><span class="lbl"><span class="es">Continuar heparina posparto si está indicada; apoyo de lactancia; atención a la salud mental posparto</span><span class="en">Continue postpartum heparin if indicated; lactation support; watch postpartum mental health</span></span></label>
+    </div>
+  </section>
+
+  <!-- ADD INFO -->
+  <section id="addinfo">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Mantén el plan vivo</span><span class="en">Keep the plan alive</span></p>
+      <h2><span class="es">Agregar información nueva</span><span class="en">Add new information</span></h2>
+      <p class="intro"><span class="es">Escribe una nota o adjunta una foto (por ejemplo, un resultado de laboratorio o el nombre exacto de tu trombofilia) y el asistente responde con notas personalizadas — qué significa y qué preguntarle a tu médico. Queda guardado abajo.</span><span class="en">Write a note or attach a photo (for example, a lab result or the exact name of your thrombophilia) and the assistant replies with personalized notes — what it means and what to ask your doctor. It's saved below.</span></p>
+    </div>
+
+    <div class="addinfo">
+      <div id="ai-form">
+        <textarea id="ai-text" placeholder=""></textarea>
+        <div class="thumbs" id="ai-thumbs"></div>
+        <div class="ai-row">
+          <label class="filebtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span class="es">Adjuntar foto / archivo</span><span class="en">Attach photo / file</span>
+            <input type="file" id="ai-file" accept="image/*,.pdf" multiple hidden>
+          </label>
+          <button class="sendbtn" id="ai-send"><span class="es">Enviar</span><span class="en">Send</span></button>
+        </div>
+        <div class="ai-status" id="ai-status"></div>
+      </div>
+      <div class="updates" id="ai-updates"></div>
+    </div>
+    <p class="src" style="margin-top:.9rem;"><span class="es">Privacidad: este enlace es privado (no aparece en buscadores). Lo que envíes se guarda en la cuenta de Vercel de Robbie. Es privacidad razonable, no confidencialidad de nivel médico — no compartas el enlace públicamente. El asistente da orientación general, no diagnósticos.</span><span class="en">Privacy: this link is unlisted (hidden from search engines). What you submit is stored on Robbie's Vercel account. It's reasonable privacy, not medical-grade confidentiality — don't post the link publicly. The assistant gives general guidance, not diagnoses.</span></p>
+  </section>
+
+  <!-- FOR ROBBIE -->
+  <section id="robbie">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Para Robbie</span><span class="en">For Robbie</span></p>
+      <h2><span class="es">Tu parte — y ese fondo universitario</span><span class="en">Your part — and that college fund</span></h2>
+    </div>
+    <div class="robbie">
+      <p style="margin-top:0;"><span class="es">Lo más útil que hace un compañero: ir a las citas, aprender las señales de alarma, cambiar la arena del gato, cocinar en los días de náusea, y llevar tú la lista de trámites y seguros para que ella no la cargue. Con su historia, tu presencia tranquila y el acompañamiento cercano de verdad mejoran los resultados.</span><span class="en">The most useful things a partner does: come to the appointments, learn the warning signs, handle the cat litter, cook on nausea days, and carry the admin/insurance list so she doesn't have to. With her history, your calm presence and close support genuinely improve outcomes.</span></p>
+      <hr style="border:none;border-top:1px solid var(--line);margin:1.1rem 0;">
+      <p class="eyebrow"><span class="es">El regalo de $15.000 para los 24 años</span><span class="en">The $15,000 gift for age 24</span></p>
+      <div class="money">
+        <span class="big tnum">$15,000</span>
+        <span class="arrow">→</span>
+        <span class="big tnum">~$147,700</span>
+        <span style="color:var(--ink-soft);font-size:.9rem;"><span class="es">en 24 años al 10% anual</span><span class="en">in 24 years at 10% annual</span></span>
+      </div>
+      <p style="font-size:.93rem;margin-bottom:0;"><span class="es">La cuenta cuadra — es el promedio histórico <em>nominal</em> del S&amp;P 500. Un matiz honesto: tras ~3% de inflación, su poder de compra <b>real</b> a los 24 años se acerca más a <b>$72.000 de hoy</b>. Igual es un gran comienzo — y si agregas un aporte mensual pequeño, el número sube bastante. Un fondo indexado de bajo costo es justo el instinto correcto.</span><span class="en">The math checks out — that's the S&amp;P 500's long-run <em>nominal</em> average. One honest caveat: after ~3% inflation, its <b>real</b> spending power at age 24 is closer to <b>$72,000 in today's dollars</b>. Still a wonderful head start — and adding even a small monthly contribution lifts the number a lot. A low-cost index fund is exactly the right instinct.</span></p>
+    </div>
+  </section>
+
+  <section>
+    <details class="sources">
+      <summary><span class="es">Fuentes y cómo se investigó</span><span class="en">Sources &amp; how this was researched</span></summary>
+      <p style="font-size:.82rem;color:var(--ink-soft);margin:.4rem 0 .8rem;"><span class="es">Compilado de guías clínicas primarias (ACOG, WHO, CDC, NHS, RCOG, ESHRE, ASH, USPSTF, Cochrane) y fuentes colombianas (MinSalud / Resolución 3280 de 2018, sitios de la clínica, prepagadas). Donde las guías difieren — sobre todo heparina para trombofilia hereditaria vs. SAF — lo marcamos como “consultar con tu especialista”.</span><span class="en">Compiled from primary clinical guidelines (ACOG, WHO, CDC, NHS, RCOG, ESHRE, ASH, USPSTF, Cochrane) and Colombian sources (MinSalud / Resolución 3280 de 2018, clinic sites, prepagadas). Where guidelines disagree — especially heparin for inherited thrombophilia vs. APS — we flag it as “discuss with your specialist.”</span></p>
+      <ul>
+        <li>ACOG PB 197 (thrombophilias), ALIFE2 trial (Lancet 2023), ESHRE RPL 2023, AAFP (APS), RCOG GTG 37a</li>
+        <li>ACOG — prenatal care, exercise (CO 804), nutrition, aspirin, chromosomal screening (PB 226), pregnancy at 35+</li>
+        <li>WHO — antenatal care, iron/calcium, altitude hemoglobin; CDC/FDA/EPA — food safety, fish, toxoplasmosis</li>
+        <li>Colombia — Resolución 3280/2018, PAI vaccine schedule, GDM &amp; GBS guidance, Ley 1980/2019, Ley 2114/2021</li>
+        <li>Clínica La Colina / Clínica del Country; Newsweek World's Best Hospitals 2025; Colmédica / Colsanitas maternity terms</li>
+      </ul>
+    </details>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><span class="es"><b>Sobre la confianza.</b> Este documento reúne evidencia para que tus conversaciones con tu médico sean más claras — no las reemplaza. Tu ginecólogo/a y tu especialista conocen tu caso; cuando este plan y tu médico difieran, manda tu médico.</span><span class="en"><b>A note on trust.</b> This document gathers evidence so your conversations with your doctor are sharper — it doesn't replace them. Your OB and specialist know your case; when this plan and your doctor differ, your doctor wins.</span></p>
+    <p style="opacity:.8;"><span class="es">Hecho con cariño para su familia · Bogotá · 2026</span><span class="en">Made with care for your family · Bogotá · 2026</span></p>
+  </div>
+</footer>
+
+<script>
+  var STR = {
+    ph_text:{es:"Escribe aquí lo que quieras agregar… (por ejemplo: “Mi resultado dice Factor V Leiden heterocigoto” o adjunta la foto del laboratorio)",en:"Write anything you want to add… (e.g. “My result says Factor V Leiden heterozygous” or attach a photo of the lab)"},
+    ph_code:{es:"Código",en:"Passcode"},
+    sending:{es:"Enviando y analizando…",en:"Sending and analyzing…"},
+    need_text:{es:"Escribe una nota o adjunta un archivo primero.",en:"Write a note or attach a file first."},
+    need_code:{es:"Ingresa el código para enviar.",en:"Enter the passcode to send."},
+    ok:{es:"¡Listo! Se agregó abajo.",en:"Done! Added below."},
+    err:{es:"No se pudo enviar. Revisa el código e inténtalo de nuevo.",en:"Couldn't send. Check the passcode and try again."},
+    err_net:{es:"Error de conexión. Inténtalo de nuevo.",en:"Connection error. Please try again."},
+    you:{es:"Tú escribiste",en:"You wrote"},
+    loading:{es:"Cargando notas anteriores…",en:"Loading previous notes…"}
+  };
+  function curLang(){return document.body.getAttribute('data-lang');}
+  function t(k){return STR[k][curLang()];}
+
+  // ---- language toggle ----
+  (function(){
+    var saved=null; try{saved=localStorage.getItem('babyplan-lang');}catch(e){}
+    if(saved){document.body.setAttribute('data-lang',saved);document.documentElement.lang=saved;}
+    function applyPlaceholders(){
+      var tx=document.getElementById('ai-text'); if(tx) tx.placeholder=t('ph_text');
+      
+    }
+    applyPlaceholders();
+    document.getElementById('langbtn').addEventListener('click',function(){
+      var next=curLang()==='es'?'en':'es';
+      document.body.setAttribute('data-lang',next);
+      document.documentElement.lang=next;
+      try{localStorage.setItem('babyplan-lang',next);}catch(e){}
+      applyPlaceholders();
+    });
+  })();
+
+  // ---- tabs ----
+  (function(){
+    var tabs=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
+    var panels=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'));});
+    function select(i){tabs.forEach(function(t,j){var on=i===j;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;panels[j].hidden=!on;});}
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){select(i);});
+      t.addEventListener('keydown',function(e){var n=null;if(e.key==='ArrowRight')n=(i+1)%tabs.length;else if(e.key==='ArrowLeft')n=(i-1+tabs.length)%tabs.length;if(n!==null){e.preventDefault();select(n);tabs[n].focus();}});
+    });
+  })();
+
+  // ---- checklist ----
+  (function(){
+    var KEY='babyplan-checklist-v1';
+    var boxes=[].slice.call(document.querySelectorAll('.check input[type=checkbox]'));
+    var saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+    function upd(){var d=boxes.filter(function(b){return b.checked;}).length;var txt=d+' / '+boxes.length;var a=document.getElementById('prog');var b=document.getElementById('progen');if(a)a.textContent=txt;if(b)b.textContent=txt;}
+    boxes.forEach(function(b,i){if(saved[i])b.checked=true;b.addEventListener('change',function(){saved[i]=b.checked;try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(e){}upd();});});
+    upd();
+  })();
+
+  // ---- add info ----
+  (function(){
+    var files=[]; // {name, type, dataUrl}
+    var textEl=document.getElementById('ai-text');
+    var fileEl=document.getElementById('ai-file');
+    var thumbs=document.getElementById('ai-thumbs');
+    var status=document.getElementById('ai-status');
+    var sendBtn=document.getElementById('ai-send');
+    var updatesEl=document.getElementById('ai-updates');
+
+        function downscale(file){
+      return new Promise(function(resolve){
+        if(!/^image\//.test(file.type)){
+          var r=new FileReader();
+          r.onload=function(){resolve({name:file.name,type:file.type,dataUrl:r.result});};
+          r.readAsDataURL(file); return;
+        }
+        var img=new Image(); var url=URL.createObjectURL(file);
+        img.onload=function(){
+          var max=1600, w=img.width, h=img.height;
+          if(w>max||h>max){var s=Math.min(max/w,max/h);w=Math.round(w*s);h=Math.round(h*s);}
+          var c=document.createElement('canvas');c.width=w;c.height=h;
+          c.getContext('2d').drawImage(img,0,0,w,h);
+          URL.revokeObjectURL(url);
+          resolve({name:file.name,type:'image/jpeg',dataUrl:c.toDataURL('image/jpeg',0.82)});
+        };
+        img.onerror=function(){URL.revokeObjectURL(url);resolve(null);};
+        img.src=url;
+      });
+    }
+    function renderThumbs(){
+      thumbs.innerHTML='';
+      files.forEach(function(f,i){
+        var d=document.createElement('div');d.className='thumb'+(/^image\//.test(f.type)?'':' file');
+        if(/^image\//.test(f.type)){d.innerHTML='<img src="'+f.dataUrl+'" alt="">';}
+        else{d.textContent=f.name.slice(0,10);}
+        var b=document.createElement('button');b.className='rm';b.textContent='×';
+        b.onclick=function(){files.splice(i,1);renderThumbs();};
+        d.appendChild(b);thumbs.appendChild(d);
+      });
+    }
+    fileEl.addEventListener('change',function(){
+      var list=[].slice.call(fileEl.files);
+      Promise.all(list.map(downscale)).then(function(res){
+        res.forEach(function(r){if(r&&files.length<6)files.push(r);});
+        renderThumbs(); fileEl.value='';
+      });
+    });
+
+    function fmtTime(ts){try{return new Date(ts).toLocaleString(curLang()==='es'?'es-CO':'en-US',{dateStyle:'medium',timeStyle:'short'});}catch(e){return '';}}
+    function renderUpdate(u){
+      var d=document.createElement('div');
+      d.className='update'+(u.urgent?' urgent-u':'');
+      var you=(u.userText||'').trim();
+      d.innerHTML=
+        '<div class="u-time">'+fmtTime(u.ts)+'</div>'+
+        (you?'<div class="u-you"><b>'+t('you')+':</b> '+esc(you)+'</div>':'')+
+        '<h4><span class="es">'+esc(u.titleES||'')+'</span><span class="en">'+esc(u.titleEN||'')+'</span></h4>'+
+        '<div class="es">'+fmtNote(u.noteES||'')+'</div>'+
+        '<div class="en">'+fmtNote(u.noteEN||'')+'</div>';
+      return d;
+    }
+    function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+    function fmtNote(s){return esc(s).split(/\n\n+/).map(function(p){return '<p>'+p.replace(/\n/g,'<br>')+'</p>';}).join('');}
+    function renderAll(list){
+      updatesEl.innerHTML='';
+      (list||[]).slice().reverse().forEach(function(u){updatesEl.appendChild(renderUpdate(u));});
+    }
+
+    function loadState(){
+      fetch('/api/state').then(function(r){return r.ok?r.json():null;}).then(function(d){
+        if(d&&d.updates)renderAll(d.updates);
+      }).catch(function(){});
+    }
+
+    sendBtn.addEventListener('click',function(){
+      var text=textEl.value.trim();
+      if(!text&&files.length===0){status.textContent=t('need_text');return;}
+      sendBtn.disabled=true; status.textContent=t('sending');
+      fetch('/api/add-info',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({text:text,files:files,lang:curLang()})})
+      .then(function(r){
+        if(r.status===401){throw new Error('auth');}
+        if(!r.ok){throw new Error('http');}
+        return r.json();
+      })
+      .then(function(d){
+        status.textContent=t('ok');
+        textEl.value=''; files=[]; renderThumbs();
+        if(d&&d.updates)renderAll(d.updates);
+        else if(d&&d.update){updatesEl.insertBefore(renderUpdate(d.update),updatesEl.firstChild);}
+      })
+      .catch(function(e){
+        status.textContent=(e&&e.message==='auth')?t('err'):t('err_net');
+      })
+      .finally(function(){sendBtn.disabled=false;});
+    });
+
+    // load prior notes
+    loadState();
+  })();
+</script>
+</body>
+</html>

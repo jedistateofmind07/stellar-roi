@@ -1,0 +1,8 @@
+{
+  "name": "babyplan",
+  "private": true,
+  "dependencies": {
+    "@vercel/blob": "latest",
+    "@anthropic-ai/sdk": "latest"
+  }
+}
