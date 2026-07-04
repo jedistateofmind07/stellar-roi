@@ -1,5 +1,0 @@
-{
-  "functions": {
-    "api/add-info.js": { "maxDuration": 60 }
-  }
-}

@@ -252,6 +252,9 @@
   footer .wrap{display:flex;flex-direction:column;gap:.5rem;}
   footer b{color:#fff;}
   .src{font-size:.72rem;color:var(--ink-faint);}
+  .u-files{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem;}
+  .u-files img{max-width:150px;max-height:150px;border-radius:8px;border:1px solid var(--line);display:block;}
+  .u-doc{font-size:.85rem;align-self:center;}
 </style>
 </head>
 <body data-lang="es">
@@ -952,7 +955,7 @@
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Mantén el plan vivo</span><span class="en">Keep the plan alive</span></p>
       <h2><span class="es">Agregar información nueva</span><span class="en">Add new information</span></h2>
-      <p class="intro"><span class="es">Escribe una nota o adjunta una foto (por ejemplo, un resultado de laboratorio o el nombre exacto de tu trombofilia) y el asistente responde con notas personalizadas — qué significa y qué preguntarle a tu médico. Queda guardado abajo.</span><span class="en">Write a note or attach a photo (for example, a lab result or the exact name of your thrombophilia) and the assistant replies with personalized notes — what it means and what to ask your doctor. It's saved below.</span></p>
+      <p class="intro"><span class="es">Escribe una nota o adjunta una foto (por ejemplo, un resultado de laboratorio o el nombre exacto de tu trombofilia). Queda guardado abajo, para tener todo en un solo lugar — y pregúntale a Claude sobre cualquier resultado cuando quieras.</span><span class="en">Write a note or attach a photo (for example, a lab result or the exact name of your thrombophilia). It's saved below so everything stays in one place — and ask Claude about any result whenever you want.</span></p>
     </div>
 
     <div class="addinfo">
@@ -1021,7 +1024,7 @@
   var STR = {
     ph_text:{es:"Escribe aquí lo que quieras agregar… (por ejemplo: “Mi resultado dice Factor V Leiden heterocigoto” o adjunta la foto del laboratorio)",en:"Write anything you want to add… (e.g. “My result says Factor V Leiden heterozygous” or attach a photo of the lab)"},
     ph_code:{es:"Código",en:"Passcode"},
-    sending:{es:"Enviando y analizando…",en:"Sending and analyzing…"},
+    sending:{es:"Guardando…",en:"Saving…"},
     need_text:{es:"Escribe una nota o adjunta un archivo primero.",en:"Write a note or attach a file first."},
     need_code:{es:"Ingresa el código para enviar.",en:"Enter the passcode to send."},
     ok:{es:"¡Listo! Se agregó abajo.",en:"Done! Added below."},
@@ -1126,12 +1129,17 @@
       var d=document.createElement('div');
       d.className='update'+(u.urgent?' urgent-u':'');
       var you=(u.userText||'').trim();
+      var atts=(u.files||[]).filter(function(f){return f&&typeof f.dataUrl==='string';});
       d.innerHTML=
         '<div class="u-time">'+fmtTime(u.ts)+'</div>'+
         (you?'<div class="u-you"><b>'+t('you')+':</b> '+esc(you)+'</div>':'')+
-        '<h4><span class="es">'+esc(u.titleES||'')+'</span><span class="en">'+esc(u.titleEN||'')+'</span></h4>'+
-        '<div class="es">'+fmtNote(u.noteES||'')+'</div>'+
-        '<div class="en">'+fmtNote(u.noteEN||'')+'</div>';
+        (atts.length?'<div class="u-files">'+atts.map(function(f){
+          return /^image\//.test(f.type||'')
+            ?'<a href="'+f.dataUrl+'" target="_blank" rel="noopener"><img src="'+f.dataUrl+'" alt=""></a>'
+            :'<a class="u-doc" href="'+f.dataUrl+'" download="'+esc(f.name||'documento')+'">📄 '+esc(f.name||'PDF')+'</a>';
+        }).join('')+'</div>':'')+
+        ((u.titleES||u.titleEN)?'<h4><span class="es">'+esc(u.titleES||'')+'</span><span class="en">'+esc(u.titleEN||'')+'</span></h4>':'')+
+        ((u.noteES||u.noteEN)?'<div class="es">'+fmtNote(u.noteES||'')+'</div>'+'<div class="en">'+fmtNote(u.noteEN||'')+'</div>':'');
       return d;
     }
     function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}

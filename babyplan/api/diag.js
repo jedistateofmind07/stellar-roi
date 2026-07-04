@@ -12,7 +12,6 @@ module.exports = async (req, res) => {
   const out = {
     envNames: Object.keys(process.env).sort(),
     hasBlobToken: !!process.env.BLOB_READ_WRITE_TOKEN,
-    hasAnthropicKey: !!(process.env.ANTHROPIC_API_KEY || process.env.CLAUDE_API_KEY),
     blobs: null
   };
   if (out.hasBlobToken) {
