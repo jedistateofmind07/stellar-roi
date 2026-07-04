@@ -72,32 +72,51 @@ async function askClaude(question, attachments, history) {
   // The Agent SDK is ESM-only — load it with a dynamic import from CommonJS.
   const { query } = await import('@anthropic-ai/claude-agent-sdk');
 
+  // NOTE: no permissionMode override — 'bypassPermissions' maps to
+  // --dangerously-skip-permissions, which the CLI refuses to run as root
+  // (Vercel functions run as root). allowedTools already allowlists Read.
+  const abort = new AbortController();
+  const killTimer = setTimeout(() => abort.abort(), 150000);
   let resultText = '';
-  const q = query({
-    prompt,
-    options: {
-      cwd: dir,
-      systemPrompt: PLAN_CONTEXT,
-      allowedTools: ['Read'],
-      permissionMode: 'bypassPermissions',
-      maxTurns: 12,
-      env: {
-        ...process.env,
-        HOME: os.tmpdir(),
-        DISABLE_AUTOUPDATER: '1',
-        CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: '1'
+  let stderrBuf = '';
+  try {
+    const q = query({
+      prompt,
+      options: {
+        cwd: dir,
+        systemPrompt: PLAN_CONTEXT,
+        allowedTools: ['Read'],
+        maxTurns: 12,
+        abortController: abort,
+        stderr: d => { if (stderrBuf.length < 4000) stderrBuf += d; },
+        env: {
+          ...process.env,
+          HOME: os.tmpdir(),
+          DISABLE_AUTOUPDATER: '1',
+          CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC: '1'
+        }
+      }
+    });
+    for await (const msg of q) {
+      if (msg.type === 'result') {
+        resultText = msg.subtype === 'success' && typeof msg.result === 'string' ? msg.result : '';
+        if (msg.subtype !== 'success') stderrBuf = (msg.subtype || 'error') + ' | ' + stderrBuf;
       }
     }
-  });
-  for await (const msg of q) {
-    if (msg.type === 'result') {
-      resultText = msg.subtype === 'success' && typeof msg.result === 'string' ? msg.result : '';
-    }
+  } catch (e) {
+    const detail = (stderrBuf || (e && e.message) || 'unknown').slice(0, 600);
+    console.error('ask: agent failed:', detail);
+    throw new Error('agent: ' + detail);
+  } finally {
+    clearTimeout(killTimer);
+    try { fs.rmSync(dir, { recursive: true, force: true }); } catch (e) {}
   }
-  try { fs.rmSync(dir, { recursive: true, force: true }); } catch (e) {}
 
   const m = resultText.match(/\{[\s\S]*\}/);
-  if (!m) throw new Error('no_json');
+  if (!m) {
+    console.error('ask: no JSON in result. stderr:', stderrBuf.slice(0, 600));
+    throw new Error('agent returned no answer' + (stderrBuf ? ': ' + stderrBuf.slice(0, 300) : ''));
+  }
   return JSON.parse(m[0]);
 }
 
@@ -181,6 +200,18 @@ module.exports = async (req, res) => {
 
     res.status(200).json({ updates });
   } catch (e) {
-    res.status(500).json({ error: 'server' });
+    console.error('ask: failed:', e && e.message);
+    let updates = [];
+    try { updates = (await readUpdates()).updates; } catch (e2) {}
+    res.status(200).json({
+      updates: updates.concat([{
+        ts: Date.now(),
+        titleES: 'El asistente falló',
+        titleEN: 'Assistant error',
+        noteES: 'Detalle técnico (para Robbie): ' + ((e && e.message) || 'desconocido').slice(0, 400),
+        noteEN: 'Technical detail (for Robbie): ' + ((e && e.message) || 'unknown').slice(0, 400),
+        urgent: false
+      }])
+    });
   }
 };
