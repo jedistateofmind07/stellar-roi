@@ -4,6 +4,7 @@ const path = require('path');
 const { put } = require('@vercel/blob');
 const { query } = require('@anthropic-ai/claude-agent-sdk');
 const { readUpdates, DEFAULT_PATH } = require('./state.js');
+const { storeFiles } = require('./add-info.js');
 
 const MAX_REQUEST_FILES = 4;
 const MAX_STORED_FILES = 4;
@@ -36,14 +37,29 @@ function validFile(f) {
   return f && typeof f.dataUrl === 'string' && DATA_URL_RE.test(f.dataUrl);
 }
 
+function usableAttachment(f) {
+  return f && (validFile(f) || typeof f.url === 'string');
+}
+
 async function askClaude(question, attachments, history) {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'ask-'));
-  const filePaths = attachments.map((f, i) => {
-    const type = f.dataUrl.slice(5, f.dataUrl.indexOf(';'));
+  const filePaths = [];
+  for (let i = 0; i < attachments.length; i++) {
+    const f = attachments[i];
+    let buf, type;
+    if (typeof f.dataUrl === 'string') {
+      type = f.dataUrl.slice(5, f.dataUrl.indexOf(';'));
+      buf = Buffer.from(f.dataUrl.slice(f.dataUrl.indexOf(',') + 1), 'base64');
+    } else {
+      const r = await fetch(f.url);
+      if (!r.ok) continue;
+      type = f.type || r.headers.get('content-type') || 'image/jpeg';
+      buf = Buffer.from(await r.arrayBuffer());
+    }
     const p = path.join(dir, 'attachment-' + (i + 1) + extFor(type));
-    fs.writeFileSync(p, Buffer.from(f.dataUrl.slice(f.dataUrl.indexOf(',') + 1), 'base64'));
-    return p;
-  });
+    fs.writeFileSync(p, buf);
+    filePaths.push(p);
+  }
 
   const prompt = [
     "Today's date: " + new Date().toISOString().slice(0, 10),
@@ -124,7 +140,7 @@ module.exports = async (req, res) => {
     for (let i = updates.length - 1; i >= 0 && attachments.length < MAX_REQUEST_FILES + MAX_STORED_FILES; i--) {
       for (const f of updates[i].files || []) {
         if (attachments.length >= MAX_REQUEST_FILES + MAX_STORED_FILES) break;
-        if (validFile(f)) attachments.push(f);
+        if (usableAttachment(f)) attachments.push(f);
       }
     }
 
@@ -139,14 +155,11 @@ module.exports = async (req, res) => {
 
     const note = await askClaude(question, attachments, history);
 
+    const storedFiles = await storeFiles(reqFiles);
     updates.push({
       ts: Date.now(),
       userText: question,
-      files: reqFiles.map(f => ({
-        name: typeof f.name === 'string' ? f.name.slice(0, 120) : '',
-        type: f.dataUrl.slice(5, f.dataUrl.indexOf(';')),
-        dataUrl: f.dataUrl
-      })),
+      files: storedFiles,
       titleES: note.titleES || '',
       titleEN: note.titleEN || '',
       noteES: note.noteES || '',

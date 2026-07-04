@@ -1030,6 +1030,7 @@
     asking:{es:"Consultando al asistente…",en:"Asking the assistant…"},
     ask_need:{es:"Escribe tu pregunta primero.",en:"Write your question first."},
     ask_ok:{es:"Respuesta agregada abajo.",en:"Answer added below."},
+    err_big:{es:"Archivo(s) demasiado grandes. Envía menos fotos a la vez, o toma fotos de las páginas del PDF (máx ~3MB por archivo).",en:"File(s) too large. Send fewer photos at a time, or photograph the PDF pages (max ~3MB per file)."},
     need_text:{es:"Escribe una nota o adjunta un archivo primero.",en:"Write a note or attach a file first."},
     need_code:{es:"Ingresa el código para enviar.",en:"Enter the passcode to send."},
     ok:{es:"¡Listo! Se agregó abajo.",en:"Done! Added below."},
@@ -1093,18 +1094,19 @@
         function downscale(file){
       return new Promise(function(resolve){
         if(!/^image\//.test(file.type)){
+          if(file.size>3145728){resolve({name:file.name,tooBig:true});return;}
           var r=new FileReader();
           r.onload=function(){resolve({name:file.name,type:file.type,dataUrl:r.result});};
           r.readAsDataURL(file); return;
         }
         var img=new Image(); var url=URL.createObjectURL(file);
         img.onload=function(){
-          var max=1600, w=img.width, h=img.height;
+          var max=1400, w=img.width, h=img.height;
           if(w>max||h>max){var s=Math.min(max/w,max/h);w=Math.round(w*s);h=Math.round(h*s);}
           var c=document.createElement('canvas');c.width=w;c.height=h;
           c.getContext('2d').drawImage(img,0,0,w,h);
           URL.revokeObjectURL(url);
-          resolve({name:file.name,type:'image/jpeg',dataUrl:c.toDataURL('image/jpeg',0.82)});
+          resolve({name:file.name,type:'image/jpeg',dataUrl:c.toDataURL('image/jpeg',0.75)});
         };
         img.onerror=function(){URL.revokeObjectURL(url);resolve(null);};
         img.src=url;
@@ -1124,8 +1126,13 @@
     fileEl.addEventListener('change',function(){
       var list=[].slice.call(fileEl.files);
       Promise.all(list.map(downscale)).then(function(res){
-        res.forEach(function(r){if(r&&files.length<6)files.push(r);});
+        var big=false;
+        res.forEach(function(r){
+          if(r&&r.tooBig){big=true;return;}
+          if(r&&files.length<6)files.push(r);
+        });
         renderThumbs(); fileEl.value='';
+        status.textContent=big?t('err_big'):'';
       });
     });
 
@@ -1134,14 +1141,15 @@
       var d=document.createElement('div');
       d.className='update'+(u.urgent?' urgent-u':'');
       var you=(u.userText||'').trim();
-      var atts=(u.files||[]).filter(function(f){return f&&typeof f.dataUrl==='string';});
+      var atts=(u.files||[]).filter(function(f){return f&&(f.url||f.dataUrl);});
       d.innerHTML=
         '<div class="u-time">'+fmtTime(u.ts)+'</div>'+
         (you?'<div class="u-you"><b>'+t('you')+':</b> '+esc(you)+'</div>':'')+
         (atts.length?'<div class="u-files">'+atts.map(function(f){
+          var src=f.url||f.dataUrl;
           return /^image\//.test(f.type||'')
-            ?'<a href="'+f.dataUrl+'" target="_blank" rel="noopener"><img src="'+f.dataUrl+'" alt=""></a>'
-            :'<a class="u-doc" href="'+f.dataUrl+'" download="'+esc(f.name||'documento')+'">📄 '+esc(f.name||'PDF')+'</a>';
+            ?'<a href="'+src+'" target="_blank" rel="noopener"><img src="'+src+'" alt=""></a>'
+            :'<a class="u-doc" href="'+src+'" download="'+esc(f.name||'documento')+'">📄 '+esc(f.name||'PDF')+'</a>';
         }).join('')+'</div>':'')+
         ((u.titleES||u.titleEN)?'<h4><span class="es">'+esc(u.titleES||'')+'</span><span class="en">'+esc(u.titleEN||'')+'</span></h4>':'')+
         ((u.noteES||u.noteEN)?'<div class="es">'+fmtNote(u.noteES||'')+'</div>'+'<div class="en">'+fmtNote(u.noteEN||'')+'</div>':'');
@@ -1163,10 +1171,13 @@
     sendBtn.addEventListener('click',function(){
       var text=textEl.value.trim();
       if(!text&&files.length===0){status.textContent=t('need_text');return;}
+      var payload=JSON.stringify({text:text,files:files,lang:curLang()});
+      if(payload.length>3800000){status.textContent=t('err_big');return;}
       sendBtn.disabled=true; status.textContent=t('sending');
       fetch('/api/add-info',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({text:text,files:files,lang:curLang()})})
+        body:payload})
       .then(function(r){
+        if(r.status===413){throw new Error('big');}
         if(r.status===401){throw new Error('auth');}
         if(!r.ok){throw new Error('http');}
         return r.json();
@@ -1178,7 +1189,7 @@
         else if(d&&d.update){updatesEl.insertBefore(renderUpdate(d.update),updatesEl.firstChild);}
       })
       .catch(function(e){
-        status.textContent=(e&&e.message==='auth')?t('err'):t('err_net');
+        status.textContent=(e&&e.message==='auth')?t('err'):(e&&e.message==='big')?t('err_big'):t('err_net');
       })
       .finally(function(){sendBtn.disabled=false;});
     });
@@ -1187,10 +1198,13 @@
     askBtn.addEventListener('click',function(){
       var text=textEl.value.trim();
       if(!text){status.textContent=t('ask_need');return;}
+      var payload=JSON.stringify({question:text,files:files,lang:curLang()});
+      if(payload.length>3800000){status.textContent=t('err_big');return;}
       askBtn.disabled=true; sendBtn.disabled=true; status.textContent=t('asking');
       fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({question:text,files:files,lang:curLang()})})
+        body:payload})
       .then(function(r){
+        if(r.status===413){throw new Error('big');}
         if(!r.ok){throw new Error('http');}
         return r.json();
       })
@@ -1199,7 +1213,7 @@
         textEl.value=''; files=[]; renderThumbs();
         if(d&&d.updates)renderAll(d.updates);
       })
-      .catch(function(){status.textContent=t('err_net');})
+      .catch(function(e){status.textContent=(e&&e.message==='big')?t('err_big'):t('err_net');})
       .finally(function(){askBtn.disabled=false; sendBtn.disabled=false;});
     });
 
