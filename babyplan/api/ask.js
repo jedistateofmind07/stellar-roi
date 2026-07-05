@@ -6,6 +6,34 @@ const MAX_REQUEST_FILES = 10;
 const MAX_STORED_FILES = 6;
 const MAX_HISTORY = 20;
 const MODEL = 'claude-opus-4-8';
+const MAX_TOKENS = 6000;
+
+// Extract the note object from the model's reply. Tolerant of a leading
+// preamble and of a response that got truncated mid-JSON: falls back to
+// pulling each field out individually so a cut-off answer still shows.
+function parseNote(textOut) {
+  const start = textOut.indexOf('{');
+  const end = textOut.lastIndexOf('}');
+  if (start !== -1 && end > start) {
+    try { return JSON.parse(textOut.slice(start, end + 1)); } catch (e) { /* fall through */ }
+  }
+  const grab = key => {
+    const m = textOut.match(new RegExp('"' + key + '"\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)', 'i'));
+    if (!m) return '';
+    return m[1].replace(/\\n/g, '\n').replace(/\\"/g, '"').replace(/\\t/g, ' ').replace(/\\\\/g, '\\');
+  };
+  const note = {
+    titleES: grab('titleES'),
+    titleEN: grab('titleEN'),
+    noteES: grab('noteES'),
+    noteEN: grab('noteEN'),
+    urgent: /"urgent"\s*:\s*true/i.test(textOut)
+  };
+  if (!note.titleES && !note.titleEN && !note.noteES && !note.noteEN) {
+    throw new Error('unparseable reply: ' + textOut.slice(0, 150));
+  }
+  return note;
+}
 const DATA_URL_RE = /^data:(image\/(?:jpeg|png|gif|webp)|application\/pdf);base64,[A-Za-z0-9+/=]+$/;
 
 const PLAN_CONTEXT = `You are the assistant embedded in a private pregnancy-planning website used by a couple in Bogotá, Colombia (he reads English, she reads Spanish — always answer in both). This site is their single repository for everything about the pregnancy and birth, and your job is to analyze what they add, give feedback and general medical guidance, and keep the plan and next steps up to date.
@@ -18,9 +46,9 @@ Their situation and plan:
 
 Attached photos and PDFs (lab results, doctor's notes, ultrasounds) are included in the message, along with the running log of saved notes. Read them carefully. Give practical, specific guidance: what results mean in plain language, what to ask the obstetrician, concrete next steps, and how the new information changes the plan and its deadlines. General guidance, not diagnoses. Warm and honest. Set "urgent" true only for genuine red flags that warrant contacting a doctor promptly.
 
-Respond with ONLY a JSON object, no markdown fences, in exactly this shape:
+The very first character of your response MUST be "{". Output ONLY a single JSON object and nothing else — no preamble, no explanation, no markdown fences. Exact shape:
 {"titleES":"...","titleEN":"...","noteES":"...","noteEN":"...","urgent":false}
-titleES/noteES in Colombian Spanish, titleEN/noteEN in English. Notes can include short next-step lists. Keep it focused and useful.`;
+titleES/noteES in Colombian Spanish, titleEN/noteEN in English. Put the full analysis, feedback, and next steps inside noteES/noteEN (use \\n for line breaks). Titles are one short line. Keep each note focused — aim for a few paragraphs, not an essay.`;
 
 function validFile(f) {
   return f && typeof f.dataUrl === 'string' && DATA_URL_RE.test(f.dataUrl);
@@ -101,7 +129,7 @@ async function askClaude(question, attachments, history) {
       signal: controller.signal,
       body: JSON.stringify({
         model: MODEL,
-        max_tokens: 2000,
+        max_tokens: MAX_TOKENS,
         system,
         messages: [{ role: 'user', content }]
       })
@@ -121,9 +149,7 @@ async function askClaude(question, attachments, history) {
     .filter(b => b.type === 'text')
     .map(b => b.text)
     .join('\n');
-  const m = textOut.match(/\{[\s\S]*\}/);
-  if (!m) throw new Error('no JSON in reply: ' + textOut.slice(0, 200));
-  return JSON.parse(m[0]);
+  return parseNote(textOut);
 }
 
 module.exports = async (req, res) => {
