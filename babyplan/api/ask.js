@@ -99,8 +99,12 @@ async function askClaude(question, attachments, history) {
     });
     for await (const msg of q) {
       if (msg.type === 'result') {
-        resultText = msg.subtype === 'success' && typeof msg.result === 'string' ? msg.result : '';
-        if (msg.subtype !== 'success') stderrBuf = (msg.subtype || 'error') + ' | ' + stderrBuf;
+        const ok = msg.subtype === 'success' && !msg.is_error && typeof msg.result === 'string';
+        resultText = ok ? msg.result : '';
+        if (!ok) {
+          const detail = typeof msg.result === 'string' ? msg.result.slice(0, 300) : (msg.subtype || 'error');
+          stderrBuf = detail + ' | ' + stderrBuf;
+        }
       }
     }
   } catch (e) {
