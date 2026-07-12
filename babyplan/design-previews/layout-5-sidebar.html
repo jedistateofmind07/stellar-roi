@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Plan de Embarazo · Bogotá (Layout 5 · sidebar v2)</title>
+<style>
+  :root{
+    --ground:#F4F6F2; --panel:#FFFFFF; --panel-2:#EEF2EC;
+    --ink:#1C2A25; --ink-soft:#42544C; --ink-faint:#6B7A72;
+    --line:#DCE3DA; --line-strong:#C4D0C4;
+    --teal:#2E6E62; --teal-deep:#234f47; --teal-tint:#E4EFEA;
+    --clay:#D98C6A; --clay-tint:#F7E7DD;
+    --amber:#B0791F; --amber-tint:#F6ECD6;
+    --crimson:#B23A3A; --crimson-tint:#F6E2E0;
+    --plum:#6E5079; --plum-tint:#EFE7F2;
+    --gold:#9C7A2A;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --sp:clamp(1.1rem,4vw,2rem);
+    --maxw:1180px; --sidebar-w:220px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+    font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--sp);}
+  h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.15;text-wrap:balance;margin:0;}
+  p{margin:0 0 .85em;}
+  a{color:var(--teal-deep);text-underline-offset:2px;}
+  .eyebrow{font-family:var(--sans);text-transform:uppercase;letter-spacing:.14em;
+    font-size:.7rem;font-weight:700;color:var(--teal);margin:0 0 .55rem;}
+  .tnum{font-variant-numeric:tabular-nums;}
+
+  [hidden]{display:none !important;}
+  [data-lang="es"] .en{display:none;} [data-lang="en"] .es{display:none;}
+  span.en,span.es{display:inline;}
+  [data-lang="es"] span.en{display:none;} [data-lang="en"] span.es{display:none;}
+
+  .langbtn{position:fixed;top:.8rem;right:.8rem;z-index:50;
+    background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
+    border:1px solid var(--line-strong);border-radius:999px;
+    padding:.45rem .9rem;font-family:var(--sans);font-size:.82rem;font-weight:700;
+    color:var(--teal-deep);cursor:pointer;box-shadow:0 2px 8px rgba(28,42,37,.12);
+    display:flex;align-items:center;gap:.4rem;}
+  .langbtn:hover{background:#fff;}
+
+  .hero{background:
+      radial-gradient(120% 90% at 82% -10%, rgba(217,140,106,.20), transparent 55%),
+      radial-gradient(120% 100% at 0% 0%, rgba(46,110,98,.16), transparent 50%),
+      var(--teal-deep);
+    color:#F3F7F3;padding:clamp(2.6rem,7vw,4.2rem) 0 clamp(2rem,6vw,3.2rem);}
+  .hero .eyebrow{color:#B9E0D2;}
+  .hero h1{font-size:clamp(2.05rem,6.2vw,3.4rem);color:#FCFEFB;letter-spacing:-.01em;}
+  .hero .lede{font-size:clamp(1.02rem,2.5vw,1.2rem);color:#D6E7DF;max-width:58ch;margin-top:.9rem;}
+  .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem;}
+  .chip{display:inline-flex;align-items:center;gap:.4rem;background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.22);color:#EAF3EE;border-radius:999px;
+    padding:.34rem .7rem;font-size:.8rem;font-weight:600;}
+  .chip b{color:#fff;font-weight:700;}
+
+  .layout{display:flex;align-items:flex-start;gap:2.2rem;padding:2rem var(--sp);max-width:var(--maxw);margin:0 auto;}
+  .sidebar{flex:0 0 var(--sidebar-w);position:sticky;top:1.2rem;display:flex;flex-direction:column;gap:.15rem;}
+  .sidebar [role=tab]{all:unset;box-sizing:border-box;cursor:pointer;font-size:.88rem;font-weight:650;
+    color:var(--ink-soft);padding:.55rem .8rem;border-radius:9px;font-family:var(--sans);}
+  .sidebar [role=tab]:hover{background:var(--teal-tint);color:var(--teal-deep);}
+  .sidebar [role=tab][aria-selected="true"]{background:var(--teal);color:#fff;}
+  .sidebar-title{font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:0 .8rem;margin-bottom:.4rem;}
+  .content{flex:1;min-width:0;}
+  @media(max-width:860px){
+    .layout{flex-direction:column;gap:1rem;padding:1.2rem var(--sp);}
+    .sidebar{position:static;flex-direction:row;flex-wrap:wrap;width:100%;background:var(--panel-2);border-radius:12px;padding:.4rem;gap:.15rem;}
+    .sidebar-title{display:none;}
+    .sidebar [role=tab]{padding:.45rem .65rem;}
+  }
+
+  section.tabpanel{padding-bottom:2rem;}
+  .sec-head{margin-bottom:1.4rem;}
+  .sec-head h2{font-size:clamp(1.5rem,4vw,2.05rem);}
+  .sec-head p.intro{color:var(--ink-soft);max-width:66ch;margin-top:.5rem;}
+
+  .disclaimer{background:var(--amber-tint);border:1px solid #E6D3A6;border-radius:12px;
+    padding:.85rem 1.05rem;font-size:.9rem;color:#5f4a17;display:flex;gap:.65rem;align-items:flex-start;margin-bottom:1.6rem;}
+  .disclaimer svg{flex:0 0 auto;margin-top:2px;}
+
+  .priority{background:linear-gradient(180deg,var(--plum-tint),var(--panel));border:1px solid #DCC8E4;border-radius:16px;padding:1.4rem 1.4rem;}
+  .priority .badge{display:inline-flex;align-items:center;gap:.45rem;background:var(--plum);color:#fff;font-weight:700;font-size:.78rem;letter-spacing:.03em;border-radius:999px;padding:.35rem .8rem;text-transform:uppercase;}
+  .priority h3{font-size:1.3rem;margin:.85rem 0 .5rem;}
+  .keybox{background:#fff;border:1px solid #DCC8E4;border-radius:12px;padding:1rem 1.1rem;margin-top:1rem;}
+  .keybox .eyebrow{color:var(--plum);}
+  .qlist{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:.55rem;}
+  .qlist li{display:flex;gap:.6rem;align-items:flex-start;font-size:.93rem;}
+  .qlist li::before{content:"?";flex:0 0 auto;width:1.4rem;height:1.4rem;border-radius:50%;background:var(--plum-tint);color:var(--plum);display:grid;place-items:center;font-weight:800;font-size:.82rem;margin-top:1px;}
+
+  .verdict{background:linear-gradient(180deg,var(--teal-tint),var(--panel));border:1px solid var(--line-strong);border-radius:16px;padding:1.4rem 1.4rem;}
+  .verdict .badge{display:inline-flex;align-items:center;gap:.45rem;background:var(--teal);color:#fff;font-weight:700;font-size:.82rem;letter-spacing:.03em;border-radius:999px;padding:.35rem .8rem;text-transform:uppercase;}
+  .verdict h3{font-size:1.3rem;margin:.85rem 0 .5rem;}
+
+  .urgent-band{display:grid;gap:1rem;}
+  @media(min-width:640px){.urgent-band{grid-template-columns:1fr 1fr;}}
+  .urgent{border-left:4px solid var(--clay);background:var(--clay-tint);border-radius:0 12px 12px 0;padding:1.05rem 1.15rem;}
+  .urgent .tag{font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#9c5a38;}
+  .urgent h3{font-size:1.05rem;margin:.35rem 0 .45rem;}
+
+  .tabs{display:flex;gap:.4rem;background:var(--panel-2);padding:.32rem;border-radius:12px;border:1px solid var(--line);flex-wrap:wrap;}
+  .tabs button{flex:1 1 auto;min-width:150px;font-family:var(--sans);font-size:.86rem;font-weight:700;color:var(--ink-soft);background:transparent;border:0;border-radius:9px;padding:.6rem .5rem;cursor:pointer;}
+  .tabs button[aria-selected="true"]{background:var(--teal);color:#fff;}
+  .tpanel{margin-top:1.4rem;}
+  .tri-intro{background:var(--teal-tint);border-radius:12px;padding:.9rem 1.1rem;font-size:.92rem;color:var(--teal-deep);margin-bottom:1.3rem;}
+
+  .milestone{display:grid;grid-template-columns:auto 1fr;gap:1rem;padding:1.05rem 0;border-top:1px solid var(--line);}
+  .milestone:first-of-type{border-top:none;}
+  .week-badge{flex:0 0 auto;background:var(--panel);border:1.5px solid var(--teal);color:var(--teal-deep);border-radius:11px;min-width:76px;height:fit-content;padding:.5rem .3rem;text-align:center;font-weight:800;line-height:1.05;}
+  .week-badge small{display:block;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);}
+  .week-badge .n{font-size:1.1rem;font-variant-numeric:tabular-nums;}
+  .m-body h4{font-family:var(--serif);font-size:1.1rem;font-weight:600;margin:.05rem 0 .5rem;}
+
+  .emergency{background:#fff;border:2px solid var(--crimson);border-radius:16px;overflow:hidden;}
+  .emergency .top{background:var(--crimson);color:#fff;padding:.9rem 1.2rem;display:flex;align-items:center;gap:.6rem;}
+  .emergency .top h3{color:#fff;font-size:1.15rem;}
+  .emergency .body{padding:1.1rem 1.3rem;}
+  .emergency ul{margin:0;padding-left:1.15rem;font-size:.92rem;}
+
+  .phase{margin-bottom:1.5rem;}
+  .phase h3{font-size:1.1rem;margin-bottom:.2rem;}
+  .check{display:flex;gap:.7rem;align-items:flex-start;padding:.5rem .7rem;border-radius:10px;cursor:pointer;user-select:none;}
+  .check:hover{background:var(--panel-2);}
+  .check input{flex:0 0 auto;width:1.2rem;height:1.2rem;margin-top:.15rem;accent-color:var(--teal);cursor:pointer;}
+  .check input:checked ~ .lbl{color:var(--ink-faint);text-decoration:line-through;}
+  .progress{font-size:.8rem;color:var(--teal-deep);font-weight:700;margin-left:.3rem;}
+
+  .addinfo{background:linear-gradient(180deg,#eef4f0,var(--panel));border:1px solid var(--line-strong);border-radius:16px;padding:1.3rem 1.4rem;}
+  .addinfo textarea{width:100%;min-height:96px;border:1px solid var(--line-strong);border-radius:10px;padding:.7rem .8rem;font-family:var(--sans);font-size:.95rem;resize:vertical;background:#fff;color:var(--ink);}
+  .ai-row{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-top:.7rem;}
+  .filebtn{display:inline-flex;align-items:center;gap:.4rem;background:#fff;border:1px solid var(--line-strong);border-radius:9px;padding:.5rem .8rem;font-size:.85rem;font-weight:650;cursor:pointer;color:var(--ink-soft);}
+  .filebtn:hover{background:var(--panel-2);}
+  .sendbtn{background:var(--teal);color:#fff;border:0;border-radius:9px;padding:.55rem 1.1rem;font-size:.9rem;font-weight:700;cursor:pointer;}
+  .thumbs{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem;}
+  .thumb{position:relative;width:56px;height:56px;border-radius:8px;overflow:hidden;border:1px solid var(--line-strong);background:var(--panel-2);display:grid;place-items:center;font-size:.6rem;color:var(--ink-soft);text-align:center;padding:2px;}
+  .thumb .rm{position:absolute;top:0;right:0;background:rgba(0,0,0,.55);color:#fff;border:0;width:18px;height:18px;font-size:.7rem;cursor:pointer;line-height:1;}
+  .ai-status{font-size:.85rem;margin-top:.7rem;min-height:1.2em;color:var(--ink-soft);}
+  .askbtn{background:var(--plum);}
+
+  .expand-btn{margin-top:1.2rem;}
+  .expand-btn .arrow{color:var(--teal);}
+  .expand-panel{margin-top:.9rem;}
+  .cat-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem;}
+  .cat-chip{background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:.35rem .75rem;font-size:.8rem;font-weight:650;color:var(--ink-soft);cursor:pointer;}
+  .cat-chip.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+  .act-cards{display:grid;gap:.6rem;}
+  @media(min-width:640px){.act-cards{grid-template-columns:1fr 1fr;}}
+  .act-card{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:.7rem .85rem;font-size:.9rem;display:flex;justify-content:space-between;gap:.6rem;align-items:baseline;}
+  .act-card .act-date{font-size:.72rem;color:var(--ink-faint);white-space:nowrap;}
+  .act-notes{display:grid;gap:0;}
+  .act-row{display:flex;gap:.9rem;font-size:.9rem;padding:.6rem 0;border-top:1px solid var(--line);}
+  .act-row:first-child{border-top:none;}
+  .act-row .act-date{flex:0 0 auto;width:3.4rem;color:var(--ink-faint);font-size:.78rem;font-weight:700;padding-top:.1rem;}
+  .ink-soft-txt{color:var(--ink-soft);}
+
+  .chat-panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.8rem;}
+  .chat-messages{display:flex;flex-direction:column;gap:.7rem;max-height:420px;overflow-y:auto;padding-right:.2rem;}
+  .msg{max-width:80%;padding:.65rem .9rem;border-radius:14px;font-size:.92rem;line-height:1.5;}
+  .msg.user{align-self:flex-end;background:var(--teal);color:#fff;border-bottom-right-radius:4px;}
+  .msg.claude{align-self:flex-start;background:var(--panel-2);color:var(--ink);border-bottom-left-radius:4px;}
+  .msg .msg-time{display:block;font-size:.68rem;opacity:.7;margin-top:.3rem;}
+  .chat-input-row{display:flex;gap:.6rem;align-items:flex-end;border-top:1px solid var(--line);padding-top:.8rem;}
+  .chat-input-row textarea{flex:1;min-height:52px;border:1px solid var(--line-strong);border-radius:10px;padding:.6rem .8rem;font-family:var(--sans);font-size:.92rem;resize:vertical;background:#fff;color:var(--ink);}
+
+  .robbie{background:linear-gradient(180deg,#f0f4ee,var(--panel));border:1px solid var(--line-strong);border-radius:16px;padding:1.3rem 1.4rem;}
+  .money{display:flex;flex-wrap:wrap;gap:.5rem 1.5rem;align-items:baseline;margin:.8rem 0;font-variant-numeric:tabular-nums;}
+  .money .big{font-family:var(--serif);font-size:2rem;color:var(--teal-deep);font-weight:700;}
+  .money .arrow{color:var(--clay);font-size:1.3rem;}
+
+  details.sources{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.4rem 1rem;}
+  details.sources summary{cursor:pointer;font-weight:700;padding:.6rem 0;font-size:.92rem;}
+
+  footer{background:var(--teal-deep);color:#cfe1d9;padding:2rem 0;font-size:.85rem;}
+  footer .wrap{display:flex;flex-direction:column;gap:.5rem;}
+  footer b{color:#fff;}
+  .src{font-size:.72rem;color:var(--ink-faint);}
+</style>
+</head>
+<body data-lang="es">
+
+<button class="langbtn" id="langbtn" aria-label="Switch language">
+  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>
+  <span class="es">English</span><span class="en">Español</span>
+</button>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="eyebrow"><span class="es">Una guía de embarazo · Bogotá 2026–2027</span><span class="en">A pregnancy companion · Bogotá 2026–2027</span></p>
+    <h1><span class="es">Nueve meses, un solo plan.</span><span class="en">Nine months, one plan.</span></h1>
+    <p class="lede"><span class="es">Todo investigado en un solo lugar.</span><span class="en">Everything researched in one place.</span></p>
+    <div class="chips">
+      <span class="chip">🗓️ <span class="es">Fecha ~feb–mar 2027</span><span class="en">Due ~Feb–Mar 2027</span></span>
+      <span class="chip">🏥 <b>Clínica La Colina</b></span>
+    </div>
+    <div class="chips" style="margin-top:.6rem;">
+      <span class="chip" style="background:rgba(217,140,106,.28);border-color:rgba(217,140,106,.5);">🧪 <b>LAYOUT 5 — SIDEBAR (v2)</b> — no auto-scroll, dedicated Chat tab</span>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+  <nav class="sidebar" aria-label="Navigation" role="tablist">
+    <div class="sidebar-title"><span class="es">Secciones</span><span class="en">Sections</span></div>
+    <button role="tab" id="navtab-priority" data-target="priority" aria-selected="true"><span class="es">Prioridad</span><span class="en">Priority</span></button>
+    <button role="tab" id="navtab-hospital" data-target="hospital" aria-selected="false" tabindex="-1"><span class="es">Hospital</span><span class="en">Hospital</span></button>
+    <button role="tab" id="navtab-now" data-target="now" aria-selected="false" tabindex="-1"><span class="es">Ahora</span><span class="en">Do now</span></button>
+    <button role="tab" id="navtab-insurance" data-target="insurance" aria-selected="false" tabindex="-1"><span class="es">Seguro</span><span class="en">Insurance</span></button>
+    <button role="tab" id="navtab-timeline" data-target="timeline" aria-selected="false" tabindex="-1"><span class="es">Semana a semana</span><span class="en">Week by week</span></button>
+    <button role="tab" id="navtab-supplements" data-target="supplements" aria-selected="false" tabindex="-1"><span class="es">Vitaminas</span><span class="en">Vitamins</span></button>
+    <button role="tab" id="navtab-diet" data-target="diet" aria-selected="false" tabindex="-1"><span class="es">Dieta</span><span class="en">Diet</span></button>
+    <button role="tab" id="navtab-exercise" data-target="exercise" aria-selected="false" tabindex="-1"><span class="es">Ejercicio</span><span class="en">Exercise</span></button>
+    <button role="tab" id="navtab-emergency" data-target="emergency" aria-selected="false" tabindex="-1"><span class="es">Señales de alarma</span><span class="en">Warning signs</span></button>
+    <button role="tab" id="navtab-logistics" data-target="logistics" aria-selected="false" tabindex="-1"><span class="es">Lista</span><span class="en">Checklist</span></button>
+    <button role="tab" id="navtab-addinfo" data-target="addinfo" aria-selected="false" tabindex="-1"><span class="es">Agregar info</span><span class="en">Add info</span></button>
+    <button role="tab" id="navtab-chat" data-target="chat" aria-selected="false" tabindex="-1"><span class="es">Chat</span><span class="en">Chat</span></button>
+    <button role="tab" id="navtab-robbie" data-target="robbie" aria-selected="false" tabindex="-1"><span class="es">Para Robbie</span><span class="en">For Robbie</span></button>
+    <button role="tab" id="navtab-sources" data-target="sources" aria-selected="false" tabindex="-1"><span class="es">Fuentes</span><span class="en">Sources</span></button>
+  </nav>
+
+  <main class="content">
+    <div class="disclaimer">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8a6d1f" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="13"/><circle cx="12" cy="16.5" r="0.4" fill="#8a6d1f" stroke="#8a6d1f"/></svg>
+      <div><span class="es">Esto es investigación bien documentada para <b>llevar a tu ginecólogo/a y especialista</b>.</span><span class="en">This is well-sourced research to <b>bring to your OB and specialist</b>.</span></div>
+    </div>
+
+    <section id="priority" class="tabpanel" role="tabpanel" aria-labelledby="navtab-priority">
+      <div class="sec-head"><p class="eyebrow"><span class="es">Lo más importante primero</span><span class="en">First things first</span></p><h2><span class="es">Tu trombofilia y tu historia</span><span class="en">Your thrombophilia &amp; history</span></h2></div>
+      <div class="priority">
+        <span class="badge">◆ <span class="es">Máxima prioridad</span><span class="en">Top priority</span></span>
+        <h3><span class="es">Un solo dato cambia todo el plan.</span><span class="en">One fact drives the whole plan.</span></h3>
+        <p class="src"><span class="es">(Contenido completo igual al sitio en vivo.)</span><span class="en">(Full content same as the live site.)</span></p>
+        <div class="keybox">
+          <p class="eyebrow"><span class="es">Preguntas para tu especialista</span><span class="en">Questions for your specialist</span></p>
+          <ul class="qlist"><li><span class="es"><b>¿Exactamente cuál trombofilia tengo?</b></span><span class="en"><b>Which thrombophilia exactly?</b></span></li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="hospital" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-hospital">
+      <div class="sec-head"><p class="eyebrow"><span class="es">El veredicto</span><span class="en">The verdict</span></p><h2><span class="es">¿La Clínica La Colina es un buen lugar?</span><span class="en">Is Clínica La Colina a good place?</span></h2></div>
+      <div class="verdict"><span class="badge">✓ <span class="es">Recomendada</span><span class="en">Recommended</span></span><h3><span class="es">Una clínica privada de alta complejidad.</span><span class="en">A high-complexity private clinic.</span></h3><p class="src"><span class="es">(Contenido completo igual al sitio en vivo.)</span><span class="en">(Full content same as the live site.)</span></p></div>
+    </section>
+
+    <section id="now" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-now">
+      <div class="sec-head"><p class="eyebrow"><span class="es">Con fecha límite</span><span class="en">Time-sensitive</span></p><h2><span class="es">Dos cosas fáciles de olvidar</span><span class="en">Two things easy to miss</span></h2></div>
+      <div class="urgent-band">
+        <div class="urgent"><div class="tag">◆ <span class="es">Verifica ya</span><span class="en">Verify now</span></div><h3><span class="es">Confirma que tu prepagada cubre este embarazo</span><span class="en">Confirm your prepagada covers this pregnancy</span></h3></div>
+        <div class="urgent"><div class="tag">◆ <span class="es">Hacia el mes 5</span><span class="en">By ~month 5</span></div><h3><span class="es">Afilia al bebé “en gestación”</span><span class="en">Enroll the baby “en gestación”</span></h3></div>
+      </div>
+    </section>
+
+    <section id="insurance" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-insurance">
+      <div class="sec-head"><p class="eyebrow"><span class="es">Seguro y afiliación</span><span class="en">Insurance &amp; enrollment</span></p><h2><span class="es">Qué seguro contratar</span><span class="en">Which insurance to get</span></h2></div>
+      <div class="verdict"><span class="badge">✓ <span class="es">Recomendado</span><span class="en">Recommended</span></span><h3><span class="es">Colmédica — es del mismo grupo que La Colina.</span><span class="en">Colmédica — same group as La Colina.</span></h3><p class="src"><span class="es">(Contenido completo igual al sitio en vivo.)</span><span class="en">(Full content same as the live site.)</span></p></div>
+    </section>
+
+    <section id="timeline" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-timeline">
+      <div class="sec-head"><p class="eyebrow"><span class="es">El plan</span><span class="en">The plan</span></p><h2><span class="es">Semana a semana</span><span class="en">Week by week</span></h2></div>
+      <div class="tabs" role="tablist" aria-label="Trimesters">
+        <button role="tab" id="tab-t1" aria-controls="panel-t1" aria-selected="true"><span class="es">Primer trimestre</span><span class="en">First trimester</span></button>
+        <button role="tab" id="tab-t2" aria-controls="panel-t2" aria-selected="false" tabindex="-1"><span class="es">Segundo trimestre</span><span class="en">Second trimester</span></button>
+        <button role="tab" id="tab-t3" aria-controls="panel-t3" aria-selected="false" tabindex="-1"><span class="es">Tercer trimestre</span><span class="en">Third trimester</span></button>
+      </div>
+      <div class="tpanel" id="panel-t1" role="tabpanel" aria-labelledby="tab-t1"><div class="tri-intro"><span class="es">Estás aquí. El tema es organizarse.</span><span class="en">You're here. The theme is get set up.</span></div>
+        <div class="milestone"><div class="week-badge"><small><span class="es">Sem.</span><span class="en">Weeks</span></small><span class="n">6–8</span></div><div class="m-body"><h4><span class="es">Primera cita prenatal</span><span class="en">First prenatal visit</span></h4></div></div>
+      </div>
+      <div class="tpanel" id="panel-t2" role="tabpanel" aria-labelledby="tab-t2" hidden><div class="tri-intro"><span class="es">Suele ser la etapa más llevadera.</span><span class="en">Usually the easiest stretch.</span></div></div>
+      <div class="tpanel" id="panel-t3" role="tabpanel" aria-labelledby="tab-t3" hidden><div class="tri-intro"><span class="es">La recta final.</span><span class="en">The home stretch.</span></div></div>
+    </section>
+
+    <section id="supplements" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-supplements">
+      <div class="sec-head"><p class="eyebrow"><span class="es">Vitaminas</span><span class="en">Vitamins</span></p><h2><span class="es">Qué tomar — y qué evitar</span><span class="en">What to take — and what to skip</span></h2></div>
+      <p class="src"><span class="es">(Tabla completa igual al sitio en vivo.)</span><span class="en">(Full table same as the live site.)</span></p>
+    </section>
+
+    <section id="diet" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-diet">
+      <div class="sec-head"><p class="eyebrow"><span class="es">Comer por dos</span><span class="en">Eating for two</span></p><h2><span class="es">Dieta y comida segura</span><span class="en">Diet &amp; food safety</span></h2></div>
+      <p class="src"><span class="es">(Columnas completas igual al sitio en vivo.)</span><span class="en">(Full columns same as the live site.)</span></p>
+    </section>
+
+    <section id="exercise" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-exercise">
+      <div class="sec-head"><p class="eyebrow"><span class="es">Movimiento</span><span class="en">Movement</span></p><h2><span class="es">Ejercicio</span><span class="en">Exercise</span></h2></div>
+      <p class="src"><span class="es">(Contenido completo igual al sitio en vivo.)</span><span class="en">(Full content same as the live site.)</span></p>
+    </section>
+
+    <section id="emergency" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-emergency">
+      <div class="emergency">
+        <div class="top"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M12 2 2 21h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.5" r="0.5" fill="#fff"/></svg><h3><span class="es">Llama a tu médico si…</span><span class="en">Call your doctor if…</span></h3></div>
+        <div class="body"><ul><li><span class="es">Sangrado vaginal</span><span class="en">Vaginal bleeding</span></li></ul></div>
+      </div>
+    </section>
+
+    <section id="logistics" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-logistics">
+      <div class="sec-head"><p class="eyebrow"><span class="es">Trámites</span><span class="en">Paperwork</span></p><h2><span class="es">Lista <span class="progress" id="prog"></span></span><span class="en">Checklist <span class="progress" id="progen"></span></span></h2></div>
+      <div class="phase"><h3><span class="es">Primer trimestre</span><span class="en">First trimester</span></h3><label class="check"><input type="checkbox"><span class="lbl"><span class="es">Verificar la carencia de la prepagada</span><span class="en">Verify the prepagada waiting period</span></span></label></div>
+    </section>
+
+    <section id="addinfo" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-addinfo">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="es">Mantén el plan vivo</span><span class="en">Keep the plan alive</span></p>
+        <h2><span class="es">Agregar información nueva</span><span class="en">Add new information</span></h2>
+        <p class="intro"><span class="es">Escribe una nota o adjunta un archivo. Para preguntar sobre un resultado, ve a <b>Chat</b>.</span><span class="en">Write a note or attach a file. To ask about a result, go to <b>Chat</b>.</span></p>
+      </div>
+      <div class="addinfo">
+        <textarea id="ai-text" placeholder="…"></textarea>
+        <div class="thumbs" id="ai-thumbs"></div>
+        <div class="ai-row">
+          <label class="filebtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span class="es">Adjuntar foto / archivo</span><span class="en">Attach photo / file</span>
+            <input type="file" id="ai-file" accept="image/*,.pdf" multiple hidden>
+          </label>
+          <button class="sendbtn" id="ai-send"><span class="es">Guardar</span><span class="en">Save</span></button>
+        </div>
+        <div class="ai-status" id="ai-status"></div>
+      </div>
+      <button class="filebtn expand-btn" id="view-docs-btn" type="button">
+        <span class="arrow">▸</span> <span class="es">Ver documentos guardados (7)</span><span class="en">View saved documents (7)</span>
+      </button>
+      <div class="expand-panel" id="docs-panel" hidden>
+        <div class="cat-chips">
+          <button class="cat-chip active" data-filter="all"><span class="es">Todos (7)</span><span class="en">All (7)</span></button>
+          <button class="cat-chip" data-filter="rx">💊 <span class="es">Recetas (2)</span><span class="en">Prescriptions (2)</span></button>
+          <button class="cat-chip" data-filter="visit">🩺 <span class="es">Citas (2)</span><span class="en">Visits (2)</span></button>
+          <button class="cat-chip" data-filter="lab">🧪 <span class="es">Laboratorios (2)</span><span class="en">Labs (2)</span></button>
+          <button class="cat-chip" data-filter="us">📷 <span class="es">Ecografías (1)</span><span class="en">Ultrasounds (1)</span></button>
+        </div>
+        <div class="act-cards">
+          <div class="act-card" data-cat="rx">💊 <b><span class="es">Ácido fólico 5mg</span><span class="en">Folic acid 5mg</span></b><span class="act-date">Jul 2</span></div>
+          <div class="act-card" data-cat="visit">🩺 <b><span class="es">Primera cita prenatal</span><span class="en">First prenatal visit</span></b><span class="act-date">Jul 5</span></div>
+          <div class="act-card" data-cat="lab">🧪 <b><span class="es">Hemograma completo</span><span class="en">Full blood count</span></b><span class="act-date">Jul 8</span></div>
+          <div class="act-card" data-cat="us">📷 <b><span class="es">Ecografía de datación</span><span class="en">Dating ultrasound</span></b><span class="act-date">Jul 10</span></div>
+          <div class="act-card" data-cat="rx">💊 <b>Enoxaparina 40mg</b><span class="act-date">Jul 20</span></div>
+          <div class="act-card" data-cat="visit">🩺 <b><span class="es">Control materno-fetal</span><span class="en">Maternal-fetal check-up</span></b><span class="act-date">Jul 22</span></div>
+          <div class="act-card" data-cat="lab">🧪 <b><span class="es">Perfil de trombofilia</span><span class="en">Thrombophilia panel</span></b><span class="act-date">Jul 25</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="chat" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-chat">
+      <div class="sec-head">
+        <p class="eyebrow"><span class="es">Interactúa con el plan</span><span class="en">Interact with the plan</span></p>
+        <h2><span class="es">Chat con Claude</span><span class="en">Chat with Claude</span></h2>
+        <p class="intro"><span class="es">Pregunta sobre cualquier resultado o próximo paso — Claude tiene el contexto completo del plan.</span><span class="en">Ask about any result or next step — Claude has the full context of the plan.</span></p>
+      </div>
+      <div class="chat-panel">
+        <div class="chat-messages" id="chat-messages">
+          <div class="msg user"><span class="es">¿Es seguro tomar B6 + doxilamina para las náuseas?</span><span class="en">Is B6 + doxylamine safe for nausea?</span><span class="msg-time">Jul 15</span></div>
+          <div class="msg claude"><span class="es">Sí — es la primera opción recomendada y es segura durante el embarazo.</span><span class="en">Yes — it's the recommended first-line option and is safe during pregnancy.</span><span class="msg-time">Jul 15</span></div>
+        </div>
+        <div class="chat-input-row">
+          <textarea id="chat-text" placeholder="…"></textarea>
+          <button class="sendbtn askbtn" id="chat-send"><span class="es">Preguntar</span><span class="en">Ask</span></button>
+        </div>
+      </div>
+      <button class="filebtn expand-btn" id="prevq-btn" type="button">
+        <span class="arrow">▸</span> <span class="es">Preguntas respondidas anteriormente (2)</span><span class="en">Previously answered questions (2)</span>
+      </button>
+      <div class="expand-panel" id="prevq-panel" hidden>
+        <div class="act-notes">
+          <div class="act-row"><span class="act-date">Jul 28</span><div><b><span class="es">Actualización de seguro</span><span class="en">Insurance update</span></b><br><span class="ink-soft-txt es">Anexo de maternidad comprado hoy.</span><span class="ink-soft-txt en">Maternity rider purchased today.</span></div></div>
+          <div class="act-row"><span class="act-date">Jul 15</span><div><b><span class="es">Pregunta sobre náuseas</span><span class="en">Question about nausea</span></b><br><span class="ink-soft-txt es">¿Es seguro tomar B6 + doxilamina?</span><span class="ink-soft-txt en">Is B6 + doxylamine safe?</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="robbie" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-robbie">
+      <div class="sec-head"><p class="eyebrow"><span class="es">Para Robbie</span><span class="en">For Robbie</span></p><h2><span class="es">Tu parte</span><span class="en">Your part</span></h2></div>
+      <div class="robbie">
+        <p style="margin-top:0;"><span class="es">Lo más útil: ir a las citas, aprender las señales de alarma.</span><span class="en">Most useful: come to appointments, learn the warning signs.</span></p>
+        <div class="money"><span class="big tnum">$15,000</span><span class="arrow">→</span><span class="big tnum">~$147,700</span></div>
+      </div>
+    </section>
+
+    <section id="sources" class="tabpanel" hidden role="tabpanel" aria-labelledby="navtab-sources">
+      <details class="sources" open><summary><span class="es">Fuentes</span><span class="en">Sources</span></summary><ul><li>ACOG PB 197, ALIFE2 (Lancet 2023), ESHRE RPL 2023</li></ul></details>
+    </section>
+  </main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><span class="es"><b>Sobre la confianza.</b> Este documento reúne evidencia — no reemplaza a tu médico.</span><span class="en"><b>A note on trust.</b> This document gathers evidence — it doesn't replace your doctor.</span></p>
+    <p style="opacity:.8;"><span class="es">Vista previa de diseño · Layout 5</span><span class="en">Design preview · Layout 5</span></p>
+  </div>
+</footer>
+
+<script>
+  function curLang(){return document.body.getAttribute('data-lang');}
+  (function(){
+    var saved=null; try{saved=localStorage.getItem('babyplan-lang');}catch(e){}
+    if(saved){document.body.setAttribute('data-lang',saved);document.documentElement.lang=saved;}
+    document.getElementById('langbtn').addEventListener('click',function(){
+      var next=curLang()==='es'?'en':'es';
+      document.body.setAttribute('data-lang',next);
+      document.documentElement.lang=next;
+      try{localStorage.setItem('babyplan-lang',next);}catch(e){}
+    });
+  })();
+
+  (function(){
+    var tabs=[].slice.call(document.querySelectorAll('.tabs [role=tab]'));
+    var panels=tabs.map(function(t){return document.getElementById(t.getAttribute('aria-controls'));});
+    function select(i){tabs.forEach(function(t,j){var on=i===j;t.setAttribute('aria-selected',on?'true':'false');t.tabIndex=on?0:-1;panels[j].hidden=!on;});}
+    tabs.forEach(function(t,i){ t.addEventListener('click',function(){select(i);}); });
+  })();
+
+  (function(){
+    var KEY='babyplan-checklist-preview-v1';
+    var boxes=[].slice.call(document.querySelectorAll('.check input[type=checkbox]'));
+    var saved={};try{saved=JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){}
+    function upd(){var d=boxes.filter(function(b){return b.checked;}).length;var txt=d+' / '+boxes.length;var a=document.getElementById('prog');var b=document.getElementById('progen');if(a)a.textContent=txt;if(b)b.textContent=txt;}
+    boxes.forEach(function(b,i){if(saved[i])b.checked=true;b.addEventListener('change',function(){saved[i]=b.checked;try{localStorage.setItem(KEY,JSON.stringify(saved));}catch(e){}upd();});});
+    upd();
+  })();
+
+  (function(){
+    var textEl=document.getElementById('ai-text');
+    var fileEl=document.getElementById('ai-file');
+    var thumbs=document.getElementById('ai-thumbs');
+    var status=document.getElementById('ai-status');
+    var sendBtn=document.getElementById('ai-send');
+    var files=[];
+    fileEl.addEventListener('change',function(){
+      var list=[].slice.call(fileEl.files);
+      fileEl.value='';
+      list.forEach(function(f){files.push(f);});
+      thumbs.innerHTML='';
+      files.forEach(function(f,i){
+        var d=document.createElement('div');d.className='thumb';
+        d.textContent=f.name.slice(0,10);
+        var b=document.createElement('button');b.className='rm';b.textContent='×';
+        b.onclick=function(){files.splice(i,1);fileEl.dispatchEvent(new Event('change'));};
+        thumbs.appendChild(d);
+      });
+    });
+    sendBtn.addEventListener('click',function(){
+      status.textContent=curLang()==='es' ? 'Vista previa de diseño — no conectado al backend real.' : 'Design preview — not wired to the real backend.';
+      textEl.value=''; files=[]; thumbs.innerHTML='';
+    });
+  })();
+
+  (function(){
+    var textEl=document.getElementById('chat-text');
+    var sendBtn=document.getElementById('chat-send');
+    var messagesEl=document.getElementById('chat-messages');
+    if(!sendBtn) return;
+    sendBtn.addEventListener('click',function(){
+      var q=textEl.value.trim();
+      if(!q) return;
+      var u=document.createElement('div'); u.className='msg user'; u.textContent=q;
+      messagesEl.appendChild(u);
+      var a=document.createElement('div'); a.className='msg claude';
+      a.textContent = curLang()==='es' ? 'Vista previa de diseño — no conectado al backend real.' : 'Design preview — not wired to the real backend.';
+      messagesEl.appendChild(a);
+      textEl.value='';
+      messagesEl.scrollTop = messagesEl.scrollHeight;
+    });
+  })();
+
+  function wireToggle(btnId, panelId){
+    var btn=document.getElementById(btnId), panel=document.getElementById(panelId);
+    if(!btn||!panel) return;
+    var arrow=btn.querySelector('.arrow');
+    btn.addEventListener('click',function(){
+      panel.hidden=!panel.hidden;
+      if(arrow) arrow.textContent = panel.hidden ? '▸' : '▾';
+    });
+  }
+  wireToggle('view-docs-btn','docs-panel');
+  wireToggle('prevq-btn','prevq-panel');
+
+  (function(){
+    var chips=[].slice.call(document.querySelectorAll('#docs-panel .cat-chip'));
+    var cards=[].slice.call(document.querySelectorAll('#docs-panel .act-card'));
+    chips.forEach(function(chip){
+      chip.addEventListener('click',function(){
+        chips.forEach(function(c){c.classList.remove('active');});
+        chip.classList.add('active');
+        var f=chip.getAttribute('data-filter');
+        cards.forEach(function(card){card.hidden = f!=='all' && card.getAttribute('data-cat')!==f;});
+      });
+    });
+  })();
+
+  (function(){
+    var navBtns=[].slice.call(document.querySelectorAll('.sidebar [role=tab]'));
+    var panels=navBtns.map(function(b){return document.getElementById(b.getAttribute('data-target'));});
+    function select(i){
+      navBtns.forEach(function(b,j){
+        var on=i===j;
+        b.setAttribute('aria-selected',on?'true':'false');
+        b.tabIndex=on?0:-1;
+        if(panels[j]) panels[j].hidden=!on;
+      });
+      window.scrollTo(0,0);
+    }
+    navBtns.forEach(function(b,i){ b.addEventListener('click',function(){select(i);}); });
+  })();
+</script>
+</body>
+</html>
