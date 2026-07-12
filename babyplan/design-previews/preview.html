@@ -69,7 +69,7 @@
 
   nav.jump{position:sticky;top:0;z-index:20;background:rgba(244,246,242,.92);
     backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-  nav.jump .wrap{display:flex;gap:.15rem;overflow-x:auto;padding-top:.5rem;padding-bottom:.5rem;scrollbar-width:thin;}
+  nav.jump .wrap{display:flex;flex-wrap:wrap;gap:.15rem;padding-top:.5rem;padding-bottom:.5rem;}
   nav.jump [role=tab]{all:unset;box-sizing:border-box;cursor:pointer;white-space:nowrap;font-size:.82rem;font-weight:650;
     color:var(--ink-soft);text-decoration:none;padding:.4rem .7rem;border-radius:8px;font-family:var(--sans);}
   nav.jump [role=tab]:hover{background:var(--teal-tint);color:var(--teal-deep);}
