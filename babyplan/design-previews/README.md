@@ -1,46 +1,58 @@
 # Layout redesign preview
 
-One self-contained file — `preview.html` — showing the proposed redesign of the
-main site: real top tabs instead of anchor-link scrolling, all sections
-hidden/shown instead of one long page, and a new **Activity** tab that
-replaces the always-visible notes list under "Add info".
+Three self-contained files, each a different **overall site layout** for the
+main babyplan page — replacing today's single long scrolling page with anchor
+links. All three share the same content, design tokens, and the same
+"Activity" concept (a combined notes + documents history hidden behind
+expand/collapse instead of an always-visible list); only the outer navigation
+structure differs.
 
-## How to look at it
+## The 3 layouts
 
-No build step, no server needed — just open the file directly:
+- **`layout-1-top-tabs.html`** — horizontal tab bar under the hero (like the
+  current sticky nav, but real tabs: one section visible at a time, no
+  scrolling through everything). Includes an extra A/B/C switcher inside its
+  Activity tab to also compare 3 ways of organizing that history specifically
+  (timeline + filter chips, category accordions + search, dashboard tiles +
+  feed).
+- **`layout-2-sidebar.html`** — a persistent left-hand sidebar (like a docs
+  site or settings page) with the content area to its right. On narrow
+  screens the sidebar collapses into a wrapping row above the content.
+- **`layout-3-accordion.html`** — no separate tab UI at all. Every section
+  lives on one page as a collapsible accordion (closed by default, except
+  "Priority" which opens first). A "Jump to" strip up top scrolls to and
+  opens whichever section you pick, and there's an "Expand all" toggle.
+
+## How to look at them
+
+No build step, no server needed — just open the files directly:
 
 ```
 git checkout claude/site-layout-redesign
-open babyplan/design-previews/preview.html   # or double-click it in Finder/Explorer
+open babyplan/design-previews/layout-1-top-tabs.html
+open babyplan/design-previews/layout-2-sidebar.html
+open babyplan/design-previews/layout-3-accordion.html
 ```
 
-The Save / Ask Claude buttons in this preview are **not wired to the real
-backend** — clicking them just shows a placeholder message. The 9 activity
+The Save / Ask Claude buttons in all three are **not wired to the real
+backend** — clicking them just shows a placeholder message. The 9 "Activity"
 items are sample data (not your real notes/photos), so the branch is safe to
 commit and view without exposing anything private.
 
-## What's already settled (from your answers)
+## What's already settled (from earlier answers)
 
-- Top tabs for navigation (not anchor scrolling).
-- One combined "Activity" tab, not separate history sections scattered
-  through the page.
+- One combined "Activity" section/tab, not history scattered through the
+  page — present in all 3 layouts.
+- Documents auto-categorized (rx / visit / lab / ultrasound / other) — shown
+  here with sample categories; the real version will tag each save via
+  Claude once a layout is picked.
 
-## What the 3 layouts let you compare
+Pick whichever overall layout (1, 2, or 3) feels right — that becomes the
+site's new information architecture. If you like a mix (e.g. layout 2's
+sidebar, but layout 1's Activity sub-designs), point that out too.
 
-Open the **Activity** tab and use the A / B / C switcher at the top:
+## Legacy file
 
-- **A — Timeline + filters**: two expandable panels, "Notes & questions" and
-  "Documents". Documents has filter chips (Prescriptions / Visits / Labs /
-  Ultrasounds) to narrow the list once expanded.
-- **B — Categories + search**: one search box up top, and documents grouped
-  into their own expandable accordion per category. Notes get their own
-  accordion at the bottom. Typing in the search box auto-expands whichever
-  group has a match.
-- **C — Dashboard + feed**: colored count tiles per category (click to
-  filter) sitting above a single interleaved feed of everything, newest
-  first, collapsed to the latest 3 with a "Show all" button.
-
-Whichever one feels right, that becomes the pattern for the real Activity
-tab — the auto-categorization (rx / visit / lab / ultrasound / other) will
-be filled in for real by asking Claude to tag each save, matching what you
-picked for that clarifying question.
+`preview.html` is the original Activity-only comparison (top tabs, with just
+the A/B/C sub-variants) from before this was widened into a full 3-layout
+comparison — kept for reference, superseded by `layout-1-top-tabs.html`.
