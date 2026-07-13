@@ -301,6 +301,22 @@
   .doc-card img.doc-thumb{width:34px;height:34px;object-fit:cover;border-radius:7px;flex:0 0 auto;}
   .doc-empty{color:var(--ink-faint);font-size:.9rem;padding:.4rem 0;}
 
+  /* ---- documents brief (facts extracted from uploads) ---- */
+  .brief{background:linear-gradient(180deg,var(--teal-tint),var(--panel));border:1px solid var(--line-strong);
+    border-radius:16px;padding:1.15rem 1.25rem;margin-bottom:1.4rem;}
+  .brief-head{display:flex;align-items:center;justify-content:space-between;gap:.6rem;flex-wrap:wrap;margin-bottom:.4rem;}
+  .brief-head .eyebrow{margin:0;}
+  .brief-answer{background:#fff;border:1px solid var(--line-strong);border-left:4px solid var(--teal);
+    border-radius:0 10px 10px 0;padding:.7rem .9rem;font-size:.95rem;margin:.5rem 0 .8rem;}
+  .brief-answer.missing{border-left-color:var(--amber);color:var(--ink-soft);}
+  .brief h5{font-family:var(--sans);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;
+    color:var(--teal-deep);font-weight:800;margin:.9rem 0 .35rem;}
+  .brief ul{margin:0;padding-left:1.1rem;font-size:.9rem;display:grid;gap:.25rem;}
+  .brief .med-chips{display:flex;flex-wrap:wrap;gap:.4rem;}
+  .brief .med-chip{background:#fff;border:1px solid var(--line-strong);border-radius:999px;padding:.3rem .7rem;font-size:.82rem;font-weight:650;color:var(--ink-soft);}
+  .brief-ts{font-size:.72rem;color:var(--ink-faint);margin:.9rem 0 0;}
+  .brief-status{font-size:.85rem;color:var(--ink-soft);min-height:1.1em;margin-top:.4rem;}
+
   /* ---- CHAT ---- */
   .chat-panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;
     padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.8rem;}
@@ -388,6 +404,16 @@
         <span class="es">Una trombofilia genética junto con dos pérdidas te da todo el derecho a ser cuidada de cerca — y la buena noticia es que, con el manejo correcto, el pronóstico es muy bueno.</span>
         <span class="en">A genetic thrombophilia together with two losses is every reason to be closely cared for — and the good news is that, with the right management, the outlook is very good.</span>
       </p>
+    </div>
+
+    <div class="brief" id="doc-brief" hidden>
+      <div class="brief-head">
+        <p class="eyebrow"><span class="es">Lo que dicen tus documentos</span><span class="en">What your documents tell us</span></p>
+        <button class="filebtn" id="brief-refresh" type="button">↻ <span class="es">Actualizar desde documentos</span><span class="en">Update from documents</span></button>
+      </div>
+      <div id="brief-body"></div>
+      <p class="brief-ts" id="brief-ts"></p>
+      <div class="brief-status" id="brief-status"></div>
     </div>
 
     <div class="priority">
@@ -1158,7 +1184,14 @@
     cat_visit:{es:"Citas",en:"Visits"},
     cat_lab:{es:"Laboratorios",en:"Labs"},
     cat_us:{es:"Ecografías",en:"Ultrasounds"},
-    cat_other:{es:"Otros",en:"Other"}
+    cat_other:{es:"Otros",en:"Other"},
+    brief_analyzing:{es:"Analizando documentos… (puede tardar ~1 min)",en:"Analyzing documents… (may take ~1 min)"},
+    brief_done:{es:"Actualizado.",en:"Updated."},
+    brief_err:{es:"No se pudo analizar. Inténtalo de nuevo.",en:"Couldn't analyze. Please try again."},
+    brief_never:{es:"Los documentos aún no se han analizado — toca “Actualizar desde documentos”.",en:"Documents haven't been analyzed yet — tap “Update from documents”."},
+    brief_thromb_found:{es:"Trombofilia identificada en tus documentos: ",en:"Thrombophilia identified in your documents: "},
+    brief_thromb_missing:{es:"El tipo exacto de trombofilia aún no aparece en los documentos subidos — sube el resultado del laboratorio cuando lo tengas.",en:"The exact thrombophilia type doesn't appear in the uploaded documents yet — upload the lab result when you have it."},
+    brief_updated:{es:"Última actualización: ",en:"Last updated: "}
   };
   function curLang(){return document.body.getAttribute('data-lang');}
   function t(k){return STR[k][curLang()];}
@@ -1343,6 +1376,57 @@
       qaItems.slice().reverse().forEach(function(u){prevqList.appendChild(renderUpdate(u));});
     }
 
+    // ---- documents brief (facts Claude extracted from the uploads) ----
+    var briefDoc=null;
+    var briefPanel=document.getElementById('doc-brief');
+    var briefBody=document.getElementById('brief-body');
+    var briefTs=document.getElementById('brief-ts');
+    var briefStatus=document.getElementById('brief-status');
+    function renderBrief(){
+      if(!briefPanel) return;
+      briefPanel.hidden = !(briefDoc || allUpdates.length);
+      if(briefPanel.hidden) return;
+      var es=curLang()==='es';
+      if(!briefDoc||!briefDoc.brief){
+        briefBody.innerHTML='<div class="brief-answer missing">'+esc(t('brief_never'))+'</div>';
+        briefTs.textContent='';
+        return;
+      }
+      var b=briefDoc.brief;
+      var html='';
+      var th=es?b.thrombophiliaES:b.thrombophiliaEN;
+      if(th){ html+='<div class="brief-answer"><b>'+esc(t('brief_thromb_found'))+'</b>'+esc(th)+'</div>'; }
+      else  { html+='<div class="brief-answer missing">'+esc(t('brief_thromb_missing'))+'</div>'; }
+      var gest=es?b.gestES:b.gestEN;
+      if(gest){ html+='<h5><span class="es">Embarazo</span><span class="en">Pregnancy</span></h5><ul><li>'+esc(gest)+'</li></ul>'; }
+      var meds=es?b.medsES:b.medsEN;
+      if(meds&&meds.length){ html+='<h5><span class="es">Medicamentos y suplementos</span><span class="en">Medications &amp; supplements</span></h5><div class="med-chips">'+meds.map(function(m){return '<span class="med-chip">'+esc(m)+'</span>';}).join('')+'</div>'; }
+      var finds=es?b.findingsES:b.findingsEN;
+      if(finds&&finds.length){ html+='<h5><span class="es">Hallazgos clave</span><span class="en">Key findings</span></h5><ul>'+finds.map(function(f){return '<li>'+esc(f)+'</li>';}).join('')+'</ul>'; }
+      var steps=es?b.stepsES:b.stepsEN;
+      if(steps&&steps.length){ html+='<h5><span class="es">Próximos pasos</span><span class="en">Next steps</span></h5><ul>'+steps.map(function(s){return '<li>'+esc(s)+'</li>';}).join('')+'</ul>'; }
+      briefBody.innerHTML=html;
+      briefTs.textContent=t('brief_updated')+fmtTime(briefDoc.ts);
+    }
+    var digestBusy=false;
+    function runDigest(silent){
+      if(digestBusy) return;
+      digestBusy=true;
+      var btn=document.getElementById('brief-refresh');
+      if(btn) btn.disabled=true;
+      if(!silent&&briefStatus) briefStatus.textContent=t('brief_analyzing');
+      fetch('/api/digest',{method:'POST'})
+      .then(function(r){return r.json();})
+      .then(function(d){
+        if(d&&d.ok&&d.brief){ briefDoc=d.brief; renderBrief(); if(!silent&&briefStatus)briefStatus.textContent=t('brief_done'); }
+        else if(!silent&&briefStatus){ briefStatus.textContent=t('brief_err'); }
+      })
+      .catch(function(){ if(!silent&&briefStatus)briefStatus.textContent=t('brief_err'); })
+      .finally(function(){ digestBusy=false; if(btn)btn.disabled=false; if(!silent&&briefStatus)setTimeout(function(){briefStatus.textContent='';},4000); });
+    }
+    var briefBtn=document.getElementById('brief-refresh');
+    if(briefBtn) briefBtn.addEventListener('click',function(){runDigest(false);});
+
     function setCount(id,idEn,n){var a=document.getElementById(id),b=document.getElementById(idEn);if(a)a.textContent='('+n+')';if(b)b.textContent='('+n+')';}
 
     function rebuild(){
@@ -1356,13 +1440,15 @@
       });
       setCount('docs-count','docs-count-en',docItems.length);
       setCount('prevq-count','prevq-count-en',qaItems.length);
-      renderDocs(); renderPrevq();
+      renderDocs(); renderPrevq(); renderBrief();
     }
-    window.__bpRerender=function(){renderDocs();renderPrevq();};
+    window.__bpRerender=function(){renderDocs();renderPrevq();renderBrief();};
 
     function loadState(){
       fetch('/api/state').then(function(r){return r.ok?r.json():null;}).then(function(d){
-        if(d&&d.updates){allUpdates=d.updates;rebuild();}
+        if(d&&d.brief){briefDoc=d.brief;}
+        if(d&&d.updates){allUpdates=d.updates;}
+        rebuild();
       }).catch(function(){}).then(function(){
         if(!chatStarted&&cMsgs){cMsgs.innerHTML='<div class="chat-hint"><span class="es">'+STR.chat_empty.es+'</span><span class="en">'+STR.chat_empty.en+'</span></div>';}
       });
@@ -1389,6 +1475,7 @@
         if(d&&d.updates){allUpdates=d.updates;rebuild();}
         var dp=document.getElementById('docs-panel'), db=document.getElementById('view-docs-btn');
         if(dp&&dp.hidden&&db){db.click();}
+        runDigest(true); // re-extract facts from documents in the background
       })
       .catch(function(e){aStatus.textContent=(e&&e.message==='auth')?t('err'):(e&&e.message==='big')?t('err_big'):t('err_net');})
       .finally(function(){aSend.disabled=false;});

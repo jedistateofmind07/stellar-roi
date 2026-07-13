@@ -21,15 +21,35 @@ async function readUpdates() {
   return { updates, pathname: hit.pathname };
 }
 
+const BRIEF_PATH = 'babyplan/brief.json';
+
+// The "brief" is the digest of everything uploaded: structured facts extracted
+// by Claude from the documents (thrombophilia type, gestational age, meds, ...).
+// Written by /api/digest, read here and by /api/ask.
+async function readBrief() {
+  if (!process.env.BLOB_READ_WRITE_TOKEN) return null;
+  const { blobs } = await list({ prefix: 'babyplan/brief', limit: 10 });
+  const hit = blobs.find(b => b.pathname === BRIEF_PATH);
+  if (!hit) return null;
+  const res = await fetch(hit.url + (hit.url.includes('?') ? '&' : '?') + 't=' + Date.now());
+  if (!res.ok) return null;
+  return res.json().catch(() => null);
+}
+
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
   try {
-    const { updates } = await readUpdates();
-    res.status(200).json({ updates });
+    const [{ updates }, brief] = await Promise.all([
+      readUpdates(),
+      readBrief().catch(() => null)
+    ]);
+    res.status(200).json({ updates, brief });
   } catch (e) {
-    res.status(200).json({ updates: [] });
+    res.status(200).json({ updates: [], brief: null });
   }
 };
 
 module.exports.readUpdates = readUpdates;
+module.exports.readBrief = readBrief;
 module.exports.DEFAULT_PATH = DEFAULT_PATH;
+module.exports.BRIEF_PATH = BRIEF_PATH;
