@@ -1,5 +1,5 @@
 const { put } = require('@vercel/blob');
-const { readUpdates, DEFAULT_PATH } = require('./state.js');
+const { readUpdates, readBrief, DEFAULT_PATH } = require('./state.js');
 const { storeFiles } = require('./add-info.js');
 
 const MAX_REQUEST_FILES = 10;
@@ -79,7 +79,7 @@ async function toContentBlock(f) {
   return null;
 }
 
-async function askClaude(question, attachments, history) {
+async function askClaude(question, attachments, history, brief) {
   const oauth = process.env.CLAUDE_CODE_OAUTH_TOKEN;
   const apiKey = process.env.ANTHROPIC_API_KEY;
 
@@ -94,6 +94,10 @@ async function askClaude(question, attachments, history) {
     type: 'text',
     text:
       "Today's date: " + new Date().toISOString().slice(0, 10) + '\n\n' +
+      (brief
+        ? 'Verified facts already extracted from their uploaded documents (trust these; do NOT ask for information they contain — e.g. if the exact thrombophilia type is here, use it instead of saying it is unknown):\n' +
+          JSON.stringify(brief) + '\n\n'
+        : '') +
       (history ? 'Saved notes so far (oldest to newest):\n' + history + '\n\n' : '') +
       'Question: ' + question
   });
@@ -204,7 +208,8 @@ module.exports = async (req, res) => {
       return parts.join(' ');
     }).join('\n');
 
-    const note = await askClaude(question, attachments, history);
+    const briefDoc = await readBrief().catch(() => null);
+    const note = await askClaude(question, attachments, history, briefDoc && briefDoc.brief);
 
     const storedFiles = await storeFiles(reqFiles);
     updates.push({
@@ -245,3 +250,5 @@ module.exports = async (req, res) => {
     });
   }
 };
+
+module.exports.toContentBlock = toContentBlock;
