@@ -22,8 +22,7 @@
     --maxw:860px;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  /* No smooth scroll: tab switches jump to the top instantly, not animate. */
   body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
     font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased;}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 var(--sp);}
@@ -67,12 +66,29 @@
     padding:.34rem .7rem;font-size:.8rem;font-weight:600;}
   .chip b{color:#fff;font-weight:700;}
 
-  nav.jump{position:sticky;top:0;z-index:20;background:rgba(244,246,242,.92);
+  nav.jump{position:sticky;top:0;z-index:20;background:rgba(244,246,242,.94);
     backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
-  nav.jump .wrap{display:flex;gap:.15rem;overflow-x:auto;padding-top:.5rem;padding-bottom:.5rem;scrollbar-width:thin;}
-  nav.jump a{white-space:nowrap;font-size:.82rem;font-weight:650;color:var(--ink-soft);
-    text-decoration:none;padding:.4rem .7rem;border-radius:8px;}
-  nav.jump a:hover{background:var(--teal-tint);color:var(--teal-deep);}
+  /* Desktop: tabs wrap onto multiple rows so everything is visible at once. */
+  nav.jump .wrap{display:flex;flex-wrap:wrap;gap:.15rem;padding-top:.5rem;padding-bottom:.5rem;}
+  nav.jump [role=tab]{all:unset;box-sizing:border-box;cursor:pointer;white-space:nowrap;
+    font-family:var(--sans);font-size:.82rem;font-weight:650;color:var(--ink-soft);
+    padding:.45rem .7rem;border-radius:8px;}
+  nav.jump [role=tab]:hover{background:var(--teal-tint);color:var(--teal-deep);}
+  nav.jump [role=tab][aria-selected="true"]{background:var(--teal);color:#fff;}
+  nav.jump [role=tab]:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px;}
+  /* Mobile: a single horizontal-scrolling strip so the nav stays compact (one row,
+     not five). A right-edge fade hints there's more to swipe, and the active tab is
+     scrolled into view by JS. */
+  @media(max-width:640px){
+    nav.jump{position:relative;}
+    nav.jump .wrap-scroll{position:relative;}
+    nav.jump .wrap-scroll::after{content:"";position:absolute;top:0;right:0;bottom:0;width:2.2rem;
+      pointer-events:none;background:linear-gradient(to right,rgba(244,246,242,0),rgba(244,246,242,.94));}
+    nav.jump .wrap{flex-wrap:nowrap;overflow-x:auto;scroll-behavior:smooth;
+      scrollbar-width:none;-webkit-overflow-scrolling:touch;gap:.25rem;padding-right:2rem;}
+    nav.jump .wrap::-webkit-scrollbar{display:none;}
+    nav.jump [role=tab]{font-size:.88rem;padding:.55rem .85rem;scroll-snap-align:start;}
+  }
 
   section{padding:clamp(2.2rem,6vw,3.4rem) 0;border-bottom:1px solid var(--line);}
   section:last-of-type{border-bottom:none;}
@@ -256,6 +272,54 @@
   .u-files{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.55rem;}
   .u-files img{max-width:150px;max-height:150px;border-radius:8px;border:1px solid var(--line);display:block;}
   .u-doc{font-size:.85rem;align-self:center;}
+
+  /* ---- tab panels (each nav tab shows one section) ---- */
+  section[role=tabpanel]{border-bottom:none;}
+  section[role=tabpanel][hidden]{display:none;}
+
+  /* ---- expand/collapse button (saved documents, previous questions) ---- */
+  .expand-btn{margin-top:1.2rem;display:inline-flex;align-items:center;gap:.4rem;background:#fff;
+    border:1px solid var(--line-strong);border-radius:9px;padding:.55rem .9rem;font-size:.88rem;
+    font-weight:700;cursor:pointer;color:var(--ink-soft);font-family:var(--sans);}
+  .expand-btn:hover{background:var(--panel-2);}
+  .expand-btn .arrow{color:var(--teal);font-size:.9rem;}
+  .expand-panel{margin-top:1rem;}
+
+  /* ---- document categories ---- */
+  .cat-chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.9rem;}
+  .cat-chip{background:var(--panel-2);border:1px solid var(--line);border-radius:999px;
+    padding:.4rem .8rem;font-size:.82rem;font-weight:650;color:var(--ink-soft);cursor:pointer;font-family:var(--sans);}
+  .cat-chip.active{background:var(--teal);border-color:var(--teal);color:#fff;}
+  .doc-cards{display:grid;gap:.6rem;}
+  @media(min-width:560px){.doc-cards{grid-template-columns:1fr 1fr;}}
+  .doc-card{background:#fff;border:1px solid var(--line);border-radius:11px;padding:.7rem .85rem;
+    display:flex;gap:.6rem;align-items:center;justify-content:space-between;}
+  .doc-card a{display:flex;gap:.55rem;align-items:center;text-decoration:none;color:var(--ink);
+    font-size:.9rem;font-weight:600;min-width:0;}
+  .doc-card .doc-name{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .doc-card .doc-date{font-size:.72rem;color:var(--ink-faint);white-space:nowrap;flex:0 0 auto;}
+  .doc-card img.doc-thumb{width:34px;height:34px;object-fit:cover;border-radius:7px;flex:0 0 auto;}
+  .doc-empty{color:var(--ink-faint);font-size:.9rem;padding:.4rem 0;}
+
+  /* ---- CHAT ---- */
+  .chat-panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    padding:1rem 1.1rem;display:flex;flex-direction:column;gap:.8rem;}
+  .chat-messages{display:flex;flex-direction:column;gap:.7rem;max-height:60vh;overflow-y:auto;padding-right:.2rem;}
+  .chat-hint{color:var(--ink-faint);font-size:.9rem;text-align:center;padding:1.2rem .5rem;}
+  .msg{max-width:88%;padding:.7rem .95rem;border-radius:15px;font-size:.93rem;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere;}
+  .msg.user{align-self:flex-end;background:var(--teal);color:#fff;border-bottom-right-radius:5px;}
+  .msg.claude{align-self:flex-start;background:var(--panel-2);color:var(--ink);border-bottom-left-radius:5px;}
+  .msg.claude.urgent-msg{background:var(--crimson-tint);border:1px solid #E7C4C1;}
+  .msg h4{font-family:var(--serif);font-size:1rem;margin:0 0 .35rem;}
+  .msg .msg-time{display:block;font-size:.68rem;opacity:.7;margin-top:.35rem;}
+  .msg .msg-files{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.4rem;}
+  .msg .msg-files img{max-width:110px;max-height:110px;border-radius:8px;border:1px solid var(--line);}
+  .msg .msg-files a.msg-doc{font-size:.82rem;color:#fff;text-decoration:underline;}
+  .chat-input-row{display:flex;gap:.5rem;align-items:flex-end;border-top:1px solid var(--line);padding-top:.8rem;flex-wrap:wrap;}
+  .chat-input-row textarea{flex:1 1 12rem;min-height:52px;border:1px solid var(--line-strong);border-radius:10px;
+    padding:.6rem .8rem;font-family:var(--sans);font-size:.95rem;resize:vertical;background:#fff;color:var(--ink);}
+  .chat-input-row textarea:focus{outline:2px solid var(--teal);outline-offset:1px;}
+  .chat-actions{display:flex;gap:.5rem;align-items:center;}
 </style>
 </head>
 <body data-lang="es">
@@ -283,18 +347,23 @@
 </header>
 
 <nav class="jump" aria-label="Navigation">
-  <div class="wrap">
-    <a href="#priority"><span class="es">Prioridad</span><span class="en">Priority</span></a>
-    <a href="#hospital"><span class="es">Hospital</span><span class="en">Hospital</span></a>
-    <a href="#now"><span class="es">Ahora</span><span class="en">Do now</span></a>
-    <a href="#insurance"><span class="es">Seguro</span><span class="en">Insurance</span></a>
-    <a href="#timeline"><span class="es">Semana a semana</span><span class="en">Week by week</span></a>
-    <a href="#supplements"><span class="es">Vitaminas</span><span class="en">Vitamins</span></a>
-    <a href="#diet"><span class="es">Dieta</span><span class="en">Diet</span></a>
-    <a href="#exercise"><span class="es">Ejercicio</span><span class="en">Exercise</span></a>
-    <a href="#emergency"><span class="es">Señales de alarma</span><span class="en">Warning signs</span></a>
-    <a href="#logistics"><span class="es">Lista</span><span class="en">Checklist</span></a>
-    <a href="#addinfo"><span class="es">Agregar info</span><span class="en">Add info</span></a>
+  <div class="wrap-scroll">
+    <div class="wrap" role="tablist">
+      <button role="tab" id="navtab-priority" data-target="priority" aria-selected="true"><span class="es">Prioridad</span><span class="en">Priority</span></button>
+      <button role="tab" id="navtab-hospital" data-target="hospital" aria-selected="false" tabindex="-1"><span class="es">Hospital</span><span class="en">Hospital</span></button>
+      <button role="tab" id="navtab-now" data-target="now" aria-selected="false" tabindex="-1"><span class="es">Ahora</span><span class="en">Do now</span></button>
+      <button role="tab" id="navtab-insurance" data-target="insurance" aria-selected="false" tabindex="-1"><span class="es">Seguro</span><span class="en">Insurance</span></button>
+      <button role="tab" id="navtab-timeline" data-target="timeline" aria-selected="false" tabindex="-1"><span class="es">Semana a semana</span><span class="en">Week by week</span></button>
+      <button role="tab" id="navtab-supplements" data-target="supplements" aria-selected="false" tabindex="-1"><span class="es">Vitaminas</span><span class="en">Vitamins</span></button>
+      <button role="tab" id="navtab-diet" data-target="diet" aria-selected="false" tabindex="-1"><span class="es">Dieta</span><span class="en">Diet</span></button>
+      <button role="tab" id="navtab-exercise" data-target="exercise" aria-selected="false" tabindex="-1"><span class="es">Ejercicio</span><span class="en">Exercise</span></button>
+      <button role="tab" id="navtab-emergency" data-target="emergency" aria-selected="false" tabindex="-1"><span class="es">Señales de alarma</span><span class="en">Warning signs</span></button>
+      <button role="tab" id="navtab-logistics" data-target="logistics" aria-selected="false" tabindex="-1"><span class="es">Lista</span><span class="en">Checklist</span></button>
+      <button role="tab" id="navtab-addinfo" data-target="addinfo" aria-selected="false" tabindex="-1"><span class="es">Agregar info</span><span class="en">Add info</span></button>
+      <button role="tab" id="navtab-chat" data-target="chat" aria-selected="false" tabindex="-1"><span class="es">Chat</span><span class="en">Chat</span></button>
+      <button role="tab" id="navtab-robbie" data-target="robbie" aria-selected="false" tabindex="-1"><span class="es">Para Robbie</span><span class="en">For Robbie</span></button>
+      <button role="tab" id="navtab-sources" data-target="sources" aria-selected="false" tabindex="-1"><span class="es">Fuentes</span><span class="en">Sources</span></button>
+    </div>
   </div>
 </nav>
 
@@ -311,7 +380,7 @@
   </section>
 
   <!-- PRIORITY: THROMBOPHILIA -->
-  <section id="priority">
+  <section id="priority" role="tabpanel" aria-labelledby="navtab-priority">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Lo más importante primero</span><span class="en">First things first</span></p>
       <h2><span class="es">Tu trombofilia y tu historia</span><span class="en">Your thrombophilia &amp; history</span></h2>
@@ -396,7 +465,7 @@
   </section>
 
   <!-- HOSPITAL -->
-  <section id="hospital">
+  <section id="hospital" hidden role="tabpanel" aria-labelledby="navtab-hospital">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">El veredicto</span><span class="en">The verdict</span></p>
       <h2><span class="es">¿Es la Clínica La Colina un buen lugar para tener a tu bebé?</span><span class="en">Is Clínica La Colina a good place to have your baby?</span></h2>
@@ -428,7 +497,7 @@
   </section>
 
   <!-- DO NOW -->
-  <section id="now">
+  <section id="now" hidden role="tabpanel" aria-labelledby="navtab-now">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Con fecha límite · próximas semanas</span><span class="en">Time-sensitive · next few weeks</span></p>
       <h2><span class="es">Dos cosas fáciles de olvidar — y caras si se pasan</span><span class="en">Two things easy to miss — and costly if you do</span></h2>
@@ -450,7 +519,7 @@
   </section>
 
   <!-- INSURANCE -->
-  <section id="insurance">
+  <section id="insurance" hidden role="tabpanel" aria-labelledby="navtab-insurance">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Seguro y afiliación · con fecha límite</span><span class="en">Insurance &amp; enrollment · time-sensitive</span></p>
       <h2><span class="es">Qué seguro contratar para La Colina</span><span class="en">Which insurance to get for La Colina</span></h2>
@@ -560,7 +629,7 @@
   </section>
 
   <!-- TIMELINE -->
-  <section id="timeline">
+  <section id="timeline" hidden role="tabpanel" aria-labelledby="navtab-timeline">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">El plan</span><span class="en">The plan</span></p>
       <h2><span class="es">Semana a semana, trimestre a trimestre</span><span class="en">Week by week, trimester by trimester</span></h2>
@@ -745,7 +814,7 @@
   </section>
 
   <!-- SUPPLEMENTS -->
-  <section id="supplements">
+  <section id="supplements" hidden role="tabpanel" aria-labelledby="navtab-supplements">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Vitaminas y suplementos</span><span class="en">Vitamins &amp; supplements</span></p>
       <h2><span class="es">Qué tomar — y qué evitar</span><span class="en">What to take — and what to skip</span></h2>
@@ -782,7 +851,7 @@
   </section>
 
   <!-- DIET -->
-  <section id="diet">
+  <section id="diet" hidden role="tabpanel" aria-labelledby="navtab-diet">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Comer por dos (un poquito)</span><span class="en">Eating for two (a little)</span></p>
       <h2><span class="es">Dieta y comida segura, para Bogotá</span><span class="en">Diet &amp; food safety, mapped to Bogotá</span></h2>
@@ -837,7 +906,7 @@
   </section>
 
   <!-- EXERCISE -->
-  <section id="exercise">
+  <section id="exercise" hidden role="tabpanel" aria-labelledby="navtab-exercise">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Movimiento</span><span class="en">Movement</span></p>
       <h2><span class="es">Ejercicio: 150 minutos a la semana, adaptándose</span><span class="en">Exercise: 150 minutes a week, adapting as you grow</span></h2>
@@ -884,7 +953,7 @@
   </section>
 
   <!-- EMERGENCY -->
-  <section id="emergency">
+  <section id="emergency" hidden role="tabpanel" aria-labelledby="navtab-emergency">
     <div class="emergency">
       <div class="top">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M12 2 2 21h20L12 2z"/><line x1="12" y1="9" x2="12" y2="14"/><circle cx="12" cy="17.5" r="0.5" fill="#fff"/></svg>
@@ -910,7 +979,7 @@
   </section>
 
   <!-- LOGISTICS -->
-  <section id="logistics">
+  <section id="logistics" hidden role="tabpanel" aria-labelledby="navtab-logistics">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Trámites y organización</span><span class="en">Paperwork &amp; life admin</span></p>
       <h2><span class="es">Lista: todo lo demás por organizar <span class="progress" id="prog"></span></span><span class="en">Checklist: everything else to line up <span class="progress" id="progen"></span></span></h2>
@@ -952,11 +1021,11 @@
   </section>
 
   <!-- ADD INFO -->
-  <section id="addinfo">
+  <section id="addinfo" hidden role="tabpanel" aria-labelledby="navtab-addinfo">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Mantén el plan vivo</span><span class="en">Keep the plan alive</span></p>
       <h2><span class="es">Agregar información nueva</span><span class="en">Add new information</span></h2>
-      <p class="intro"><span class="es">Escribe una nota o adjunta una foto (por ejemplo, un resultado de laboratorio o el nombre exacto de tu trombofilia). Queda guardado abajo, para tener todo en un solo lugar — y pregúntale a Claude sobre cualquier resultado cuando quieras.</span><span class="en">Write a note or attach a photo (for example, a lab result or the exact name of your thrombophilia). It's saved below so everything stays in one place — and ask Claude about any result whenever you want.</span></p>
+      <p class="intro"><span class="es">Escribe una nota o adjunta una foto o PDF (por ejemplo, un resultado de laboratorio o el nombre exacto de tu trombofilia). Se guarda como parte del repositorio del embarazo. Para preguntarle algo a Claude sobre un resultado, usa la pestaña <b>Chat</b>.</span><span class="en">Write a note or attach a photo or PDF (for example, a lab result or the exact name of your thrombophilia). It's saved as part of the pregnancy's repository. To ask Claude about a result, use the <b>Chat</b> tab.</span></p>
     </div>
 
     <div class="addinfo">
@@ -970,17 +1039,58 @@
             <input type="file" id="ai-file" accept="image/*,.pdf" multiple hidden>
           </label>
           <button class="sendbtn" id="ai-send"><span class="es">Guardar</span><span class="en">Save</span></button>
-          <button class="sendbtn askbtn" id="ai-ask"><span class="es">Preguntar a Claude</span><span class="en">Ask Claude</span></button>
         </div>
         <div class="ai-status" id="ai-status"></div>
       </div>
-      <div class="updates" id="ai-updates"></div>
     </div>
-    <p class="src" style="margin-top:.9rem;"><span class="es">Privacidad: este enlace es privado (no aparece en buscadores). Lo que envíes se guarda en la cuenta de Vercel de Robbie. Es privacidad razonable, no confidencialidad de nivel médico — no compartas el enlace públicamente. El asistente da orientación general, no diagnósticos.</span><span class="en">Privacy: this link is unlisted (hidden from search engines). What you submit is stored on Robbie's Vercel account. It's reasonable privacy, not medical-grade confidentiality — don't post the link publicly. The assistant gives general guidance, not diagnoses.</span></p>
+
+    <button class="expand-btn" id="view-docs-btn" type="button" aria-expanded="false">
+      <span class="arrow">▸</span> <span class="es">Ver documentos guardados <span id="docs-count"></span></span><span class="en">View saved documents <span id="docs-count-en"></span></span>
+    </button>
+    <div class="expand-panel" id="docs-panel" hidden>
+      <div class="cat-chips" id="doc-cat-chips"></div>
+      <div class="doc-cards" id="doc-cards"></div>
+    </div>
+
+    <p class="src" style="margin-top:1.1rem;"><span class="es">Privacidad: este enlace es privado (no aparece en buscadores). Lo que envíes se guarda en la cuenta de Vercel de Robbie. Es privacidad razonable, no confidencialidad de nivel médico — no compartas el enlace públicamente. El asistente da orientación general, no diagnósticos.</span><span class="en">Privacy: this link is unlisted (hidden from search engines). What you submit is stored on Robbie's Vercel account. It's reasonable privacy, not medical-grade confidentiality — don't post the link publicly. The assistant gives general guidance, not diagnoses.</span></p>
+  </section>
+
+  <!-- CHAT -->
+  <section id="chat" hidden role="tabpanel" aria-labelledby="navtab-chat">
+    <div class="sec-head">
+      <p class="eyebrow"><span class="es">Interactúa con el plan</span><span class="en">Interact with the plan</span></p>
+      <h2><span class="es">Chat con Claude</span><span class="en">Chat with Claude</span></h2>
+      <p class="intro"><span class="es">Pregunta sobre cualquier resultado, documento o próximo paso. Claude tiene el contexto completo del plan y de lo que han guardado en “Agregar info”, y puede analizar tus exámenes y actualizar el plan.</span><span class="en">Ask about any result, document, or next step. Claude has the full context of the plan and everything saved under “Add info,” and can analyze your results and update the plan.</span></p>
+    </div>
+    <div class="chat-panel">
+      <div class="chat-messages" id="chat-messages">
+        <div class="chat-hint"><span class="es">Cargando conversación…</span><span class="en">Loading conversation…</span></div>
+      </div>
+      <div class="chat-input-row">
+        <textarea id="chat-text" placeholder=""></textarea>
+        <div class="chat-actions">
+          <label class="filebtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span class="es">Adjuntar</span><span class="en">Attach</span>
+            <input type="file" id="chat-file" accept="image/*,.pdf" multiple hidden>
+          </label>
+          <button class="sendbtn askbtn" id="chat-send"><span class="es">Preguntar</span><span class="en">Ask</span></button>
+        </div>
+      </div>
+      <div class="thumbs" id="chat-thumbs"></div>
+      <div class="ai-status" id="chat-status"></div>
+    </div>
+
+    <button class="expand-btn" id="prevq-btn" type="button" aria-expanded="false">
+      <span class="arrow">▸</span> <span class="es">Preguntas respondidas anteriormente <span id="prevq-count"></span></span><span class="en">Previously answered questions <span id="prevq-count-en"></span></span>
+    </button>
+    <div class="expand-panel" id="prevq-panel" hidden>
+      <div class="updates" id="prevq-list"></div>
+    </div>
   </section>
 
   <!-- FOR ROBBIE -->
-  <section id="robbie">
+  <section id="robbie" hidden role="tabpanel" aria-labelledby="navtab-robbie">
     <div class="sec-head">
       <p class="eyebrow"><span class="es">Para Robbie</span><span class="en">For Robbie</span></p>
       <h2><span class="es">Tu parte — y ese fondo universitario</span><span class="en">Your part — and that college fund</span></h2>
@@ -999,8 +1109,8 @@
     </div>
   </section>
 
-  <section>
-    <details class="sources">
+  <section id="sources" hidden role="tabpanel" aria-labelledby="navtab-sources">
+    <details class="sources" open>
       <summary><span class="es">Fuentes y cómo se investigó</span><span class="en">Sources &amp; how this was researched</span></summary>
       <p style="font-size:.82rem;color:var(--ink-soft);margin:.4rem 0 .8rem;"><span class="es">Compilado de guías clínicas primarias (ACOG, WHO, CDC, NHS, RCOG, ESHRE, ASH, USPSTF, Cochrane) y fuentes colombianas (MinSalud / Resolución 3280 de 2018, sitios de la clínica, prepagadas). Donde las guías difieren — sobre todo heparina para trombofilia hereditaria vs. SAF — lo marcamos como “consultar con tu especialista”.</span><span class="en">Compiled from primary clinical guidelines (ACOG, WHO, CDC, NHS, RCOG, ESHRE, ASH, USPSTF, Cochrane) and Colombian sources (MinSalud / Resolución 3280 de 2018, clinic sites, prepagadas). Where guidelines disagree — especially heparin for inherited thrombophilia vs. APS — we flag it as “discuss with your specialist.”</span></p>
       <ul>
@@ -1039,7 +1149,16 @@
     err:{es:"No se pudo enviar. Revisa el código e inténtalo de nuevo.",en:"Couldn't send. Check the passcode and try again."},
     err_net:{es:"Error de conexión. Inténtalo de nuevo.",en:"Connection error. Please try again."},
     you:{es:"Tú escribiste",en:"You wrote"},
-    loading:{es:"Cargando notas anteriores…",en:"Loading previous notes…"}
+    loading:{es:"Cargando notas anteriores…",en:"Loading previous notes…"},
+    ph_chat:{es:"Escribe tu pregunta… (por ejemplo: “¿Qué significa este resultado?” — adjunta la foto si quieres)",en:"Type your question… (e.g. “What does this result mean?” — attach the photo if you like)"},
+    chat_empty:{es:"Aún no hay preguntas. Escribe una abajo — Claude conoce todo el plan y lo que hayas guardado.",en:"No questions yet. Type one below — Claude knows the whole plan and everything you've saved."},
+    docs_none:{es:"Todavía no hay documentos guardados.",en:"No saved documents yet."},
+    cat_all:{es:"Todos",en:"All"},
+    cat_rx:{es:"Recetas",en:"Prescriptions"},
+    cat_visit:{es:"Citas",en:"Visits"},
+    cat_lab:{es:"Laboratorios",en:"Labs"},
+    cat_us:{es:"Ecografías",en:"Ultrasounds"},
+    cat_other:{es:"Otros",en:"Other"}
   };
   function curLang(){return document.body.getAttribute('data-lang');}
   function t(k){return STR[k][curLang()];}
@@ -1050,7 +1169,8 @@
     if(saved){document.body.setAttribute('data-lang',saved);document.documentElement.lang=saved;}
     function applyPlaceholders(){
       var tx=document.getElementById('ai-text'); if(tx) tx.placeholder=t('ph_text');
-      
+      var cx=document.getElementById('chat-text'); if(cx) cx.placeholder=t('ph_chat');
+      if(window.__bpRerender) window.__bpRerender();
     }
     applyPlaceholders();
     document.getElementById('langbtn').addEventListener('click',function(){
@@ -1083,19 +1203,17 @@
     upd();
   })();
 
-  // ---- add info ----
+  // ---- shared upload + saved state (Add info, Chat, saved documents) ----
   (function(){
-    var files=[]; // {name, type, url} (direct upload) or {name, type, dataUrl} (fallback)
     var blobUpload=null;
     try{import('https://esm.sh/@vercel/blob@1/client').then(function(m){blobUpload=m.upload;}).catch(function(){});}catch(e){}
-    var textEl=document.getElementById('ai-text');
-    var fileEl=document.getElementById('ai-file');
-    var thumbs=document.getElementById('ai-thumbs');
-    var status=document.getElementById('ai-status');
-    var sendBtn=document.getElementById('ai-send');
-    var updatesEl=document.getElementById('ai-updates');
 
-        function processFile(file){
+    function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+    function fmtNote(s){return esc(s).split(/\n\n+/).map(function(p){return '<p>'+p.replace(/\n/g,'<br>')+'</p>';}).join('');}
+    function fmtTime(ts){try{return new Date(ts).toLocaleString(curLang()==='es'?'es-CO':'en-US',{dateStyle:'medium',timeStyle:'short'});}catch(e){return '';}}
+    function fmtDate(ts){try{return new Date(ts).toLocaleDateString(curLang()==='es'?'es-CO':'en-US',{day:'numeric',month:'short'});}catch(e){return '';}}
+
+    function processFile(file){
       return new Promise(function(resolve){
         if(!/^image\//.test(file.type)){
           resolve({name:file.name,type:file.type||'application/pdf',blob:file});
@@ -1122,48 +1240,57 @@
         r.readAsDataURL(item.blob);
       });
     }
-    function renderThumbs(){
-      thumbs.innerHTML='';
-      files.forEach(function(f,i){
+    function renderThumbs(thumbsEl,arr){
+      thumbsEl.innerHTML='';
+      arr.forEach(function(f,i){
         var d=document.createElement('div');d.className='thumb'+(/^image\//.test(f.type)?'':' file');
         if(/^image\//.test(f.type)){d.innerHTML='<img src="'+(f.dataUrl||f.url)+'" alt="">';}
-        else{d.textContent=f.name.slice(0,10);}
+        else{d.textContent=(f.name||'PDF').slice(0,10);}
         var b=document.createElement('button');b.className='rm';b.textContent='×';
-        b.onclick=function(){files.splice(i,1);renderThumbs();};
-        d.appendChild(b);thumbs.appendChild(d);
+        b.onclick=function(){arr.splice(i,1);renderThumbs(thumbsEl,arr);};
+        d.appendChild(b);thumbsEl.appendChild(d);
       });
     }
-    fileEl.addEventListener('change',function(){
-      var list=[].slice.call(fileEl.files);
-      fileEl.value='';
-      if(!list.length)return;
-      status.textContent=t('uploading');
-      Promise.all(list.map(processFile)).then(function(items){
-        items=items.filter(Boolean);
-        var chain=Promise.resolve(); var big=false, failed=false;
-        items.forEach(function(item){
-          chain=chain.then(function(){
-            if(files.length>=10)return;
-            if(item.blob.size>26214400){big=true;return;}
-            if(blobUpload){
-              return blobUpload(item.name,item.blob,{access:'public',handleUploadUrl:'/api/upload',contentType:item.type})
-                .then(function(res){files.push({name:item.name,type:item.type,url:res.url});renderThumbs();})
-                .catch(function(){failed=true;});
-            }
-            return readAsDataUrl(item).then(function(r){
-              if(r&&r.tooBig){big=true;return;}
-              if(r){files.push(r);renderThumbs();}
+    function wireUploader(fileEl,thumbsEl,statusEl,arr){
+      fileEl.addEventListener('change',function(){
+        var list=[].slice.call(fileEl.files); fileEl.value='';
+        if(!list.length)return;
+        statusEl.textContent=t('uploading');
+        Promise.all(list.map(processFile)).then(function(items){
+          items=items.filter(Boolean);
+          var chain=Promise.resolve(); var big=false, failed=false;
+          items.forEach(function(item){
+            chain=chain.then(function(){
+              if(arr.length>=10)return;
+              if(item.blob.size>26214400){big=true;return;}
+              if(blobUpload){
+                return blobUpload(item.name,item.blob,{access:'public',handleUploadUrl:'/api/upload',contentType:item.type})
+                  .then(function(res){arr.push({name:item.name,type:item.type,url:res.url});renderThumbs(thumbsEl,arr);})
+                  .catch(function(){failed=true;});
+              }
+              return readAsDataUrl(item).then(function(r){ if(r&&r.tooBig){big=true;return;} if(r){arr.push(r);renderThumbs(thumbsEl,arr);} });
             });
           });
-        });
-        chain.then(function(){
-          renderThumbs();
-          status.textContent=big?t('err_big'):(failed?t('upload_err'):'');
+          chain.then(function(){ renderThumbs(thumbsEl,arr); statusEl.textContent=big?t('err_big'):(failed?t('upload_err'):''); });
         });
       });
-    });
+    }
 
-    function fmtTime(ts){try{return new Date(ts).toLocaleString(curLang()==='es'?'es-CO':'en-US',{dateStyle:'medium',timeStyle:'short'});}catch(e){return '';}}
+    // document auto-categorization (client-side heuristic on filename + note text)
+    var CAT_ORDER=['rx','visit','lab','us','other'];
+    var CAT_ICON={rx:'💊',visit:'🩺',lab:'🧪',us:'📷',other:'📄'};
+    function catOf(f,note){
+      if(f.category) return f.category;
+      var hay=((f.name||'')+' '+(note||'')).toLowerCase();
+      if(/eco|ecograf|ultrasound|sonogram|doppler|nucal|translucenc/.test(hay)) return 'us';
+      if(/receta|prescrip|\brx\b|dosis|tableta|comprimid|\bmg\b|enoxaparin|clexane|clenox|aspirin|aspirina|folic|f[oó]lico|heparin/.test(hay)) return 'rx';
+      if(/laborator|\blab\b|hemograma|hemoglob|blood|sangre|orina|urin|glucos|glicemia|\btsh\b|ferritin|panel|trombofil|factor\s*v|leiden|protrombina|resultad|examen/.test(hay)) return 'lab';
+      if(/cita|visit|control|consulta|appointment|obstetr|ginec|materno|prenatal/.test(hay)) return 'visit';
+      return 'other';
+    }
+
+    var allUpdates=[], docItems=[], qaItems=[], activeCat='all';
+
     function renderUpdate(u){
       var d=document.createElement('div');
       d.className='update'+(u.urgent?' urgent-u':'');
@@ -1182,70 +1309,170 @@
         ((u.noteES||u.noteEN)?'<div class="es">'+fmtNote(u.noteES||'')+'</div>'+'<div class="en">'+fmtNote(u.noteEN||'')+'</div>':'');
       return d;
     }
-    function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-    function fmtNote(s){return esc(s).split(/\n\n+/).map(function(p){return '<p>'+p.replace(/\n/g,'<br>')+'</p>';}).join('');}
-    function renderAll(list){
-      updatesEl.innerHTML='';
-      (list||[]).slice().reverse().forEach(function(u){updatesEl.appendChild(renderUpdate(u));});
+
+    var docCards=document.getElementById('doc-cards');
+    var catChips=document.getElementById('doc-cat-chips');
+    function renderDocs(){
+      if(!docCards) return;
+      var counts={all:docItems.length,rx:0,visit:0,lab:0,us:0,other:0};
+      docItems.forEach(function(it){counts[it.cat]++;});
+      var chipHtml='<button class="cat-chip'+(activeCat==='all'?' active':'')+'" data-filter="all"><span class="es">Todos</span><span class="en">All</span> ('+counts.all+')</button>';
+      CAT_ORDER.forEach(function(c){
+        if(!counts[c]) return;
+        chipHtml+='<button class="cat-chip'+(activeCat===c?' active':'')+'" data-filter="'+c+'">'+CAT_ICON[c]+' <span class="es">'+STR['cat_'+c].es+'</span><span class="en">'+STR['cat_'+c].en+'</span> ('+counts[c]+')</button>';
+      });
+      catChips.innerHTML=chipHtml;
+      [].slice.call(catChips.querySelectorAll('.cat-chip')).forEach(function(chip){
+        chip.addEventListener('click',function(){activeCat=chip.getAttribute('data-filter');renderDocs();});
+      });
+      if(!docItems.length){docCards.innerHTML='<div class="doc-empty">'+t('docs_none')+'</div>';return;}
+      var shown=docItems.filter(function(it){return activeCat==='all'||it.cat===activeCat;});
+      docCards.innerHTML=shown.map(function(it){
+        var src=it.url||it.dataUrl;
+        var isImg=/^image\//.test(it.type||'');
+        var thumb=isImg?'<img class="doc-thumb" src="'+src+'" alt="">':'<span style="font-size:1.2rem">'+CAT_ICON[it.cat]+'</span>';
+        var nm=it.name||(it.cat==='other'?'archivo':it.cat);
+        return '<div class="doc-card"><a href="'+src+'" target="_blank" rel="noopener"'+(isImg?'':' download="'+esc(nm)+'"')+'>'+thumb+'<span class="doc-name">'+esc(nm)+'</span></a><span class="doc-date">'+fmtDate(it.ts)+'</span></div>';
+      }).join('');
     }
+
+    var prevqList=document.getElementById('prevq-list');
+    function renderPrevq(){
+      if(!prevqList) return;
+      prevqList.innerHTML='';
+      qaItems.slice().reverse().forEach(function(u){prevqList.appendChild(renderUpdate(u));});
+    }
+
+    function setCount(id,idEn,n){var a=document.getElementById(id),b=document.getElementById(idEn);if(a)a.textContent='('+n+')';if(b)b.textContent='('+n+')';}
+
+    function rebuild(){
+      docItems=[]; qaItems=[];
+      allUpdates.forEach(function(u){
+        var note=(u.userText||'')+' '+(u.titleES||'')+' '+(u.titleEN||'');
+        (u.files||[]).forEach(function(f){
+          if(f&&(f.url||f.dataUrl)) docItems.push({name:f.name,type:f.type,url:f.url,dataUrl:f.dataUrl,ts:u.ts,cat:catOf(f,note)});
+        });
+        if((u.userText||'').trim()||u.noteES||u.noteEN) qaItems.push(u);
+      });
+      setCount('docs-count','docs-count-en',docItems.length);
+      setCount('prevq-count','prevq-count-en',qaItems.length);
+      renderDocs(); renderPrevq();
+    }
+    window.__bpRerender=function(){renderDocs();renderPrevq();};
 
     function loadState(){
       fetch('/api/state').then(function(r){return r.ok?r.json():null;}).then(function(d){
-        if(d&&d.updates)renderAll(d.updates);
-      }).catch(function(){});
+        if(d&&d.updates){allUpdates=d.updates;rebuild();}
+      }).catch(function(){}).then(function(){
+        if(!chatStarted&&cMsgs){cMsgs.innerHTML='<div class="chat-hint"><span class="es">'+STR.chat_empty.es+'</span><span class="en">'+STR.chat_empty.en+'</span></div>';}
+      });
     }
 
-    sendBtn.addEventListener('click',function(){
-      var text=textEl.value.trim();
-      if(!text&&files.length===0){status.textContent=t('need_text');return;}
-      var payload=JSON.stringify({text:text,files:files,lang:curLang()});
-      if(payload.length>3800000){status.textContent=t('err_big');return;}
-      sendBtn.disabled=true; status.textContent=t('sending');
-      fetch('/api/add-info',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:payload})
-      .then(function(r){
-        if(r.status===413){throw new Error('big');}
-        if(r.status===401){throw new Error('auth');}
-        if(!r.ok){throw new Error('http');}
-        return r.json();
-      })
+    // ---- Add info: save note / files ----
+    var filesA=[];
+    var aText=document.getElementById('ai-text');
+    var aThumbs=document.getElementById('ai-thumbs');
+    var aStatus=document.getElementById('ai-status');
+    var aSend=document.getElementById('ai-send');
+    wireUploader(document.getElementById('ai-file'),aThumbs,aStatus,filesA);
+    aSend.addEventListener('click',function(){
+      var text=aText.value.trim();
+      if(!text&&filesA.length===0){aStatus.textContent=t('need_text');return;}
+      var payload=JSON.stringify({text:text,files:filesA,lang:curLang()});
+      if(payload.length>3800000){aStatus.textContent=t('err_big');return;}
+      aSend.disabled=true; aStatus.textContent=t('sending');
+      fetch('/api/add-info',{method:'POST',headers:{'Content-Type':'application/json'},body:payload})
+      .then(function(r){if(r.status===413)throw new Error('big');if(r.status===401)throw new Error('auth');if(!r.ok)throw new Error('http');return r.json();})
       .then(function(d){
-        status.textContent=t('ok');
-        textEl.value=''; files=[]; renderThumbs();
-        if(d&&d.updates)renderAll(d.updates);
-        else if(d&&d.update){updatesEl.insertBefore(renderUpdate(d.update),updatesEl.firstChild);}
+        aStatus.textContent=t('ok');
+        aText.value=''; filesA.length=0; renderThumbs(aThumbs,filesA);
+        if(d&&d.updates){allUpdates=d.updates;rebuild();}
+        var dp=document.getElementById('docs-panel'), db=document.getElementById('view-docs-btn');
+        if(dp&&dp.hidden&&db){db.click();}
       })
-      .catch(function(e){
-        status.textContent=(e&&e.message==='auth')?t('err'):(e&&e.message==='big')?t('err_big'):t('err_net');
-      })
-      .finally(function(){sendBtn.disabled=false;});
+      .catch(function(e){aStatus.textContent=(e&&e.message==='auth')?t('err'):(e&&e.message==='big')?t('err_big'):t('err_net');})
+      .finally(function(){aSend.disabled=false;});
     });
 
-    var askBtn=document.getElementById('ai-ask');
-    askBtn.addEventListener('click',function(){
-      var text=textEl.value.trim();
-      if(!text){status.textContent=t('ask_need');return;}
-      var payload=JSON.stringify({question:text,files:files,lang:curLang()});
-      if(payload.length>3800000){status.textContent=t('err_big');return;}
-      askBtn.disabled=true; sendBtn.disabled=true; status.textContent=t('asking');
-      fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:payload})
-      .then(function(r){
-        if(r.status===413){throw new Error('big');}
-        if(!r.ok){throw new Error('http');}
-        return r.json();
-      })
+    // ---- Chat: ask Claude ----
+    var filesC=[];
+    var cText=document.getElementById('chat-text');
+    var cThumbs=document.getElementById('chat-thumbs');
+    var cStatus=document.getElementById('chat-status');
+    var cSend=document.getElementById('chat-send');
+    var cMsgs=document.getElementById('chat-messages');
+    wireUploader(document.getElementById('chat-file'),cThumbs,cStatus,filesC);
+    var chatStarted=false;
+    function bubble(kind){var d=document.createElement('div');d.className='msg '+kind;cMsgs.appendChild(d);cMsgs.scrollTop=cMsgs.scrollHeight;return d;}
+    cSend.addEventListener('click',function(){
+      var q=cText.value.trim();
+      if(!q&&filesC.length===0){cStatus.textContent=t('ask_need');return;}
+      var payload=JSON.stringify({question:q,files:filesC,lang:curLang()});
+      if(payload.length>3800000){cStatus.textContent=t('err_big');return;}
+      if(!chatStarted){cMsgs.innerHTML='';chatStarted=true;}
+      var ub=bubble('user'); ub.textContent=q||'📎';
+      var ab=bubble('claude'); ab.textContent='…';
+      cText.value=''; filesC.length=0; renderThumbs(cThumbs,filesC);
+      cSend.disabled=true; cStatus.textContent=t('asking');
+      fetch('/api/ask',{method:'POST',headers:{'Content-Type':'application/json'},body:payload})
+      .then(function(r){if(r.status===413)throw new Error('big');if(!r.ok)throw new Error('http');return r.json();})
       .then(function(d){
-        status.textContent=t('ask_ok');
-        textEl.value=''; files=[]; renderThumbs();
-        if(d&&d.updates)renderAll(d.updates);
+        cStatus.textContent='';
+        if(d&&d.updates){allUpdates=d.updates;rebuild();}
+        var last=(d&&d.updates&&d.updates.length)?d.updates[d.updates.length-1]:null;
+        if(last&&(last.noteES||last.noteEN)){
+          if(last.urgent) ab.className='msg claude urgent-msg';
+          ab.innerHTML=((last.titleES||last.titleEN)?'<h4><span class="es">'+esc(last.titleES||'')+'</span><span class="en">'+esc(last.titleEN||'')+'</span></h4>':'')+
+            '<div class="es">'+fmtNote(last.noteES||'')+'</div><div class="en">'+fmtNote(last.noteEN||'')+'</div>';
+        } else { ab.textContent=t('err_net'); }
+        cMsgs.scrollTop=cMsgs.scrollHeight;
       })
-      .catch(function(e){status.textContent=(e&&e.message==='big')?t('err_big'):t('err_net');})
-      .finally(function(){askBtn.disabled=false; sendBtn.disabled=false;});
+      .catch(function(e){ab.textContent=(e&&e.message==='big')?t('err_big'):t('err_net');cStatus.textContent='';})
+      .finally(function(){cSend.disabled=false;});
     });
 
-    // load prior notes
     loadState();
+  })();
+
+  // ---- expand/collapse toggles (saved documents, previous questions) ----
+  (function(){
+    function wire(btnId,panelId){
+      var btn=document.getElementById(btnId),panel=document.getElementById(panelId);
+      if(!btn||!panel)return;
+      var arrow=btn.querySelector('.arrow');
+      btn.addEventListener('click',function(){
+        var willOpen=panel.hidden;
+        panel.hidden=!willOpen;
+        btn.setAttribute('aria-expanded',willOpen?'true':'false');
+        if(arrow)arrow.textContent=willOpen?'▾':'▸';
+      });
+    }
+    wire('view-docs-btn','docs-panel');
+    wire('prevq-btn','prevq-panel');
+  })();
+
+  // ---- main navigation: real tabs, instant switch (no scroll animation) ----
+  (function(){
+    var nav=document.querySelector('nav.jump');
+    var navBtns=[].slice.call(document.querySelectorAll('nav.jump [role=tab]'));
+    var panels=navBtns.map(function(b){return document.getElementById(b.getAttribute('data-target'));});
+    function select(i){
+      navBtns.forEach(function(b,j){
+        var on=i===j;
+        b.setAttribute('aria-selected',on?'true':'false');
+        b.tabIndex=on?0:-1;
+        if(panels[j]) panels[j].hidden=!on;
+      });
+      // Land just under the sticky tab bar so the section's content is immediately
+      // visible, instead of re-showing the tall hero on every tab switch.
+      var top=nav?nav.offsetTop:0;
+      window.scrollTo(0,top);
+      try{navBtns[i].scrollIntoView({inline:'center',block:'nearest'});}catch(e){}
+    }
+    navBtns.forEach(function(b,i){
+      b.addEventListener('click',function(){select(i);});
+      b.addEventListener('keydown',function(e){var n=null;if(e.key==='ArrowRight')n=(i+1)%navBtns.length;else if(e.key==='ArrowLeft')n=(i-1+navBtns.length)%navBtns.length;if(n!==null){e.preventDefault();select(n);navBtns[n].focus();}});
+    });
   })();
 </script>
 </body>
